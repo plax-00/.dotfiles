@@ -37,6 +37,9 @@ prompt pure
 # Disables ugly folder highlighting
 export LS_COLORS=$LS_COLORS:'ow=1;34:';
 
+# Fix vi mode backspace bug
+bindkey "^?" backward-delete-char
+
 
 ################## Plugins ##################
 ls $ZSH/plugins | while IFS= read -r plugin; do
@@ -62,6 +65,14 @@ if command -v fzf &> /dev/null; then
 	source /usr/share/doc/fzf/examples/completion.zsh
 	bindkey '^O' fzf-cd-widget
 	bindkey '^K' fzf-file-widget
+	export FZF_ALT_C_COMMAND="find . $HOME -type d"
+	export FZF_CTRL_T_COMMAND="find . $HOME"
+
+	if command -v fdfind &> /dev/null; then
+		export FZF_ALT_C_COMMAND="fdfind . $HOME --type d --hidden"
+		export FZF_CTRL_T_COMMAND="fdfind . $HOME --hidden"
+	fi
+
 fi
 
 # Extended zshrc

@@ -44,3 +44,5 @@ hi Normal guibg=NONE ctermbg=NONE
 let mapleader = ' '
 nnoremap <leader>h :noh<CR>
 nnoremap <leader>' "_
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>

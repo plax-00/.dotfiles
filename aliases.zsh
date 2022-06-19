@@ -22,6 +22,7 @@ alias df="df -h"
 # git
 alias gc="git checkout"
 alias gs="git status"
+alias gd="git diff"
 
 # cd
 alias ..2="../.."

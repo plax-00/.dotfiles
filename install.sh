@@ -33,14 +33,19 @@ function main() {
 	mkdir -p ~/.vim	
 	cd ~/.vim
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	vim -E -c PlugInstall -c qall
+	vim -E -c PlugInstall -c qall &> /dev/null
+
+	# Create empty extended files if they don't exist
+	if ! [ -f ~/.zsh/extended.zshrc ]; then touch ~/.zsh/extended.zshrc; fi
+	if ! [ -f ~/.zsh/extended_aliases.zsh ]; then touch ~/.zsh/extended_aliases.zsh; fi
+	if ! [ -f ~/.tmux/extended.tmux.conf ]; then touch ~/.tmux/extended.tmux.conf; fi
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	main
 else
-	read -p "This is intended to be run as an initial install of dotfiles and plugins. Are you sure? (y/n) " -n 1;
-	echo "";
+	read -p "This is intended to be run as an initial install of dotfiles and plugins. Continue? (y/n) " -n 1
+	echo ""
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		main
 	fi

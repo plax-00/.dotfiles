@@ -1,41 +1,46 @@
+" settings
 source $VIMRUNTIME/defaults.vim
 set number
 set hidden
-set tabstop=4
+set tabstop=4 softtabstop=4
 set shiftwidth=4
-set background=dark
+set expandtab
+set nowrap
+set hlsearch
+set incsearch
+set notimeout
+set scrolloff=10
 set laststatus=2
 set noshowmode
+set cursorline
+set encoding=utf-8
+set autoread
 
+autocmd BufWritePre * %s/\s\+$//e  " remove trailing whitespace
 
-" ~~~~~~~~~~~~ vim-plug section ~~~~~~~~~~~~ 
+" ############ vim-plug section ############
 call plug#begin('~/.vim/plugged')
 
-Plug 'joshdick/onedark.vim'
-Plug 'itchyny/lightline.vim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" ##########################################
 
 
 " plugin options
-let g:onedark_hide_endofbuffer=1
-let g:lightline={'colorscheme':'onedark'}
+let g:airline_theme = 'codedark'
+let g:airline_section_z = '%p%%  %l:%c'
 
-autocmd VimEnter * call SetupLightlineColors()
-function SetupLightlineColors() abort
-  " transparent background in statusbar
-  let l:palette = lightline#palette()
-
-  let l:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
-  let l:palette.inactive.middle = l:palette.normal.middle
-  let l:palette.tabline.middle = l:palette.normal.middle
-
-  call lightline#colorscheme()
-endfunction
-
-
-colorscheme onedark
+colorscheme codedark
+set t_Co=256
+set t_ut=
 
 " transparent bg
 hi Normal guibg=NONE ctermbg=NONE
+
+
+" remaps
+let mapleader = ' '
+nnoremap <leader>h :noh<CR>
+nnoremap <leader>' "_

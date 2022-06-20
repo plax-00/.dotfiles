@@ -25,12 +25,12 @@ function main() {
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 	# Install tmux theme
-	mkdir -p ~/.tmux	
+	mkdir -p ~/.tmux
 	cd ~/.tmux
-	git clone https://github.com/odedlaz/tmux-onedark-theme.git
+	git clone https://github.com/khanghh/tmux-dark-plus-theme.git
 
 	# Install vim-plug and theme
-	mkdir -p ~/.vim	
+	mkdir -p ~/.vim
 	cd ~/.vim
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	vim -E -c PlugInstall -c qall &> /dev/null

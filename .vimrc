@@ -1,6 +1,6 @@
 " settings
 source $VIMRUNTIME/defaults.vim
-set number
+set number relativenumber
 set hidden
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -17,8 +17,9 @@ set noshowmode
 set cursorline
 set encoding=utf-8
 set autoread
+set path+=**
 
-autocmd BufWritePre * %s/\s\+$//e  " remove trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e  " remove trailing whitespace on write
 
 " ############ vim-plug section ############
 call plug#begin('~/.vim/plugged')
@@ -26,6 +27,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tomasiser/vim-code-dark'
 Plug 'vim-airline/vim-airline'
 Plug 'lifecrisis/vim-difforig'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 " ##########################################
@@ -46,18 +48,24 @@ hi LineNr guibg=NONE ctermbg=NONE
 
 " remaps
 let mapleader = ' '
-nnoremap <leader>h :noh<CR>
-nnoremap <leader>' "_
-nnoremap <leader>n :bn<CR>
-nnoremap <leader>p :bp<CR>
-nnoremap <leader>i :set ignorecase!<CR>
-nnoremap <leader>I ^
-nnoremap <leader>A $
-nnoremap <leader>P "_ddP
+nnoremap <Leader>h :noh<CR>
+nnoremap <Leader>' "_
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>p :bp<CR>
+nnoremap <Leader>i :set ignorecase!<CR>
+nnoremap <Leader>I ^
+nnoremap <Leader>A $
+nnoremap <Leader>P "_ddP
+nnoremap <Leader>b <C-^>
 
 noremap Y y$
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
+command! -nargs=1 -complete=help H h <args> | only

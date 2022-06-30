@@ -1,0 +1,36 @@
+" settings
+source $VIMRUNTIME/defaults.vim
+source ~/.vim/settings.vim
+
+
+" ############ vim-plug section ############
+call plug#begin('~/.vim/plugged')
+
+Plug 'tomasiser/vim-code-dark'
+Plug 'vim-airline/vim-airline'
+Plug 'lifecrisis/vim-difforig'
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
+Plug 'jesseleite/vim-noh'
+
+call plug#end()
+" ##########################################
+
+
+" plugin options
+let g:airline_theme = 'codedark'
+let g:airline_section_z = '%p%%  %l:%c'
+
+colorscheme codedark
+set t_Co=256
+set t_ut=
+
+" transparent bg
+hi Normal ctermbg=NONE
+hi LineNr ctermbg=NONE
+hi EndOfBuffer ctermbg=NONE
+
+
+" remaps
+source ~/.vim/mappings.vim
+

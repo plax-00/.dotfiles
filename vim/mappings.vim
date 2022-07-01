@@ -9,6 +9,7 @@ nnoremap <Leader>D "_D
 nnoremap <Leader>I ^
 nnoremap <Leader>A $
 nnoremap <Leader>P "_ddP
+nnoremap <Leader>y yyp
 nnoremap <Leader>b <C-^>
 
 noremap Y y$

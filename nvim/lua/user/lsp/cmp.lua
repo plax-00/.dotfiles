@@ -18,7 +18,6 @@ cmp.setup {
         end,
     },
     mapping = {
-        -- ['<Tab>'] = cmp.mapping.select_next_item(),
         ['<CR>'] = cmp.mapping.confirm(),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
@@ -43,21 +42,23 @@ cmp.setup {
     },
     sources = {
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
         { name = 'vsnip' },
         { name = 'buffer' },
         { name = 'path' },
     },
-     formatting = {
-      format = function(entry, vim_item)
-        vim_item.menu = ({
-          nvim_lsp = '[LSP]',
-          buffer = '[Buffer]',
-          path = '[Path]',
-        })[entry.source.name]
-        return vim_item
-      end,
+    formatting = {
+        format = function(entry, vim_item)
+            vim_item.menu = ({
+                nvim_lsp = '[LSP]',
+                buffer = '[Buffer]',
+                path = '[Path]',
+            })[entry.source.name]
+            return vim_item
+        end,
   },
 }
 
-Capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+return { capabilities = capabilities }

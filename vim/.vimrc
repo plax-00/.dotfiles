@@ -12,6 +12,8 @@ Plug 'lifecrisis/vim-difforig'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jesseleite/vim-noh'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 " ##########################################

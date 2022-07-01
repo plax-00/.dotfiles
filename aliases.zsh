@@ -1,7 +1,13 @@
+if command -v nvim &> /dev/null; then
+    ALIAS_EDITOR=nvim
+else
+    ALIAS_EDITOR=vim
+fi
+
 # zsh stuff
-alias zshrc="vim ~/.zshrc"
+alias zshrc="$ALIAS_EDITOR ~/.zshrc"
 alias rezsh="source ~/.zshrc"
-alias aliases="vim ~/.zsh/aliases.zsh"
+alias aliases="$ALIAS_EDITOR ~/.zsh/aliases.zsh"
 
 # ls
 alias ls="ls --color=auto"
@@ -38,4 +44,5 @@ alias c="clear"
 alias sqlite="sqlite3"
 alias x="exit 0"
 alias tm="tmux new -A -s shell"
+alias nv="nvim"
 

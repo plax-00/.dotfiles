@@ -9,6 +9,8 @@ Plug 'lifecrisis/vim-difforig'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jesseleite/vim-noh'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'
 
 " nvim plugins
 Plug 'Mofiqul/vscode.nvim'
@@ -25,9 +27,11 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'kdheepak/lazygit.nvim'
 
 " nvim-cmp stuff
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
@@ -49,12 +53,15 @@ hi EndOfBuffer ctermbg=NONE
 
 " extension mappings
 nnoremap <silent> <Leader>e :NvimTreeToggle<CR>
-nnoremap <silent> <Leader>ff :Telescope find_files<CR>
+nnoremap <silent> <Leader>ff :Telescope find_files hidden=true<CR>
 nnoremap <silent> <Leader>fo :Telescope oldfiles<CR>
 nnoremap <silent> <Leader>tt :execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>
 nnoremap <silent> <Leader>tl :setlocal invbuflisted<CR>
+nnoremap <silent> <Leader>K :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <Leader>r :lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> gh :lua vim.lsp.buf.hover()<CR>
 
 " plugin configs
 lua require("user.lsp.config")
 lua require("user.plugins.init")
+

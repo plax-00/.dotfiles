@@ -1,6 +1,9 @@
-require('nvim-lsp-installer').setup {}
+local lspconfig = require('lspconfig')
+local lsp_installer = require('nvim-lsp-installer')
 
-require('user.lsp.cmp')
+lsp_installer.setup {}
+
+local cmp = require('user.lsp.cmp')
 
 -- diagnostics in hover
 vim.diagnostic.config {
@@ -18,18 +21,20 @@ vim.cmd([[
     sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
 ]])
 
+
 -- language server setups
-require('lspconfig').clangd.setup {
-    capabilities = Capabilities,
-}
-require('lspconfig').eslint.setup {
+for _, server in ipairs(lsp_installer.get_installed_servers()) do
+    lspconfig[server.name].setup {
+        capabilities = cmp.capabilities
+    }
+end
+
+-- additional settings
+lspconfig.eslint.setup {
     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-    capabilities = Capabilities,
 }
-require('lspconfig').pyright.setup {
-    capabilities = Capabilities,
-}
-require('lspconfig').sumneko_lua.setup {
+
+lspconfig.sumneko_lua.setup {
     settings = {
         Lua = {
             diagnostics = {
@@ -37,8 +42,5 @@ require('lspconfig').sumneko_lua.setup {
             },
         },
     },
-    capabilities = Capabilities,
 }
-require('lspconfig').volar.setup {
-    capabilities = Capabilities,
-}
+

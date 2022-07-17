@@ -9,6 +9,8 @@ alias zshrc="$ALIAS_EDITOR ~/.zshrc"
 alias rezsh="source ~/.zshrc"
 alias aliases="$ALIAS_EDITOR ~/.zsh/aliases.zsh"
 
+function which() { whence -p $1 || command -v $1 }
+
 # ls
 alias ls="ls --color=auto"
 alias l="ls -lAh"
@@ -41,8 +43,9 @@ alias ..7="../../../../../../.."
 
 # Other
 alias c="clear"
-alias sqlite="sqlite3"
 alias x="exit 0"
+alias mv="mv -i"
+alias sqlite="sqlite3"
 alias tm="tmux new -A -s shell"
 alias nv="nvim"
 

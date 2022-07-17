@@ -1,5 +1,7 @@
 #tmux
-if [ "$TMUX" = "" ]; then tmux new -A -s shell; fi
+if command -v tmux &> /dev/null; then
+    if [ "$TMUX" = "" ]; then tmux new -A -s shell; fi
+fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile

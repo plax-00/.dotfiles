@@ -9,7 +9,7 @@ set incsearch
 set ignorecase
 set smartcase
 set notimeout
-set scrolloff=12
+set scrolloff=12 sidescrolloff=10
 set laststatus=2
 set noshowmode
 set cursorline
@@ -21,4 +21,4 @@ set path+=**
 
 autocmd BufWritePre * %s/\s\+$//e  " remove trailing whitespace on write
 autocmd CursorHold * echon ''
-command! -nargs=1 -complete=help H h <args> | only
+command! -nargs=1 -complete=help H h <args> | only | set buflisted

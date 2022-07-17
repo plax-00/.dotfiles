@@ -19,8 +19,11 @@ require('nvim-tree').setup {
     renderer = {
         group_empty = true,
         indent_markers = {
-            enable = true,
+            enable = false,
         }
+    },
+    git = {
+        enable = false,
     },
     hijack_unnamed_buffer_when_opening = true,
     hijack_cursor = true,

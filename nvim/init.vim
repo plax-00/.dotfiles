@@ -33,6 +33,7 @@ Plug 'kdheepak/lazygit.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'sindrets/diffview.nvim'
 Plug 'plax-00/endscroll.nvim'
+Plug 'akinsho/toggleterm.nvim', { 'tag' : 'v2.*' }
 
 " nvim-cmp stuff
 Plug 'hrsh7th/cmp-nvim-lsp'

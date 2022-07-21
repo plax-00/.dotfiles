@@ -2,10 +2,11 @@ let mapleader = ' '
 nnoremap <silent>           <Leader>H   :noh<CR>
 nnoremap <silent>           <Leader>n   :bn<CR>
 nnoremap <silent>           <Leader>p   :bp<CR>
-nnoremap <silent><expr>     <Leader>q   len(getbufinfo({'buflisted':1}))==1 ? ':q<CR>' : ':bd<CR>'
+nnoremap <silent><expr>     <Leader>q   len(getbufinfo({'buflisted':1})) == 1 && &filetype != 'help' \|\| &filetype == 'dashboard' ? ':q<CR>' : ':bd<CR>'
 nnoremap <silent>           <Leader>ww  :w<CR>
 nnoremap <silent>           <Leader>ws  :w<CR>:source %<CR>
 nnoremap <silent>           <Leader>x   :x<CR>
+nnoremap <silent>           <Leader>ms  :call CreateSessionCWD()<CR>
 nnoremap                    <Leader>d   "_d
 nnoremap                    <Leader>D   "_D
 nnoremap                    <Leader>i   ^

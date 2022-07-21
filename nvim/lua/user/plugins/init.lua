@@ -9,5 +9,6 @@ require('user.plugins.indent-blankline')
 require('user.plugins.telescope')
 require('user.plugins.diffview')
 require('user.plugins.sneak')
--- require('user.plugins.endscroll')
+require('user.plugins.endscroll')
+require('user.plugins.toggleterm')
 

@@ -10,5 +10,5 @@ require('bufferline').setup {
     }
 }
 
-vim.o.showtabline = 0
+vim.o.showtabline = 2
 

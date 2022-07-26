@@ -12,24 +12,40 @@ set notimeout
 set scrolloff=12 sidescrolloff=10
 set laststatus=2
 set noshowmode
+set updatetime=1000
 set cursorline
 set mouse=a
-set foldmethod=syntax
+set foldmethod=indent
+set foldcolumn=0
 set foldlevelstart=99
+set foldnestmax=3
+set fillchars=foldsep:\ ,fold:\ ,foldopen:,foldclose:
 set encoding=utf-8
 set autoread
 set path+=**
-set sessionoptions=buffers,folds,winsize
+set sessionoptions=buffers,folds,help,winsize
 
 
-autocmd BufWritePre * %s/\s\+$//e  " remove trailing whitespace on write
-autocmd CursorHold * echon ''
-command! -nargs=1 -complete=help H h <args> | only
+" :H for fullscreen help
+command! -nargs=1 -complete=help H h <args> | silent! only
+
+
+augroup MiscAutocmds
+    autocmd!
+    " Remove trailing whitespace on write
+    autocmd BufWritePre * %s/\s\+$//e
+    " Clear command line automatically
+    autocmd CursorHold * echon ''
+augroup END
+
 
 
 " Automatic session saving and restoring
-autocmd VimEnter * nested call LoadSessionCWD()
-autocmd VimLeave * call SaveSessionCWD()
+augroup SessionManagement
+    autocmd!
+    autocmd VimEnter * nested call LoadSessionCWD()
+    autocmd VimLeave * call SaveSessionCWD()
+augroup END
 
 if has('nvim')
     let g:sessions_directory = '~/.local/share/nvim/sessions/'
@@ -37,12 +53,12 @@ else
     let g:sessions_directory = '~/.vim/sessions/'
 endif
 
-function! CreateSessionCWD()
+function! CreateSessionCWD() abort
     execute 'mksession!' g:sessions_directory .. substitute(getcwd(), '/', '__', 'g')
     echo 'Session created'
 endfunction
 
-function! LoadSessionCWD()
+function! LoadSessionCWD() abort
     let l:session_file = expand(g:sessions_directory .. substitute(getcwd(), '/', '__', 'g'))
 
     if filereadable(l:session_file)
@@ -51,7 +67,7 @@ function! LoadSessionCWD()
     endif
 endfunction
 
-function! SaveSessionCWD()
+function! SaveSessionCWD() abort
     if filereadable(expand(g:sessions_directory .. substitute(getcwd(), '/', '__', 'g')))
         call CreateSessionCWD()
     endif

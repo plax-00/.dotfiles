@@ -8,12 +8,14 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tomasiser/vim-code-dark'
 Plug 'vim-airline/vim-airline'
-Plug 'lifecrisis/vim-difforig'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jesseleite/vim-noh'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'jrudess/vim-foldtext'
+Plug 'jeetsukumaran/vim-indentwise'
 
 call plug#end()
 " ##########################################

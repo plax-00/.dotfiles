@@ -10,7 +10,7 @@ local colors = {
 }
 
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { 'python', 'javascript', 'typescript', 'vue', 'vim', 'lua', 'css', 'html', 'json', 'c', 'bash' },
+    ensure_installed = { 'bash', 'c', 'css', 'html', 'javascript', 'json', 'lua', 'python', 'rust', 'typescript', 'vim', 'vue' },
     highlight = { enable = true },
     incremental_selection = { enable = true },
     rainbow = {
@@ -19,7 +19,4 @@ require('nvim-treesitter.configs').setup {
         colors = colors,
     },
 }
-
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 

@@ -10,8 +10,8 @@ vim.diagnostic.config {
     virtual_text = false,
 }
 vim.o.signcolumn = 'yes'
-vim.o.updatetime = 1000
-vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+vim.cmd [[autocmd MiscAutocmds CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- diagnostic icons
 vim.cmd([[

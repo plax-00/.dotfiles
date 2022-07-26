@@ -12,6 +12,8 @@ Plug 'jesseleite/vim-noh'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'jrudess/vim-foldtext'
+Plug 'jeetsukumaran/vim-indentwise'
 
 " nvim plugins
 Plug 'Mofiqul/vscode.nvim'
@@ -24,13 +26,12 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim', { 'commit': '8d956c18258bb128ecf42f95411bb26efd3a5d23' }
 Plug 'glepnir/dashboard-nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make'  }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'kdheepak/lazygit.nvim'
-Plug 'ThePrimeagen/harpoon'
 Plug 'sindrets/diffview.nvim'
 Plug 'plax-00/endscroll.nvim'
 Plug 'akinsho/toggleterm.nvim', { 'tag' : 'v2.*' }
@@ -53,9 +54,9 @@ let g:vscode_disable_nvimtree_bg = v:true
 colorscheme vscode
 
 " transparent bg
-hi Normal ctermbg=NONE
-hi LineNr ctermbg=NONE
-hi EndOfBuffer ctermbg=NONE
+highlight Normal ctermbg=NONE
+highlight LineNr ctermbg=NONE
+highlight EndOfBuffer ctermbg=NONE
 
 " nvim-specific mappings
 source ~/.config/nvim/mappings.vim

@@ -5,11 +5,13 @@ else
 fi
 
 # zsh stuff
-alias zshrc="$ALIAS_EDITOR ~/.zshrc"
-alias rezsh="source ~/.zshrc"
-alias aliases="$ALIAS_EDITOR ~/.zsh/aliases.zsh"
+alias zshrc="cd $ZDOTDIR && $ALIAS_EDITOR $ZDOTDIR/.zshrc && cd - &> /dev/null"
+alias rezsh="source $ZDOTDIR/.zshrc"
+alias aliases="cd $ZDOTDIR && $ALIAS_EDITOR aliases.zsh && cd - &> /dev/null"
+alias extal="cd $ZDOTDIR && $ALIAS_EDITOR extended_aliases.zsh && cd - &> /dev/null"
 
 function which() { whence -p $1 || command -v $1 }
+function makedots() { cd ~/.dotfiles && make $1 ; cd - &> /dev/null }
 
 # ls
 alias ls="ls --color=auto"
@@ -24,6 +26,7 @@ alias grep="grep --color=auto -P"
 
 # du and df
 alias dus="du -hs * | sort -hr"
+alias dusa='du -hs $(ls -A) | sort -hr'
 alias du="du -h"
 alias df="df -h"
 
@@ -45,7 +48,8 @@ alias ..7="../../../../../../.."
 alias c="clear"
 alias x="exit 0"
 alias mv="mv -i"
+alias sqlite3="sqlite3 -init $XDG_CONFIG_HOME/sqlite3/sqliterc"
 alias sqlite="sqlite3"
-alias tm="tmux new -A -s shell"
+alias tm="tmux -f ~/.config/tmux/tmux.conf new -A -s shell"
 alias nv="nvim"
-
+alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'

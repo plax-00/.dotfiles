@@ -1,5 +1,5 @@
 let mapleader = ' '
-nnoremap            <Leader>H       <Cmd>noh<CR>
+nnoremap            <Leader>h       <Cmd>noh<CR>
 nnoremap            <Leader>n       <Cmd>bn<CR>
 nnoremap            <Leader>p       <Cmd>bp<CR>
 nnoremap <expr>     <Leader>q       len(getbufinfo({'buflisted':1})) == 1 && &filetype != 'help' \|\| &filetype == 'dashboard' ? '<Cmd>q<CR>' : '<Cmd>bd<CR>'

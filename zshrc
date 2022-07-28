@@ -1,10 +1,10 @@
 #tmux
 if command -v tmux &> /dev/null; then
-    if [ "$TMUX" = "" ]; then tmux new -A -s shell; fi
+    if [ "$TMUX" = "" ]; then tmux -f ~/.config/tmux/tmux.conf new -A -s shell; fi
 fi
 
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE="$XDG_STATE_HOME/zsh/history"
 HISTSIZE=5000
 SAVEHIST=5000
 setopt autocd extendedglob
@@ -22,8 +22,6 @@ compinit
 # User configuration #
 ######################
 
-ZSH=$HOME/.zsh
-
 HYPHEN_INSENSITIVE="true"
 
 setopt hist_ignore_all_dups # remove older duplicate entries from history
@@ -31,7 +29,7 @@ setopt hist_reduce_blanks # remove superfluous blanks from history items
 setopt hist_ignore_space #ignores commands with a leading space
 
 # Pure theme
-fpath+=$ZSH/pure
+fpath+=$ZDOTDIR/pure
 autoload promptinit; promptinit
 prompt pure
 
@@ -44,8 +42,8 @@ bindkey "^?" backward-delete-char
 
 
 ################## Plugins ##################
-ls $ZSH/plugins | while IFS= read -r plugin; do
-	source $ZSH/plugins/$plugin/$plugin.zsh
+ls $ZDOTDIR/plugins | while IFS= read -r plugin; do
+	source $ZDOTDIR/plugins/$plugin/$plugin.zsh
 done
 
 # Autosuggest settings
@@ -78,10 +76,10 @@ if command -v fzf &> /dev/null; then
 fi
 
 # Extended zshrc
-source $ZSH/extended.zshrc
+source $ZDOTDIR/extended.zshrc
 
 # Aliases
-source $ZSH/aliases.zsh
-if [ -f $ZSH/extended_aliases.zsh ]; then
-	source $ZSH/extended_aliases.zsh
+source $ZDOTDIR/aliases.zsh
+if [ -f $ZDOTDIR/extended_aliases.zsh ]; then
+	source $ZDOTDIR/extended_aliases.zsh
 fi

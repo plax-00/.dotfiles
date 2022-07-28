@@ -1,6 +1,7 @@
 " vim settings and mappings
-source ~/.vim/settings.vim
-source ~/.vim/mappings.vim
+source ~/.config/vim/settings.vim
+source ~/.config/vim/sessions.vim
+source ~/.config/vim/mappings.vim
 
 " ############ vim-plug section ############
 call plug#begin('~/.config/nvim/plugged')

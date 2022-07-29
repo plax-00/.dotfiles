@@ -5,7 +5,6 @@ TMUX := ~/.config/tmux
 VIM := ~/.config/vim
 VIMFILES := mappings sessions settings
 ZSH := ~/.config/zsh
-TESTO := test1 test2 test3
 
 symlink = echo -n "Created symlink: "; ln -fvs $(1) $(2)
 
@@ -46,6 +45,7 @@ zsh:
 	cd ${ZSH} && \
 	git clone https://github.com/sindresorhus/pure.git
 	@$(call symlink, ${DOTFILES}/zshrc, ${ZSH}/.zshrc)
+	@$(call symlink, ${DOTFILES}/zprofile, ${ZSH}/.zprofile)
 	@$(call symlink, ${DOTFILES}/aliases.zsh, ${ZSH}/aliases.zsh)
 	mkdir -p ${ZSH}/plugins
 	cd ${ZSH}/plugins && \
@@ -54,6 +54,9 @@ zsh:
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 	if ! [ -f ${ZSH}/extended.zshrc ]; then touch ${ZSH}/extended.zshrc; fi
 	if ! [ -f ${ZSH}/extended_aliases.zsh ]; then touch ${ZSH}/extended_aliases.zsh; fi
+	mkdir -p ~/.local/state/zsh
 
+zsh-clean:
+	rm -rf ${ZSH}/.zshrc ${ZSH}/.zprofile ${ZSH}/aliases.zsh ${ZSH}/plugins ${ZSH}/pure
 
 

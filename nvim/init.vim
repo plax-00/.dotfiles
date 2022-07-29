@@ -49,6 +49,10 @@ Plug 'hrsh7th/nvim-cmp'
 call plug#end()
 " ##########################################
 
+call system('test -n "$WSL_DISTRO_NAME"')
+if !v:shell_error
+    let g:clipboard = { 'name': 'WSL', 'copy': { '+': 'clip.exe', '*': 'clip.exe' }, 'paste': {}, 'cache_enabled': 1, }
+endif
 
 let g:vscode_transparency = 1
 let g:vscode_disable_nvimtree_bg = v:true

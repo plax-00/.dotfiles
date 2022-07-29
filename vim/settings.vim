@@ -31,6 +31,6 @@ augroup MiscAutocmds
     " Remove trailing whitespace on write
     autocmd BufWritePre * %s/\s\+$//e
     " Clear command line automatically
-    autocmd CursorHold * echon ''
+    autocmd CursorHold * echo ''
 augroup END
 

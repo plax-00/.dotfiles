@@ -42,9 +42,9 @@ bindkey "^?" backward-delete-char
 
 
 ################## Plugins ##################
-ls $ZDOTDIR/plugins | while IFS= read -r plugin; do
-	source $ZDOTDIR/plugins/$plugin/$plugin.zsh
-done
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # Autosuggest settings
 bindkey '`' autosuggest-accept

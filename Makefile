@@ -8,6 +8,8 @@ ZSH := ~/.config/zsh
 
 symlink = echo -n "Created symlink: "; ln -fvs $(1) $(2)
 
+.PHONY: help nvim tmux vim vimfiles zsh
+
 help:
 	@echo help
 
@@ -23,7 +25,7 @@ nvim: vimfiles
 
 tmux:
 	mkdir -p ${TMUX}
-	@$(call symlink, ${DOTFILES}/tmux.conf, ${TMUX}/tmux.conf)
+	@$(call symlink, ${DOTFILES}/tmux/tmux.conf, ${TMUX}/tmux.conf)
 	git clone https://github.com/khanghh/tmux-dark-plus-theme.git
 	if ! [ -f ${TMUX}/extended.tmux.conf ]; then touch ${TMUX}/extended.tmux.conf; fi
 
@@ -44,9 +46,9 @@ zsh:
 	mkdir -p ${ZSH}
 	cd ${ZSH} && \
 	git clone https://github.com/sindresorhus/pure.git
-	@$(call symlink, ${DOTFILES}/zshrc, ${ZSH}/.zshrc)
-	@$(call symlink, ${DOTFILES}/zprofile, ${ZSH}/.zprofile)
-	@$(call symlink, ${DOTFILES}/aliases.zsh, ${ZSH}/aliases.zsh)
+	@$(call symlink, ${DOTFILES}/zsh/zshrc, ${ZSH}/.zshrc)
+	@$(call symlink, ${DOTFILES}/zsh/zprofile, ${ZSH}/.zprofile)
+	@$(call symlink, ${DOTFILES}/zsh/aliases.zsh, ${ZSH}/aliases.zsh)
 	mkdir -p ${ZSH}/plugins
 	cd ${ZSH}/plugins && \
 	git clone https://github.com/zsh-users/zsh-autosuggestions.git && \

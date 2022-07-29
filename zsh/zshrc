@@ -61,8 +61,17 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # fzf
 if command -v fzf &> /dev/null; then
-	source /usr/share/doc/fzf/examples/key-bindings.zsh
-	source /usr/share/doc/fzf/examples/completion.zsh
+    if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+        source /usr/share/doc/fzf/examples/key-bindings.zsh
+    else
+        source /usr/share/fzf/key-bindings.zsh
+    fi
+    if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
+        source /usr/share/doc/fzf/examples/completion.zsh
+    else
+        source /usr/share/fzf/completion.zsh
+    fi
+
 	bindkey '^O' fzf-cd-widget
 	bindkey '^K' fzf-file-widget
 	export FZF_ALT_C_COMMAND="find . $HOME -type d"

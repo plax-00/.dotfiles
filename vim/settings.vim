@@ -2,7 +2,7 @@ set number relativenumber
 set hidden
 set tabstop=4 softtabstop=4
 set shiftwidth=4
-set expandtab
+set noexpandtab
 set nowrap
 set hlsearch
 set incsearch
@@ -19,18 +19,11 @@ set foldlevelstart=99
 set encoding=utf-8
 set autoread
 set path+=**
-set sessionoptions=buffers,folds,help,winsize
-
-
-" :H for fullscreen help
-command! -nargs=1 -complete=help H h <args> | silent! only
 
 
 augroup MiscAutocmds
     autocmd!
     " Remove trailing whitespace on write
     autocmd BufWritePre * %s/\s\+$//e
-    " Clear command line automatically
-    autocmd CursorHold * echo ''
 augroup END
 

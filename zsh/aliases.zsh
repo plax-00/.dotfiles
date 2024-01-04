@@ -5,12 +5,11 @@ else
 fi
 
 # zsh stuff
-alias zshrc="cd $ZDOTDIR && $ALIAS_EDITOR $ZDOTDIR/.zshrc && cd - &> /dev/null"
+alias zshrc="cd $ZDOTDIR && $ALIAS_EDITOR $ZDOTDIR/.zshrc ; cd - &> /dev/null"
 alias rezsh="source $ZDOTDIR/.zshrc"
-alias aliases="cd $ZDOTDIR && $ALIAS_EDITOR aliases.zsh && cd - &> /dev/null"
-alias extal="cd $ZDOTDIR && $ALIAS_EDITOR extended_aliases.zsh && cd - &> /dev/null"
+alias aliases="cd $ZDOTDIR && $ALIAS_EDITOR aliases.zsh ; cd - &> /dev/null"
+alias extal="cd $ZDOTDIR && $ALIAS_EDITOR extended_aliases.zsh ; cd - &> /dev/null"
 
-function which() { whence -p $1 || command -v $1 }
 function makedots() { cd ~/.dotfiles && make $1 ; cd - &> /dev/null }
 
 # ls
@@ -35,6 +34,9 @@ alias gc="git checkout"
 alias gs="git status"
 alias gd="git diff"
 alias gu="git add -u"
+alias gl="git log --oneline"
+alias gr="git rebase --interactive"
+alias gg="lazygit"
 
 # cd
 alias ..2="../.."

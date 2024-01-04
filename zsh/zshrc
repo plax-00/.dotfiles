@@ -1,6 +1,6 @@
 #tmux
 if command -v tmux &> /dev/null; then
-    if [ "$TMUX" = "" ]; then tmux -f ~/.config/tmux/tmux.conf new -A -s shell; fi
+    if [ "$TMUX" = "" ]; then tmux new -A -s shell; fi
 fi
 
 # Lines configured by zsh-newuser-install
@@ -29,13 +29,16 @@ setopt hist_reduce_blanks # remove superfluous blanks from history items
 setopt hist_ignore_space #ignores commands with a leading space
 
 # Pure theme
-fpath+=$ZDOTDIR/pure
+fpath+=$ZDOTDIR/themes/pure
 autoload promptinit; promptinit
 prompt pure
 
 
 # Disables ugly folder highlighting
 export LS_COLORS=$LS_COLORS:'ow=1;34:';
+
+# Add local bin to PATH
+export PATH=$PATH:~/.local/bin
 
 # Fix vi mode backspace bug
 bindkey "^?" backward-delete-char
@@ -82,6 +85,11 @@ if command -v fzf &> /dev/null; then
 		export FZF_CTRL_T_COMMAND="fdfind . $HOME --hidden"
 	fi
 
+    if command -v fd &> /dev/null; then
+        export FZF_ALT_C_COMMAND="fd . $HOME --type d --type l --hidden"
+        export FZF_CTRL_T_COMMAND="fd . $HOME --hidden"
+    fi
+
 fi
 
 # Extended zshrc
@@ -89,6 +97,4 @@ source $ZDOTDIR/extended.zshrc
 
 # Aliases
 source $ZDOTDIR/aliases.zsh
-if [ -f $ZDOTDIR/extended_aliases.zsh ]; then
-	source $ZDOTDIR/extended_aliases.zsh
-fi
+source $ZDOTDIR/extended_aliases.zsh

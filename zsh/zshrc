@@ -11,8 +11,10 @@ setopt autocd extendedglob
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '$HOME/.zshrc'
+# The following lines were added by compinstall and me
+mkdir -p ~/.cache/zsh
+export ZSH_COMPDUMP=~/.cache/zsh
+zstyle :compinstall filename "$ZDOTDIR/.zshrc"
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall

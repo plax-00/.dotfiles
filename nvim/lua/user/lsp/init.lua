@@ -30,17 +30,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 end
 
 -- additional settings
-lspconfig.eslint.setup {
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-}
-
-lspconfig.sumneko_lua.setup {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' },
-            },
-        },
-    },
-}
+-- lspconfig.eslint.setup {
+--     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+-- }
 

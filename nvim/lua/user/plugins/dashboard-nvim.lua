@@ -1,6 +1,4 @@
-local db = require('dashboard')
-
-db.custom_header = {
+local header = {
     [[]],
     [[]],
     [[        ⢀⣴⡾⠃     ⠈⠺⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣶⣤⡀  ]],
@@ -24,38 +22,54 @@ db.custom_header = {
     [[]],
 }
 
-db.custom_center = {
+local center = {
     {
         icon = ' ',
         desc = 'Search Directory         ',
+        key = 'f',
         action = 'Telescope find_files hidden=true theme=dropdown prompt_title=Search\\ Directory',
-        shortcut = 'SPC f f',
     },
     {
         icon = ' ',
         desc = 'Recent Files             ',
+        key = 'o',
         action = 'Telescope oldfiles hidden=true theme=dropdown prompt_title=Recent\\ Files',
-        shortcut = 'SPC f o',
     },
     {
         icon = ' ',
         desc = 'Grep Files               ',
+        key = 'g',
         action = 'Telescope live_grep hidden=true theme=dropdown prompt_title=Grep\\ Files',
-        shortcut = 'SPC f g',
     },
     {
         icon = ' ',
         desc = 'File Explorer            ',
+        key = 'e',
         action = 'NvimTreeOpen',
-        shortcut = 'SPC e  ',
+    },
+    {
+        icon = ' ',
+        desc = 'Quit                     ',
+        key = 'q',
+        action = 'q',
     },
 }
 
-db.custom_footer = {}
+for _, v in pairs(center) do
+    v.icon_hl = '@keyword'
+    v.desc_hl = '@function'
+    v.key_hl = '@string'
+end
 
-vim.api.nvim_command([[highlight link DashboardHeader TSFunction]])
-vim.api.nvim_command([[highlight link DashboardCenterIcon TSKeyword]])
-vim.api.nvim_command([[highlight link DashboardCenter TSFunction]])
-vim.api.nvim_command([[highlight link DashboardShortcut TSString]])
 
-vim.o.ruler = false
+return {
+    'nvimdev/dashboard-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+        theme = 'doom',
+        config = {
+            header = header,
+            center = center,
+        },
+    },
+}

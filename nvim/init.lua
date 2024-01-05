@@ -19,12 +19,6 @@ vim.cmd.source(config_dir .. '/settings.link.vim')
 vim.cmd.source(config_dir .. '/sessions.link.vim')
 vim.cmd.source(config_dir .. '/mappings.link.vim')
 vim.cmd.source(config_dir .. '/mappings.vim')
--- vim.cmd([[
---     source ~/.config/vim/settings.vim
---     source ~/.config/vim/sessions.vim
---     execute 'source' stdpath('config') .. '/mappings.link.vim'
---     source ~/.config/nvim/mappings.vim
--- ]])
 
 -- Setup plugins
 require('lazy').setup('user.plugins')

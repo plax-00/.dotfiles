@@ -1,0 +1,15 @@
+[submodule "zsh/themes/pure"]
+	path = zsh/themes/pure
+	url = https://github.com/sindresorhus/pure
+[submodule "zsh/plugins/zsh-autosuggestions"]
+	path = zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh/plugins/zsh-history-substring-search"]
+	path = zsh/plugins/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule "zsh/plugins/zsh-syntax-highlighting"]
+	path = zsh/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "tmux/themes/tmux-dark-plus-theme"]
+	path = tmux/themes/tmux-dark-plus-theme
+	url = https://github.com/khanghh/tmux-dark-plus-theme.git

@@ -14,12 +14,17 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 
 -- Load settings and mappings
-vim.cmd([[
-    source ~/.config/vim/settings.vim
-    source ~/.config/vim/sessions.vim
-    source ~/.config/vim/mappings.vim
-    source ~/.config/nvim/mappings.vim
-]])
+local config_dir = vim.fn.stdpath('config')
+vim.cmd.source(config_dir .. '/settings.link.vim')
+vim.cmd.source(config_dir .. '/sessions.link.vim')
+vim.cmd.source(config_dir .. '/mappings.link.vim')
+vim.cmd.source(config_dir .. '/mappings.vim')
+-- vim.cmd([[
+--     source ~/.config/vim/settings.vim
+--     source ~/.config/vim/sessions.vim
+--     execute 'source' stdpath('config') .. '/mappings.link.vim'
+--     source ~/.config/nvim/mappings.vim
+-- ]])
 
 -- Setup plugins
 require('lazy').setup('user.plugins')

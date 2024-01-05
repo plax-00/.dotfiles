@@ -6,30 +6,35 @@ VIM := ~/.config/vim
 VIMFILES := mappings sessions settings
 ZSH := ~/.config/zsh
 
-symlink = echo -n "Created symlink: "; ln -fvs $(1) $(2)
+NVIM_CLEAN = ${NVIM}/*.link.vim ${NVIM} ~/.local/share/nvim
+TMUX_CLEAN = ${TMUX}/tmux.conf ${TMUX}/themes
+VIM_CLEAN = ${VIM}/autoload/plug.vim ${DOTFILES}/vim/plugged
+ZSH_CLEAN = ${ZSH}/.zshrc ${ZSH}/.zprofile ${ZSH}/aliases.zsh ${ZSH}/plugins ${ZSH}/themes ~/.zshenv
 
-.PHONY: help nvim tmux vim vimfiles zsh
+symlink = ln -invs $(1) $(2) || true
+clean = echo -n "Cleaning... " ; rm -rf $(1) && echo "Done"
 
-help:
-	@echo help
+.PHONY: help nvim tmux vim zsh clean-nvim clean-tmux clean-vim clean-zsh
 
-nvim: vimfiles
+help: ## Print this message
+	@# https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+nvim: ## Setup neovim configuration
 	@$(call symlink, ${DOTFILES}/nvim, ${NVIM})
-	@echo -n "Installing vim-plug... " && \
-		sh -c 'curl -fLo "$${XDG_DATA_HOME:-$$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' && \
-		echo "Installed"
-	@echo -n "Installing plugins... " && \
-		nvim -Es -c PlugInstall -c qall || true && \
-		echo "Installed"
+	@for file in ${VIMFILES}; do \
+		$(call symlink, ${DOTFILES}/vim/$$file.vim, ${NVIM}/$$file.link.vim); \
+	done
 
-tmux:
-	mkdir -p ${TMUX}
+tmux: ## Setup tmux configuration
+	@mkdir -p ${TMUX}
 	@$(call symlink, ${DOTFILES}/tmux/tmux.conf, ${TMUX}/tmux.conf)
-	git clone https://github.com/khanghh/tmux-dark-plus-theme.git
-	if ! [ -f ${TMUX}/extended.tmux.conf ]; then touch ${TMUX}/extended.tmux.conf; fi
+	@$(call symlink, ${DOTFILES}/tmux/themes, ${TMUX}/themes)
+	@if ! [ -f ${TMUX}/extended.tmux.conf ]; then touch ${TMUX}/extended.tmux.conf; fi
 
-vim: vimfiles
+vim: ## Setup vim configuration
+	@$(call symlink, ${DOTFILES}/vim, ${VIM})
 	@echo -n "Installing vim-plug... " && \
 		curl -fLo ${VIM}/autoload/plug.vim --create-dirs --no-progress-meter \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
@@ -38,27 +43,30 @@ vim: vimfiles
 		vim -Es -c PlugInstall -c qall || true && \
 		echo "Installed"
 
-vimfiles:
-	@$(call symlink, ${DOTFILES}/vim, ${VIM})
-
-zsh:
-	echo 'ZDOTDIR=$$HOME/.config/zsh' > ~/.zshenv
-	mkdir -p ${ZSH}
-	cd ${ZSH} && \
-	git clone https://github.com/sindresorhus/pure.git
+zsh: ## Setup zsh configuration
+	@echo 'export ZDOTDIR=$$HOME/.config/zsh' > ~/.zshenv
 	@$(call symlink, ${DOTFILES}/zsh/zshrc, ${ZSH}/.zshrc)
 	@$(call symlink, ${DOTFILES}/zsh/zprofile, ${ZSH}/.zprofile)
 	@$(call symlink, ${DOTFILES}/zsh/aliases.zsh, ${ZSH}/aliases.zsh)
-	mkdir -p ${ZSH}/plugins
-	cd ${ZSH}/plugins && \
-	git clone https://github.com/zsh-users/zsh-autosuggestions.git && \
-	git clone https://github.com/zsh-users/zsh-history-substring-search.git && \
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-	if ! [ -f ${ZSH}/extended.zshrc ]; then touch ${ZSH}/extended.zshrc; fi
-	if ! [ -f ${ZSH}/extended_aliases.zsh ]; then touch ${ZSH}/extended_aliases.zsh; fi
-	mkdir -p ~/.local/state/zsh
+	@$(call symlink, ${DOTFILES}/zsh/plugins, ${ZSH}/plugins)
+	@$(call symlink, ${DOTFILES}/zsh/themes, ${ZSH}/themes)
+	@if ! [ -f ${ZSH}/extended.zshrc ]; then touch ${ZSH}/extended.zshrc; fi
+	@if ! [ -f ${ZSH}/extended_aliases.zsh ]; then touch ${ZSH}/extended_aliases.zsh; fi
+	@mkdir -p ~/.local/state/zsh
 
-zsh-clean:
-	rm -rf ${ZSH}/.zshrc ${ZSH}/.zprofile ${ZSH}/aliases.zsh ${ZSH}/plugins ${ZSH}/pure
+clean-nvim: ## Remove neovim symlinks and plugins
+	@$(call clean, ${NVIM_CLEAN})
 
+clean-tmux: ## Remove tmux symlinks and themes
+	@$(call clean, ${TMUX_CLEAN})
 
+clean-vim: ## Remove vim plugins
+	@$(call clean, ${VIM_CLEAN})
+
+clean-zsh: ## Remove zsh symlinks and plugins
+	@$(call clean, ${ZSH_CLEAN})
+
+test:
+	@for file in ${VIMFILES}; do \
+		echo "$$file.link.vim";  \
+	done

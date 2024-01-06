@@ -8,11 +8,11 @@ ZSH := ~/.config/zsh
 
 NVIM_CLEAN = ${NVIM}/*.link.vim ${NVIM} ~/.local/share/nvim
 TMUX_CLEAN = ${TMUX}/tmux.conf ${TMUX}/themes
-VIM_CLEAN = ${VIM}/autoload/plug.vim ${DOTFILES}/vim/plugged
+VIM_CLEAN = ${VIM}/autoload/plug.vim ${VIM}/plugged ${VIM}
 ZSH_CLEAN = ${ZSH}/.zshrc ${ZSH}/.zprofile ${ZSH}/aliases.zsh ${ZSH}/plugins ${ZSH}/themes ~/.zshenv
 
 symlink = ln -invs $(1) $(2) || true
-clean = echo -n "Cleaning... " ; rm -rf $(1) && echo "Done"
+clean = echo "Cleaning... " ; rm -rf $(1) && echo "Done"
 
 .PHONY: help nvim tmux vim zsh clean-nvim clean-tmux clean-vim clean-zsh
 
@@ -38,9 +38,6 @@ vim: ## Setup vim configuration
 		curl -fLo ${VIM}/autoload/plug.vim --create-dirs --no-progress-meter \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
 		echo "Installed"
-	@echo -n "Installing plugins... " && \
-		vim -Es -c PlugInstall -c qall || true && \
-		echo "Installed"
 
 zsh: ## Setup zsh configuration
 	@echo 'export ZDOTDIR=$$HOME/.config/zsh' > ~/.zshenv
@@ -56,16 +53,11 @@ zsh: ## Setup zsh configuration
 clean-nvim: ## Remove neovim symlinks and plugins
 	@$(call clean, ${NVIM_CLEAN})
 
-clean-tmux: ## Remove tmux symlinks and themes
+clean-tmux: ## Remove tmux symlinks and plugins
 	@$(call clean, ${TMUX_CLEAN})
 
-clean-vim: ## Remove vim plugins
+clean-vim: ## Remove vim symlinks and plugins
 	@$(call clean, ${VIM_CLEAN})
 
 clean-zsh: ## Remove zsh symlinks and plugins
 	@$(call clean, ${ZSH_CLEAN})
-
-test:
-	@for file in ${VIMFILES}; do \
-		echo "$$file.link.vim";  \
-	done

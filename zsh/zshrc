@@ -12,11 +12,11 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 
 # The following lines were added by compinstall and me
-mkdir -p ~/.cache/zsh
-export ZSH_COMPDUMP=~/.cache/zsh
+mkdir -p $XDG_CACHE_HOME/zsh
+export ZSH_COMPDUMP=$XDG_CACHE_HOME/zsh/zcompdump
 zstyle :compinstall filename "$ZDOTDIR/.zshrc"
 autoload -Uz compinit
-compinit
+compinit -d $ZSH_COMPDUMP
 # End of lines added by compinstall
 
 

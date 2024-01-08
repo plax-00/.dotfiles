@@ -74,6 +74,7 @@ return {
 
     {
         'HiPhish/rainbow-delimiters.nvim',
+        main = 'rainbow-delimiters.setup',
         opts = {
             highlight = {
                 'RainbowDelimiterYellow',
@@ -82,17 +83,8 @@ return {
                 'RainbowDelimiterRed',
             },
         },
-        config = function(_, opts)
-            require('rainbow-delimiters.setup').setup(opts)
-            vim.cmd([[
-                highlight RainbowDelimiterYellow guifg=#e5e510
-                highlight RainbowDelimiterViolet guifg=#d670d6
-                highlight RainbowDelimiterBlue guifg=#3b8eea
-                highlight RainbowDelimiterRed guifg=#f14c4c
-            ]])
-        end,
     },
-    
+
     {
         'declancm/cinnamon.nvim',
         enabled = false,

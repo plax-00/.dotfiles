@@ -94,6 +94,9 @@ if command -v fzf &> /dev/null; then
 
 fi
 
+# Cargo
+export PATH=$PATH:$CARGO_HOME/bin
+
 # Extended zshrc
 source $ZDOTDIR/extended.zshrc
 

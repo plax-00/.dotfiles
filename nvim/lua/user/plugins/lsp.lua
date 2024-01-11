@@ -48,10 +48,11 @@ return {
         dependencies = { 'williamboman/mason.nvim' },
         opts = {
             handlers = {
-                function (server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = require('cmp_nvim_lsp').default_capabilities()
-                    }
+                function(server_name)
+                local server_config = require('user.lsp.server_config')[server_name]
+                server_config = server_config ~= nil and server_config or {}
+                server_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
+                    require("lspconfig")[server_name].setup(server_config)
                 end,
             },
         }

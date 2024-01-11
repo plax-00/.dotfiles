@@ -8,31 +8,31 @@ local feedkey = function(key, mode)
 end
 
 local kind_icons = {
-    Text = "",
+    Text = "󰉿",
     Method = "m",
-    Function = "",
+    Function = "󰊕",
     Constructor = "",
     Field = "",
-    Variable = "",
-    Class = "",
+    Variable = "󰆧",
+    Class = "󰌗",
     Interface = "",
     Module = "",
     Property = "",
     Unit = "",
-    Value = "",
+    Value = "󰎠",
     Enum = "",
-    Keyword = "",
+    Keyword = "󰌋",
     Snippet = "",
-    Color = "",
-    File = "",
+    Color = "󰏘",
+    File = "󰈙",
     Reference = "",
-    Folder = "",
+    Folder = "󰉋",
     EnumMember = "",
-    Constant = "",
+    Constant = "󰇽",
     Struct = "",
     Event = "",
-    Operator = "",
-    TypeParameter = "",
+    Operator = "󰆕",
+    TypeParameter = "󰊄",
 }
 
 
@@ -68,14 +68,28 @@ return {
             }
             vim.o.signcolumn = 'yes'
             vim.cmd [[autocmd MiscAutocmds CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
+            if vim.version().minor >= 10 then
+                vim.api.nvim_create_autocmd('LspAttach', {
+                    pattern = '*',
+                    callback = function()
+                        vim.lsp.inlay_hint.enable()
+                    end
+                })
+                vim.api.nvim_set_keymap( 'n', '<F3>', '', {
+                    callback = function()
+                        vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                    end,
+                    noremap = true,
+                })
+            end
 
             -- diagnostic icons
-            vim.cmd([[
+            vim.cmd [[
                 sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
                 sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
                 sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
                 sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
-            ]])
+            ]]
         end,
     },
 

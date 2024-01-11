@@ -4,10 +4,15 @@ nmap                <Leader>n            <Cmd>bn<CR><Leader>\buffer
 nmap                <Leader>N            <Cmd>bp<CR><Leader>\buffer
 nmap                <Leader>\buffern     <Leader>n
 nmap                <Leader>\bufferN     <Leader>N
+nmap                <Leader>t            <Cmd>tabn<CR><Leader>\tabpage
+nmap                <Leader>T            <Cmd>tabp<CR><Leader>\tabpage
+nmap                <Leader>\tabpaget    <Leader>t
+nmap                <Leader>\tabpageT    <Leader>T
+nnoremap            <Leader><BS>         g<Tab>
 nnoremap            <Leader>q            <Cmd>call LeaderQ()<CR>
-nnoremap            <Leader>ww           <Cmd>w<CR>
-nnoremap            <Leader>ws           <Cmd>w<CR><Cmd>source %<CR>
-nnoremap            <Leader>x            <Cmd>x<CR>
+nnoremap            <Leader>ww           <Cmd>update<CR>
+nnoremap            <Leader>ws           <Cmd>update<CR><Cmd>source %<CR>
+nnoremap            <Leader>x            <Cmd>update<CR><Cmd>qall<CR>
 nnoremap            <Leader>sm           <Cmd>call CreateSessionCWD()<CR>
 nnoremap            <Leader>sd           <Cmd>call DeleteSessionCWD()<CR>
 nnoremap            <Leader>b            <C-^>
@@ -43,12 +48,25 @@ imap                jj                   <Esc>
 
 function! LeaderQ() abort
     let l:quitOut = v:false
-    if (len(getbufinfo({'buflisted':0})) == 1 && &filetype != 'help')  " check if there is only 1 buffer
-        let l:quitOut = v:true
+    let l:bufCount = len(getbufinfo({ 'buflisted': 0 }))
+
+    if (l:bufCount > 1 && tabpagenr() == 1)  " avoid closing tabpage in tab 1
+        bnext
+        bdelete #
+        return
     endif
+
+    if (l:bufCount == 1 && &filetype != 'help')  " check if there is only 1 buffer
+        let l:quitOut = v:true
+        if (tabpagenr() == 1)
+            let l:mainTabpage = v:true
+        endif
+    endif
+
     if (&buftype == 'nofile' && &filetype == 'vim')  " check for cmdwin
         let l:quitOut = v:true
     endif
+
     if &filetype == 'dashboard' || &filetype == 'lazy'  " check for filetypes
         let l:quitOut = v:true
     endif

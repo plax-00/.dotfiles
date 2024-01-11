@@ -23,6 +23,11 @@ return {
             inc_rename = false,              -- enables an input dialog for inc-rename.nvim
             lsp_doc_border = false,          -- add a border to hover docs and signature help
         },
+        cmdline = {
+            format = {
+                help = { pattern = { "^:%s*he?l?p?%s+", ":%s*tab%s*he?l?p?%s+" }, icon = "" },
+            }
+        },
         commands = {
             history = {
                 view = 'popup',
@@ -44,5 +49,6 @@ return {
     config = function(_, opts)
         require('noice').setup(opts)
         vim.cmd.cabbrev('n', 'Noice')
+        vim.cmd.cabbrev('h', 'tab help')
     end,
 }

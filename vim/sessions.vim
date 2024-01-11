@@ -1,5 +1,5 @@
 " Automatic session saving and restoring
-set sessionoptions=buffers,folds,help,winsize
+set sessionoptions=buffers,folds,help,tabpages,winsize
 
 augroup SessionManagement
     autocmd!

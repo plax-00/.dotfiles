@@ -23,6 +23,33 @@ return {
                 },
             },
         },
+        tabs = {
+            placement = 'right',
+            components = {
+                {
+                    text = function(tabpage)
+                        return tabpage.is_first and '' or ''
+                    end,
+                },
+                {
+                    text = function(tabpage)
+                        return tabpage.index
+                    end,
+                },
+                {
+                    text = function(tabpage)
+                        return (tabpage.is_first and tabpage.is_last) and ''
+                        or tabpage.is_last and ''
+                        or ' | '
+                    end,
+                },
+                {
+                    text = function(tabpage)
+                        return tabpage.is_last and '' or ''
+                    end,
+                },
+            },
+        },
         components = {
             { text = '' },
             { text = 'icon/pick' },
@@ -48,6 +75,7 @@ return {
 
         local red = get_hex('DiagnosticError', 'fg')
         local yellow = get_hex('DiagnosticWarn', 'fg')
+        local blue = vim.g.terminal_color_4
         local normal_fg = get_hex('Normal', 'fg')
         local normal_bg = get_hex('Normal', 'bg')
         local comment_fg = get_hex('Comment', 'fg')
@@ -68,10 +96,20 @@ return {
         -- NvimTree header
         opts.sidebar.components[1].bg = get_tab_color({ is_focused = false, diagnostics = {} })
 
+        -- tabpage text
+        opts.tabs.components[2].fg = function(tabpage)
+            return tabpage.is_active and blue
+            or comment_fg
+        end
+        -- tab separator
+        opts.tabs.components[3].fg = comment_fg
+
 
         -- 
         opts.components[1].fg = get_tab_color
         opts.components[1].bg = normal_bg
+        opts.tabs.components[1].fg = get_tab_color
+        opts.tabs.components[1].bg = normal_bg
 
         -- icon/pick
         opts.components[2].text = function(buffer)
@@ -92,6 +130,8 @@ return {
         -- 
         opts.components[7].fg = get_tab_color
         opts.components[7].bg = normal_bg
+        opts.tabs.components[4].fg = get_tab_color
+        opts.tabs.components[4].bg = normal_bg
 
 
         vim.api.nvim_set_hl(0, 'TabLineFill', { fg = normal_bg })

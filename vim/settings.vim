@@ -2,7 +2,7 @@ set number relativenumber
 set hidden
 set tabstop=4 softtabstop=4
 set shiftwidth=4
-set noexpandtab
+set expandtab
 set nowrap
 set hlsearch
 set incsearch

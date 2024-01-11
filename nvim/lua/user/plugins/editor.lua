@@ -1,25 +1,5 @@
 return {
     {
-        'akinsho/bufferline.nvim',
-        version = '*',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        opts = {
-            options = {
-                numbers = 'buffer_id',
-                show_buffer_close_icons = false,
-                show_close_icon = false,
-                diagnostics = 'nvim_lsp',
-                offsets = {
-                    { filetype = 'NvimTree', text = 'File Explorer', highlight = 'Directory' },
-                },
-            }
-        },
-        init = function()
-            vim.o.showtabline = 2
-        end,
-    },
-
-    {
         'plax-00/endscroll.nvim',
         dev = true,
         opts = {
@@ -42,9 +22,6 @@ return {
                     'dashboard',
                     'lazy',
                 },
-            },
-            scope = {
-                show_start = false,
             },
         },
     },
@@ -82,15 +59,6 @@ return {
                 'RainbowDelimiterBlue',
                 'RainbowDelimiterRed',
             },
-        },
-    },
-
-    {
-        'declancm/cinnamon.nvim',
-        enabled = false,
-        opts = {
-            extra_keymaps = true,
-            override_keymaps = true,
         },
     },
 }

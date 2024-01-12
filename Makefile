@@ -34,6 +34,10 @@ git: ## Setup git configuration
 nvim: ## Setup neovim configuration
 	@$(call symlink,${DOTFILES}/nvim,${NVIM})
 
+.PHONY: packages
+packages: ## Install pacman packages
+@sudo pacman -S --needed - < ${DOTFILES}/pkglist.txt
+
 .PHONY: tmux
 tmux: ## Setup tmux configuration
 	@mkdir -p ${TMUX}

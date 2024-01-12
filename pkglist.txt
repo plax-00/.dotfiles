@@ -1,0 +1,17 @@
+arch-install-scripts
+base
+base-devel
+bat
+fd
+fzf
+lazygit
+man-db
+neofetch
+neovim
+python-virtualenv
+ripgrep
+tldr
+tree
+unzip
+wget
+yt-dlp

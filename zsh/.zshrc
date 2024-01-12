@@ -63,11 +63,6 @@ if command -v fzf &> /dev/null; then
     export FZF_ALT_C_COMMAND="find . $HOME -type d"
     export FZF_CTRL_T_COMMAND="find . $HOME"
 
-    if command -v fdfind &> /dev/null; then
-        export FZF_ALT_C_COMMAND="fdfind . $HOME --type d --hidden"
-        export FZF_CTRL_T_COMMAND="fdfind . $HOME --hidden"
-    fi
-
     if command -v fd &> /dev/null; then
         export FZF_ALT_C_COMMAND="fd . $HOME --type d --type l --hidden"
         export FZF_CTRL_T_COMMAND="fd . $HOME --hidden"

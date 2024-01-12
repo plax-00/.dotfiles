@@ -34,6 +34,8 @@ setopt hist_ignore_space #ignores commands with a leading space
 fpath+=$ZDOTDIR/themes/pure
 autoload promptinit; promptinit
 prompt pure
+export PURE_PROMPT_SYMBOL=
+export PURE_PROMPT_VICMD_SYMBOL=
 
 
 # Disables ugly folder highlighting

@@ -22,11 +22,3 @@ vim.cmd.source(config_dir .. '/mappings.vim')
 
 -- Setup plugins
 require('lazy').setup('user.plugins')
-
--- transparent bg
-vim.cmd([[
-    highlight Normal ctermbg=NONE
-    highlight LineNr ctermbg=NONE
-    highlight EndOfBuffer ctermbg=NONE
-]])
-

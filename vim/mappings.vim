@@ -1,5 +1,5 @@
 let mapleader = ' '
-nnoremap            <Leader>h            <Cmd>noh<CR>
+
 nmap                <Leader>n            <Cmd>bn<CR><Leader>\buffer
 nmap                <Leader>N            <Cmd>bp<CR><Leader>\buffer
 nmap                <Leader>\buffern     <Leader>n
@@ -9,6 +9,8 @@ nmap                <Leader>T            <Cmd>tabp<CR><Leader>\tabpage
 nmap                <Leader>\tabpaget    <Leader>t
 nmap                <Leader>\tabpageT    <Leader>T
 nnoremap            <Leader><BS>         g<Tab>
+
+nnoremap            <Leader>h            <Cmd>noh<CR>
 nnoremap            <Leader>q            <Cmd>call LeaderQ()<CR>
 nnoremap            <Leader>ww           <Cmd>update<CR>
 nnoremap            <Leader>ws           <Cmd>update<CR><Cmd>source %<CR>
@@ -48,7 +50,7 @@ imap                jj                   <Esc>
 
 function! LeaderQ() abort
     let l:quitOut = v:false
-    let l:bufCount = len(getbufinfo({ 'buflisted': 0 }))
+    let l:bufCount = len(getbufinfo({ 'buflisted': 1 }))
 
     if (l:bufCount > 1 && tabpagenr() == 1)  " avoid closing tabpage in tab 1
         bnext

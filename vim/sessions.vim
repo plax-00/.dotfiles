@@ -9,7 +9,6 @@ augroup END
 
 let g:sessions_directory = stdpath('data') . '/sessions/'
 call mkdir(g:sessions_directory, 'p')
-let g:no_sessions = 0
 
 function! GetGitBranch() abort
     return system("git branch --show-current 2> /dev/null | tr -d '\n'")

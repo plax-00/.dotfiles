@@ -53,6 +53,9 @@ function! LoadSessionCWD() abort
         silent! execute 'source' l:session_file
         echo 'Session loaded'
     endif
+
+    " autosave session every 30 mins
+    call timer_start(1800000, 'AutosaveSession', { 'repeat': -1 })
 endfunction
 
 " Called by autocmd
@@ -71,3 +74,8 @@ function! SaveSessionCWD() abort
     endif
 endfunction
 
+" Called by timer
+function! AutosaveSession(timerID) abort
+    call SaveSessionCWD()
+    echo 'Autosaved session'
+endfunction

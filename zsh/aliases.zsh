@@ -37,6 +37,7 @@ alias gu="git add -u"
 alias gl="git log --oneline"
 alias gr="git rebase --interactive"
 alias gg="lazygit"
+alias gst="git stash"
 
 # cd
 alias ..2="../.."

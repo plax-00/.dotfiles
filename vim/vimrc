@@ -55,4 +55,4 @@ hi EndOfBuffer ctermbg=NONE
 source ~/.config/vim/mappings.vim
 
 " sessions
-source ~/.config/vim/
+source ~/.config/vim/sessions.vim

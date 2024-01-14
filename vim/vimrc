@@ -41,7 +41,7 @@ call plug#end()
 let g:airline_theme = 'codedark'
 let g:airline_section_z = '%p%%  %l:%c'
 
-colorscheme codedark
+silent! colorscheme codedark
 set t_Co=256
 set t_ut=
 
@@ -51,6 +51,8 @@ hi LineNr ctermbg=NONE
 hi EndOfBuffer ctermbg=NONE
 
 
-" remaps
+" mappings
 source ~/.config/vim/mappings.vim
 
+" sessions
+source ~/.config/vim/

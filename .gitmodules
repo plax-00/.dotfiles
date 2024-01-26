@@ -14,7 +14,3 @@
 	path = zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
 	shallow = true
-[submodule "tmux/themes/tmux-dark-plus-theme"]
-	path = tmux/themes/tmux-dark-plus-theme
-	url = https://github.com/khanghh/tmux-dark-plus-theme.git
-	shallow = true

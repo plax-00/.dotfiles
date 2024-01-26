@@ -33,7 +33,7 @@ nvim: ## Setup neovim configuration
 tmux: ## Setup tmux configuration
 	@mkdir -p ${TMUX}
 	@$(call symlink, ${DOTFILES}/tmux/tmux.conf, ${TMUX}/tmux.conf)
-	@$(call symlink, ${DOTFILES}/tmux/themes, ${TMUX}/themes)
+	@$(call symlink, ${DOTFILES}/tmux/plugins, ${TMUX}/plugins)
 	@if ! [ -f ${TMUX}/extended.tmux.conf ]; then touch ${TMUX}/extended.tmux.conf; fi
 
 vim: ## Setup vim configuration

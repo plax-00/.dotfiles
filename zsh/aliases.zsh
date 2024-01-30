@@ -24,14 +24,32 @@ alias du="du -h"
 alias df="df -h"
 
 # git
-alias gc="git checkout"
 alias gs="git status"
 alias gd="git diff"
 alias gu="git add -u"
 alias gl="git log --oneline"
-alias gr="git rebase --interactive"
 alias gg="lazygit"
 alias gst="git stash"
+
+function gc() {
+    if [ $# -eq 0 ] && command -v fzf &> /dev/null; then
+        local selected=`git branch --color | fzf --height=~30% --ansi | sed -E 's/^\*?\s*//' | sed -E 's/\s*$//'`
+        if [ -z $selected ]; then return 1; fi
+        git checkout $selected
+    else
+        git checkout "$@"
+    fi
+}
+
+function gr() {
+    if [ $# -eq 0 ] && command -v fzf &> /dev/null; then
+        local selected=`git log --oneline --decorate --color | fzf --height=~30% --reverse --ansi | sed -E 's/\s.*//'`
+        if [ -z $selected ]; then return 1; fi
+        git rebase --interactive $selected
+    else
+        git rebase --interactive "$@"
+    fi
+}
 
 # Other
 alias c="clear"

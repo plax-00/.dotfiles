@@ -5,17 +5,38 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_RUNTIME_DIR=/run/user/$UID
 
-
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+# less
+export LESSHISTFILE=$XDG_CACHE_HOME/less/history
 export LESSUTFCHARDEF=E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p
-export SQLITE_HISTORY="$XDG_CACHE_HOME"/sqlite_history
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+
+# ls (disable ugly folder highlighting)
+export LS_COLORS=$LS_COLORS:'ow=1;34:'
+
+# npm
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/config
+export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
+export NPM_CONFIG_PREFIX=$XDG_DATA_HOME/npm
+
+# rust
+export CARGO_HOME=$XDG_DATA_HOME/cargo
+export RUSTUP_HOME=$XDG_DATA_HOME/rustup
+
+# sqlite
+export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
+
+# vim
 export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$XDG_CONFIG_HOME/nvim/init.lua" | so $MYVIMRC'
 
 if command -v nvim &> /dev/null; then
     export EDITOR=nvim
+    export VISUAL=nvim
 else
     export EDITOR=vim
+    export VISUAL=vim
 fi
+
+# zsh
+HISTFILE=$XDG_STATE_HOME/zsh/history
+HISTSIZE=5000
+SAVEHIST=5000

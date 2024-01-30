@@ -17,3 +17,8 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+    shallow = true
+[submodule "zsh/plugins/zsh-bd"]
+	path = zsh/plugins/zsh-bd
+	url = https://github.com/Tarrasch/zsh-bd
+    shallow = true

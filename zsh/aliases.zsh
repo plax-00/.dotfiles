@@ -1,14 +1,8 @@
-if command -v nvim &> /dev/null; then
-    ALIAS_EDITOR=nvim
-else
-    ALIAS_EDITOR=vim
-fi
-
 # zsh stuff
-alias zshrc="cd $ZDOTDIR && $ALIAS_EDITOR $ZDOTDIR/.zshrc ; cd - &> /dev/null"
+alias zshrc="cd $ZDOTDIR && $EDITOR $ZDOTDIR/.zshrc ; cd - &> /dev/null"
 alias rezsh="source $ZDOTDIR/.zshrc"
-alias aliases="cd $ZDOTDIR && $ALIAS_EDITOR aliases.zsh ; cd - &> /dev/null"
-alias extal="cd $ZDOTDIR && $ALIAS_EDITOR extended_aliases.zsh ; cd - &> /dev/null"
+alias aliases="cd $ZDOTDIR && $EDITOR aliases.zsh ; cd - &> /dev/null"
+alias extal="cd $ZDOTDIR && $EDITOR extended_aliases.zsh ; cd - &> /dev/null"
 
 function makedots() { cd ~/.dotfiles && make $1 ; cd - &> /dev/null }
 
@@ -38,14 +32,6 @@ alias gl="git log --oneline"
 alias gr="git rebase --interactive"
 alias gg="lazygit"
 alias gst="git stash"
-
-# cd
-alias ..2="../.."
-alias ..3="../../.."
-alias ..4="../../../.."
-alias ..5="../../../../.."
-alias ..6="../../../../../.."
-alias ..7="../../../../../../.."
 
 # Other
 alias c="clear"

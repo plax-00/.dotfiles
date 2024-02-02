@@ -47,8 +47,7 @@ zsh: ## Setup zsh configuration
 	@echo 'export ZDOTDIR=$$HOME/.config/zsh' > ~/.zshenv
 	@$(call symlink, ${DOTFILES}/zsh/zshrc, ${ZSH}/.zshrc)
 	@$(call symlink, ${DOTFILES}/zsh/zprofile, ${ZSH}/.zprofile)
-	@$(call symlink, ${DOTFILES}/zsh/aliases.zsh, ${ZSH}/aliases.zsh)
-	@$(call symlink, ${DOTFILES}/zsh/zle.zsh, ${ZSH}/zle.zsh)
+	@$(call symlink, ${DOTFILES}/zsh/config, ${ZSH}/config)
 	@$(call symlink, ${DOTFILES}/zsh/plugins, ${ZSH}/plugins)
 	@$(call symlink, ${DOTFILES}/zsh/themes, ${ZSH}/themes)
 	@if ! [ -f ${ZSH}/extended.zshrc ]; then touch ${ZSH}/extended.zshrc; fi

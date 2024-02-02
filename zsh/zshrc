@@ -4,7 +4,10 @@ if command -v tmux &> /dev/null; then
 fi
 
 # zle settings
-source $ZDOTDIR/zle.zsh
+source $ZDOTDIR/config/zle.zsh
+
+# completion settings
+source $ZDOTDIR/config/completion.zsh
 
 # compinit
 mkdir -p $XDG_CACHE_HOME/zsh
@@ -22,11 +25,12 @@ setopt extended_glob
 setopt hist_ignore_all_dups   # remove older duplicate entries from history
 setopt hist_reduce_blanks     # remove superfluous blanks from history items
 setopt hist_ignore_space      # ignores commands with a leading space
-setopt hist_no_functions
+setopt hist_no_functions      # no function definitions in history
 setopt hist_verify            # verify !! expansion
 setopt share_history          # share history between shell instances
-setopt correct
-setopt correct_all
+setopt correct                # spellcheck commands
+setopt correct_all            # spellcheck arguments too
+setopt menu_complete          # automatically open completion menu on ambiguous completions
 
 
 ###############################
@@ -100,5 +104,5 @@ export PATH
 source $ZDOTDIR/extended.zshrc
 
 # Aliases
-source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/config/aliases.zsh
 source $ZDOTDIR/extended_aliases.zsh

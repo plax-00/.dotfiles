@@ -3,6 +3,7 @@ bindkey -v
 # Fix vi mode backspace bug
 bindkey "^?" backward-delete-char
 
+bindkey -M viins '^L' end-of-line
 
 # https://thevaluable.dev/zsh-install-configure-mouseless/
 

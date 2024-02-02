@@ -10,7 +10,8 @@ export LESSHISTFILE=$XDG_CACHE_HOME/less/history
 export LESSUTFCHARDEF=E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p
 
 # ls (disable ugly folder highlighting)
-export LS_COLORS=$LS_COLORS:'ow=1;34:'
+eval $(dircolors -p | dircolors)
+export LS_COLORS='ow=1;34:'$LS_COLORS:'ow=1;34:'
 
 # npm
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc

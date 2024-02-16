@@ -1,7 +1,6 @@
 return {
     {
         'plax-00/endscroll.nvim',
-        dev = true,
         opts = {
             disabled_filetypes = {
                 'dashboard',

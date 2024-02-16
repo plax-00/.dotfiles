@@ -1,7 +1,5 @@
 return {
     'willothy/nvim-cokeline',
-    enabled = true,
-    dev = true,
     dependencies = {
         'nvim-lua/plenary.nvim',
         'kyazdani42/nvim-web-devicons',

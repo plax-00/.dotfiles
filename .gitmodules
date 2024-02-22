@@ -3,8 +3,8 @@
 	url = https://github.com/sindresorhus/pure
 	shallow = true
 [submodule "zsh/plugins/zsh-autosuggestions"]
-    path = zsh/plugins/zsh-autosuggestions
-    url = https://github.com/zsh-users/zsh-autosuggestions
+	path = zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
 	shallow = true
 [submodule "zsh/plugins/zsh-history-substring-search"]
 	path = zsh/plugins/zsh-history-substring-search
@@ -17,8 +17,8 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-    shallow = true
+	shallow = true
 [submodule "zsh/plugins/zsh-bd"]
 	path = zsh/plugins/zsh-bd
 	url = https://github.com/plax-00/zsh-bd
-    shallow = true
+	shallow = true

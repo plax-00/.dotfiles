@@ -31,6 +31,7 @@ nnoremap            <Leader>o            o<Esc>k<Cmd>call repeat#set("\<Leader>o
 nnoremap            <Leader>;            mxA;<Esc>`x<Cmd>call repeat#set("\<Leader>;",-1)<CR>
 nnoremap            <Leader>,            mxA,<Esc>`x<Cmd>call repeat#set("\<Leader>,",-1)<CR>
 nnoremap            <Leader>z            za
+nnoremap            <Leader>:            q:
 
 nnoremap            Y                    y$
 nnoremap            G                    Gzz

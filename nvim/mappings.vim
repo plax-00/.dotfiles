@@ -16,9 +16,9 @@ nnoremap    <Leader>gg     <Cmd>LazyGit<CR>
 nnoremap    <Leader>m      <Cmd>Noice<CR>
 
 " LSP
-nnoremap    <Leader>K      <Cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap    <Leader>K      <Cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap    <Leader>r      <Cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap    gh             <Cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap    gh             <Cmd>lua vim.lsp.buf.hover()<CR>
 
 " vim-indentwise
 nmap        <Leader>]      ]=

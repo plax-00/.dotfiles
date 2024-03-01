@@ -17,5 +17,6 @@ return {
                 nmap ga <Plug>(EasyAlign)
             ]]
         end
-    }
+    },
+    'tikhomirov/vim-glsl',
 }

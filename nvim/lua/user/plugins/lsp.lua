@@ -49,9 +49,9 @@ return {
         opts = {
             handlers = {
                 function(server_name)
-                local server_config = require('user.lsp.server_config')[server_name]
-                server_config = server_config ~= nil and server_config or {}
-                server_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
+                    local server_config = require('user.lsp.server_config')[server_name]
+                    server_config = server_config ~= nil and server_config or {}
+                    server_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
                     require("lspconfig")[server_name].setup(server_config)
                 end,
             },
@@ -62,12 +62,7 @@ return {
         'neovim/nvim-lspconfig',
         dependencies = { 'williamboman/mason-lspconfig.nvim' },
         init = function()
-            -- diagnostics in hover
-            vim.diagnostic.config {
-                virtual_text = false,
-            }
-            vim.o.signcolumn = 'yes'
-            vim.cmd [[autocmd MiscAutocmds CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
+            -- <F3> to toggle inlay hints
             if vim.version().minor >= 10 then
                 vim.api.nvim_set_keymap( 'n', '<F3>', '', {
                     callback = function()
@@ -76,6 +71,15 @@ return {
                     noremap = true,
                 })
             end
+
+            -- <F4> to toggle diagnostic virtual text
+            vim.api.nvim_set_keymap( 'n', '<F4>', '', {
+                callback = function()
+                    local current = vim.diagnostic.config().virtual_text
+                    vim.diagnostic.config({ virtual_text = not current })
+                end,
+                noremap = true,
+            })
 
             -- diagnostic icons
             vim.cmd [[
@@ -89,22 +93,35 @@ return {
 
     {
         'nvimdev/lspsaga.nvim',
-        enabled = false,
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-tree/nvim-web-devicons',
+        },
         event = 'LspAttach',
         opts = {
             symbol_in_winbar = {
                 enable = true,
             },
-            ui = {
-                -- kind = kind_icons,
-            },
+            lightbulb = { enable = false },
         },
         init = function()
             vim.o.keywordprg = ':Lspsaga lsp_finder'
-            vim.cmd([[
+            vim.cmd [[
                 nnoremap <Leader>O <Cmd>Lspsaga outline<CR>
-            ]])
+            ]]
         end,
+    },
+
+    {
+        'dgagn/diagflow.nvim',
+        event = 'LspAttach',
+        opts = {
+            enable = true,
+            show_sign = true,
+            toggle_event = { 'InsertEnter', 'InsertLeave' },
+            scope = 'line',
+            text_align = 'left',
+        },
     },
 
     {

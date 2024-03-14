@@ -105,7 +105,6 @@ return {
             lightbulb = { enable = false },
         },
         init = function()
-            vim.o.keywordprg = ':Lspsaga lsp_finder'
             vim.cmd [[
                 nnoremap <Leader>O <Cmd>Lspsaga outline<CR>
             ]]

@@ -50,8 +50,15 @@ imap                jj                   <Esc>
 
 
 function! LeaderQ() abort
+    let l:filetypes = ['dashboard', 'lazy', 'oil']  " filetypes to quit out for
+
     let l:quitOut = v:false
     let l:bufCount = len(getbufinfo({ 'buflisted': 1 }))
+
+    if (winnr('$') > 1)  " if there are multiple windows just close
+        close
+        return
+    endif
 
     if (l:bufCount > 1 && tabpagenr() == 1)  " avoid closing tabpage in tab 1
         bnext
@@ -61,9 +68,6 @@ function! LeaderQ() abort
 
     if (l:bufCount == 1 && &filetype != 'help')  " check if there is only 1 buffer
         let l:quitOut = v:true
-        if (tabpagenr() == 1)
-            let l:mainTabpage = v:true
-        endif
     endif
 
     if (&buftype == 'nofile' && &filetype == 'vim')  " check for cmdwin
@@ -73,6 +77,12 @@ function! LeaderQ() abort
     if &filetype == 'dashboard' || &filetype == 'lazy'  " check for filetypes
         let l:quitOut = v:true
     endif
+
+    for f in l:filetypes
+        if &filetype == f
+            let l:quitOut = v:true
+        endif
+    endfor
 
     if l:quitOut
         quit

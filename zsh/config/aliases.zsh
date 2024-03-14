@@ -51,6 +51,10 @@ function gr() {
     fi
 }
 
+# nvim
+alias nv="nvim"
+alias oil="VIM_NO_SESSION_LOAD=1 nvim ."
+
 # Other
 alias c="clear"
 alias x="exit 0"
@@ -58,5 +62,4 @@ alias mv="mv -i"
 alias sqlite3="sqlite3 -init $XDG_CONFIG_HOME/sqlite3/sqliterc"
 alias sqlite="sqlite3"
 alias tm="tmux -f ~/.config/tmux/tmux.conf new -A -s shell"
-alias nv="nvim"
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'

@@ -1,7 +1,7 @@
 # zsh stuff
 alias zshrc="cd $ZDOTDIR && $EDITOR $ZDOTDIR/.zshrc ; cd - &> /dev/null"
 alias rezsh="source $ZDOTDIR/.zshrc"
-alias aliases="cd $ZDOTDIR && $EDITOR aliases.zsh ; cd - &> /dev/null"
+alias aliases="cd $ZDOTDIR && $EDITOR config/aliases.zsh ; cd - &> /dev/null"
 alias extal="cd $ZDOTDIR && $EDITOR extended_aliases.zsh ; cd - &> /dev/null"
 
 function makedots() { cd ~/.dotfiles && make $1 ; cd - &> /dev/null }

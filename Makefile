@@ -16,7 +16,7 @@ ZSH_CLEAN = ${ZSH}/.zshrc ${ZSH}/.zprofile ${ZSH}/aliases.zsh ${ZSH}/plugins ${Z
 symlink = ln -invs $(1) $(2) || true
 clean = echo "Cleaning... " ; rm -rf $(1) && echo "Done"
 
-.PHONY: help nvim tmux vim zsh clean-nvim clean-tmux clean-vim clean-zsh
+.PHONY: help git nvim tmux vim zsh clean-nvim clean-tmux clean-vim clean-zsh
 
 help: ## Print this message
 	@# https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html

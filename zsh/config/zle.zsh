@@ -5,6 +5,13 @@ bindkey "^?" backward-delete-char
 
 bindkey -M viins '^L' end-of-line
 
+# edit commands in vim with history
+fpath+=$ZDOTDIR/functions
+autoload -Uz edit-command-line-history
+zle -N edit-command-line-history
+bindkey -M vicmd 'v' edit-command-line-history
+
+
 # https://thevaluable.dev/zsh-install-configure-mouseless/
 
 # vim keys in completion list

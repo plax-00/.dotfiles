@@ -1,0 +1,28 @@
+() {
+    local tmp_hist_file=`mktemp /tmp/zhedXXXXX.zsh`
+    local tmp_cmd_file=`mktemp /tmp/zhedXXXXX.zsh`
+
+    local context_len=25
+    local start_line
+
+    if [ "$HISTCMD" = "$HISTNO" ]; then
+        history -n 0 | tail -n $((${context_len} * 2))
+    else
+        history 0 | \
+            grep -C${context_len} "^\s*${HISTNO}" | \
+            tr -s ' ' | \
+            cut -d ' ' -f3-
+        start_line=$((${context_len} + 1))
+    fi > $tmp_hist_file
+    if [ "$HISTCMD" = "$HISTNO" ]; then echo $BUFFER >> $tmp_hist_file; fi
+
+    tmp_cmd_file=$tmp_cmd_file $EDITOR \
+        -c "nnoremap <CR> <Cmd>.w! $tmp_cmd_file<CR><Cmd>quit!<CR>" \
+        -c "set filetype=edit-cmdline" \
+        -c "set syntax=zsh" \
+        -c "normal ${start_line}G" \
+        -c "normal zz" $tmp_hist_file
+    BUFFER=`cat $tmp_cmd_file`
+    zle redisplay
+    rm -f $tmp_cmd_file $tmp_hist_file
+}

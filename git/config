@@ -1,0 +1,25 @@
+[init]
+    defaultBranch = main
+[core]
+    editor = nvim
+    autocrlf = input
+[push]
+    autoSetupRemote = true
+[rerere]
+    enabled = true
+[include]
+    path = user.gitconfig
+    path = delta.gitconfig
+    path = diffconflicts.gitconfig
+[status]
+    submodulesummary = true
+[diff]
+    submodule = log
+    colorMoved = default
+[rebase]
+    autostash = true
+[alias]
+    rc = rebase --continue
+    ra = rebase --abort
+    mc = merge --continue
+    ma = merge --abort

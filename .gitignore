@@ -2,3 +2,4 @@ plugged/
 vim/autoload/plug.vim
 nvim/*.link.vim
 tmux/plugins/
+git/user.gitconfig

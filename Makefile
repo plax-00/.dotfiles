@@ -1,11 +1,13 @@
 SHELL := bash
 DOTFILES := ~/.dotfiles
+GIT := ~/.config/git
 NVIM := ~/.config/nvim
 TMUX := ~/.config/tmux
 VIM := ~/.config/vim
 VIMFILES := mappings sessions settings
 ZSH := ~/.config/zsh
 
+GIT_CLEAN = ${GIT}
 NVIM_CLEAN = ${NVIM}/*.link.vim ${NVIM} ~/.local/share/nvim
 TMUX_CLEAN = ${TMUX}/tmux.conf ${TMUX}/themes
 VIM_CLEAN = ${VIM}/autoload/plug.vim ${VIM}/plugged ${VIM}
@@ -20,9 +22,12 @@ help: ## Print this message
 	@# https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-all: nvim tmux zsh ## Install everything with neovim as editor
+all: nvim git tmux zsh ## Install everything with neovim as editor
 
-allv: vim tmux zsh ## Install everything with vim as editor
+allv: vim git tmux zsh ## Install everything with vim as editor
+
+git: ## Setup git configuration
+	@$(call symlink, ${DOTFILES}/git, ${GIT})
 
 nvim: ## Setup neovim configuration
 	@$(call symlink, ${DOTFILES}/nvim, ${NVIM})
@@ -54,6 +59,9 @@ zsh: ## Setup zsh configuration
 	@if ! [ -f ${ZSH}/extended.zshrc ]; then touch ${ZSH}/extended.zshrc; fi
 	@if ! [ -f ${ZSH}/extended_aliases.zsh ]; then touch ${ZSH}/extended_aliases.zsh; fi
 	@mkdir -p ~/.local/state/zsh
+
+clean-git: ## Remove git symlinks
+	@$(call clean, ${GIT_CLEAN})
 
 clean-nvim: ## Remove neovim symlinks and plugins
 	@$(call clean, ${NVIM_CLEAN})

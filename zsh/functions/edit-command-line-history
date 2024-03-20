@@ -1,6 +1,7 @@
 () {
     local tmp_hist_file=`mktemp /tmp/zhedXXXXX.zsh`
     local tmp_cmd_file=`mktemp /tmp/zhedXXXXX.zsh`
+    trap "rm -f $tmp_hist_file $tmp_cmd_file" EXIT
 
     local context_len=25
     local start_line
@@ -14,15 +15,18 @@
             cut -d ' ' -f3-
         start_line=$((${context_len} + 1))
     fi > $tmp_hist_file
+
+    local vim_cursor_offset
     if [ "$HISTCMD" = "$HISTNO" ]; then echo $BUFFER >> $tmp_hist_file; fi
+    if [ "$CURSOR" -gt 0 ]; then vim_cursor_offset="normal ${CURSOR}l"; fi
 
     tmp_cmd_file=$tmp_cmd_file $EDITOR \
         -c "nnoremap <CR> <Cmd>.w! $tmp_cmd_file<CR><Cmd>quit!<CR>" \
         -c "set filetype=edit-cmdline" \
         -c "set syntax=zsh" \
         -c "normal ${start_line}G" \
-        -c "normal zz" $tmp_hist_file
+        -c "normal zz" $tmp_hist_file \
+        -c "$vim_cursor_offset"
     BUFFER=`cat $tmp_cmd_file`
     zle redisplay
-    rm -f $tmp_cmd_file $tmp_hist_file
 }

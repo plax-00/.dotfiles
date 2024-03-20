@@ -1,1 +1,1 @@
-autocmd! BufNewFile,BufRead zprofile set filetype=zsh
+autocmd! BufNewFile,BufRead zprofile,*/zsh/functions/* set filetype=zsh

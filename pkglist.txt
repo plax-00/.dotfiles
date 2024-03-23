@@ -2,6 +2,7 @@ arch-install-scripts
 base
 base-devel
 bat
+eza
 fd
 fzf
 lazygit

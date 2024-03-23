@@ -7,10 +7,10 @@ function makedots() {
 }
 
 # ls
-alias ls="ls --color=auto"
-alias l="ls -lAh"
+alias ls="eza"
+alias l="ls -lA"
 alias la="ls -A"
-alias lo="ls -loh"
+alias lo="ls -lo"
 
 # grep
 alias egrep="egrep --color=auto"

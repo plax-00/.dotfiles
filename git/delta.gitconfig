@@ -8,4 +8,4 @@
     hunk-header-style = raw
     hunk-header-decoration-style = ul
 [merge]
-    conflictstyle = zdiff3
+    conflictstyle = diff3

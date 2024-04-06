@@ -15,6 +15,7 @@ ZSH_COMPDUMP=$XDG_CACHE_HOME/zsh/zcompdump
 autoload -Uz compinit
 compinit -d $ZSH_COMPDUMP
 
+autoload -Uz mkconf
 
 ###############################
 #           Options           #

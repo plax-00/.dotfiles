@@ -1,3 +1,6 @@
+# make aliases work with sudo
+alias sudo='sudo '
+
 # zsh stuff
 alias zshrc="cd $ZDOTDIR && $EDITOR $ZDOTDIR/.zshrc ; cd - &> /dev/null"
 alias rezsh="source $ZDOTDIR/.zshrc"

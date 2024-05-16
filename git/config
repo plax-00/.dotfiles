@@ -9,7 +9,6 @@
     enabled = true
 [include]
     path = user.gitconfig
-    path = delta.gitconfig
     path = diffconflicts.gitconfig
 [status]
     submodulesummary = true

@@ -21,7 +21,7 @@ alias fgrep="fgrep --color=auto"
 alias grep="grep --color=auto -P"
 
 # du and df
-alias dus="du -hs * | sort -hr"
+alias dus="du -hs (*|.*) | sort -hr"
 alias dusa='du -hs $(ls -A) | sort -hr'
 alias du="du -h"
 alias df="df -h"

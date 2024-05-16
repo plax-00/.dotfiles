@@ -106,8 +106,9 @@ return {
         },
         init = function()
             vim.cmd [[
-                nnoremap <Leader>O <Cmd>Lspsaga outline<CR>
-                nnoremap gk        <Cmd>Lspsaga goto_definition<CR>
+                nnoremap <Leader>O   <Cmd>Lspsaga outline<CR>
+                nnoremap gk          <Cmd>Lspsaga goto_definition<CR>
+                nnoremap <Leader>fi  <Cmd>Lspsaga code_action<CR>
             ]]
         end,
     },

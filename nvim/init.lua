@@ -22,3 +22,8 @@ vim.cmd.source(config_dir .. '/mappings.vim')
 
 -- Setup plugins
 require('lazy').setup('user.plugins')
+
+-- Neovide settings
+if vim.g.neovide then
+    require('user.neovide')
+end

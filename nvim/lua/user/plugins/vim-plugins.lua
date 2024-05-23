@@ -17,5 +17,4 @@ return {
             ]]
         end
     },
-    'tikhomirov/vim-glsl',
 }

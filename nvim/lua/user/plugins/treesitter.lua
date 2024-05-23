@@ -1,5 +1,6 @@
 return {
     'nvim-treesitter/nvim-treesitter',
+    main = 'nvim-treesitter.configs',
     build = ':TSUpdate',
     opts = {
         ensure_installed = {
@@ -23,9 +24,4 @@ return {
         highlight = { enable = true },
         incremental_selection = { enable = true },
     },
-    config = function(_, opts)
-        require('nvim-treesitter.configs').setup(opts)
-        vim.o.foldmethod = 'expr'
-        vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-    end,
 }

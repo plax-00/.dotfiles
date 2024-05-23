@@ -4,7 +4,6 @@ return {
     'tpope/vim-repeat',
     'jiangmiao/auto-pairs',
     'jesseleite/vim-noh',
-    'jrudess/vim-foldtext',
     'jeetsukumaran/vim-indentwise',
     {
         'junegunn/vim-easy-align',

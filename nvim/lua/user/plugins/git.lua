@@ -9,7 +9,6 @@ return {
             signs = {
                 changedelete = { hl = 'GitSignsChange', text = '┃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
             },
-            numhl = true,
         },
         init = function()
             vim.cmd([[

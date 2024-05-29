@@ -1,5 +1,10 @@
 return {
     {
+        'stevearc/dressing.nvim',
+        opts = {},
+    },
+
+    {
         'plax-00/endscroll.nvim',
         opts = {
             disabled_filetypes = {

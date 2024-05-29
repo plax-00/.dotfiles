@@ -146,14 +146,30 @@ return {
                     end,
                 },
                 mapping = {
-                    ['<CR>'] = cmp.mapping.confirm { select = false },
+                    -- If nothing is selected (including preselections) add a newline as usual.
+                    -- If something has explicitly been selected by the user, select it.
+                    ['<CR>'] = cmp.mapping({
+                        i = function(fallback)
+                            if cmp.visible() and cmp.get_active_entry() then
+                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                            else
+                                fallback()
+                            end
+                        end,
+                        s = cmp.mapping.confirm({ select = true }),
+                        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+                    }),
                     ['<C-j>'] = cmp.mapping.select_next_item(),
                     ['<C-k>'] = cmp.mapping.select_prev_item(),
 
                     -- Super tab
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
-                            cmp.select_next_item()
+                            if #cmp.get_entries() == 1 then
+                                cmp.confirm({ select = true })
+                            else
+                                cmp.select_next_item()
+                            end
                         elseif vim.fn["vsnip#available"](1) == 1 then
                             feedkey("<Plug>(vsnip-expand-or-jump)", "")
                         elseif has_words_before() then

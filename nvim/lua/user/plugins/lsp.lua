@@ -7,34 +7,6 @@ local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
-local kind_icons = {
-    Text = "󰉿",
-    Method = "m",
-    Function = "󰊕",
-    Constructor = "",
-    Field = "",
-    Variable = "󰆧",
-    Class = "󰌗",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "󰎠",
-    Enum = "",
-    Keyword = "󰌋",
-    Snippet = "",
-    Color = "󰏘",
-    File = "󰈙",
-    Reference = "",
-    Folder = "󰉋",
-    EnumMember = "",
-    Constant = "󰇽",
-    Struct = "",
-    Event = "",
-    Operator = "󰆕",
-    TypeParameter = "󰊄",
-}
-
 
 return {
     {
@@ -135,10 +107,12 @@ return {
                 dependencies = { 'hrsh7th/vim-vsnip' }
             },
             'hrsh7th/cmp-path',
+            'onsails/lspkind.nvim',
         },
         event = 'InsertEnter',
         opts = function()
             local cmp = require('cmp')
+            local lspkind = require('lspkind')
             return {
                 snippet = {
                     expand = function(args)
@@ -195,17 +169,18 @@ return {
                     { name = 'path' },
                 },
                 formatting = {
-                    fields = { "kind", "abbr", "menu" },
-                    format = function(entry, vim_item)
-                        vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-                        vim_item.menu = ({
-                            nvim_lsp = '[LSP]',
-                            vsnip = '[Snippet]',
-                            buffer = '[Buffer]',
-                            path = '[Path]',
-                        })[entry.source.name]
-                        return vim_item
-                    end,
+                    fields = { "abbr", "kind", "menu" },
+                    format = lspkind.cmp_format({
+                        before = function(entry, vim_item)
+                            vim_item.menu = ({
+                                nvim_lsp = '[LSP]',
+                                vsnip = '[Snippet]',
+                                buffer = '[Buffer]',
+                                path = '[Path]',
+                            })[entry.source.name]
+                            return vim_item
+                        end,
+                    }),
                 },
                 window = {
                     documentation = {

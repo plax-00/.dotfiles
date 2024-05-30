@@ -10,6 +10,17 @@ end
 
 return {
     {
+        'mhartington/formatter.nvim',
+        config = function(_, opts)
+            local formatter = require('formatter')
+            opts.filetype = {
+                lua = { require('formatter.filetypes.lua').stylua },
+            }
+            formatter.setup(opts)
+        end,
+    },
+
+    {
         'williamboman/mason.nvim',
         build = ':MasonUpdate',
         opts = {},

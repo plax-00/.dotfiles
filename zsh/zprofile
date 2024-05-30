@@ -45,3 +45,7 @@ HISTFILE=$XDG_STATE_HOME/zsh/history
 HISTSIZE=5000
 SAVEHIST=5000
 KEYTIMEOUT=1
+
+# PATH
+path+=($HOME/.local/bin $CARGO_HOME/bin $XDG_DATA_HOME/npm/bin)
+export PATH

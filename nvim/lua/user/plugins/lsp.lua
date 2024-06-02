@@ -100,7 +100,14 @@ return {
         'dgagn/diagflow.nvim',
         event = 'LspAttach',
         opts = {
-            enable = true,
+            enable = function()
+                local disabled = {
+                    'NvimTree',
+                    'lazy',
+                    'cmdpalette',
+                }
+                return not vim.tbl_contains(disabled, vim.bo.filetype)
+            end,
             show_sign = true,
             toggle_event = { 'InsertEnter', 'InsertLeave' },
             scope = 'line',

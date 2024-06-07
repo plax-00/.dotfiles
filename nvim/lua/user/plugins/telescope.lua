@@ -1,4 +1,4 @@
-local function getBackspace()
+local function get_backspace()
     local prompt_bufnr = vim.fn.bufnr('%')
     local actions = require('telescope.actions')
     local state = require('telescope.actions.state')
@@ -24,7 +24,7 @@ return {
                     ['<C-j>'] = 'move_selection_next',
                     ['<C-k>'] = 'move_selection_previous',
                     ['<Esc>'] = 'close',
-                    ['<BS>'] = getBackspace,
+                    ['<BS>'] = get_backspace,
                 },
             },
             preview = false,

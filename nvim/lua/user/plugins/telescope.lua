@@ -16,7 +16,13 @@ return {
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         { 'nvim-lua/plenary.nvim' },
     },
-    -- cmd = 'Telescope',
+    cmd = 'Telescope',
+    keys = function()
+        return vim.tbl_map(function(val)
+            return '<Leader>' .. val
+        end,
+        { 'ff', 'fj', 'fo', 'fg', 'fk', 'fh' })
+    end,
     opts = {
         defaults = {
             mappings = {
@@ -29,19 +35,21 @@ return {
             },
             preview = false,
         },
-        vimgrep_arguments = {
-            'rg',
-            '--color=never',
-            '--no-heading',
-            '--with-filename',
-            '--line-number',
-            '--column',
-            '--smart-case',
-            '--hidden',
-        },
     },
     config = function(_, opts)
-        require('telescope').setup(opts)
-        require('telescope').load_extension('fzf')
+        local telescope = require('telescope')
+
+        -- keymaps
+        vim.cmd[[
+            nnoremap    <Leader>ff     <Cmd>Telescope find_files hidden=true theme=dropdown prompt_title=Search\ Directory<CR>
+            nnoremap    <Leader>fj     <Cmd>Telescope buffers theme=dropdown<CR>
+            nnoremap    <Leader>fo     <Cmd>Telescope oldfiles hidden=true theme=dropdown prompt_title=Recent\ Files<CR>
+            nnoremap    <Leader>fg     <Cmd>Telescope live_grep hidden=true theme=dropdown prompt_title=Grep\ Files<CR>
+            nnoremap    <Leader>fk     <Cmd>Telescope keymaps hidden=true theme=dropdown<CR>
+            nnoremap    <Leader>fh     <Cmd>Telescope help_tags hidden=true theme=dropdown<CR>
+        ]]
+
+        telescope.setup(opts)
+        telescope.load_extension('fzf')
     end,
 }

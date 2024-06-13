@@ -48,6 +48,8 @@ vmap                <C-j>                3j
 vmap                <C-k>                3k
 imap                jj                   <Esc>
 
+iunmap              <C-w>
+
 
 function! LeaderQ() abort
     let l:filetypes = ['dashboard', 'lazy', 'oil']  " filetypes to quit out for

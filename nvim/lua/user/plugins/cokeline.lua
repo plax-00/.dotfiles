@@ -140,6 +140,12 @@ return {
             nmap        <Leader>N    <Plug>(cokeline-focus-prev)<Leader>\buffer
         ]]
 
+        -- <F2> to toggle tabline
+        vim.keymap.set({'n', 'i', 'v'}, '<F2>', function()
+            local tabline_visible = vim.o.showtabline == 2
+            vim.o.showtabline = tabline_visible and 0 or 2
+        end)
+
         require('cokeline').setup(opts)
     end,
 }

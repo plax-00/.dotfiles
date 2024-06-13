@@ -3,7 +3,6 @@ return {
     enabled = true,
     dependencies = {
         'MunifTanjim/nui.nvim',
-        -- 'rcarriga/nvim-notify',
     },
     event = 'VeryLazy',
     opts = {
@@ -47,8 +46,12 @@ return {
         },
     },
     config = function(_, opts)
-        require('noice').setup(opts)
+        local noice = require('noice')
+
+        vim.keymap.set('n', '<Leader>m', function() noice.cmd('history') end)
         vim.cmd.cabbrev('n', 'Noice')
         vim.cmd.cabbrev('h', 'tab help')
+
+        noice.setup(opts)
     end,
 }

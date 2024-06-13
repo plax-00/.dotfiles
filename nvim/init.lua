@@ -18,7 +18,6 @@ local config_dir = vim.fn.stdpath('config')
 vim.cmd.source(config_dir .. '/settings.link.vim')
 vim.cmd.source(config_dir .. '/sessions.link.vim')
 vim.cmd.source(config_dir .. '/mappings.link.vim')
-vim.cmd.source(config_dir .. '/mappings.vim')
 
 -- Setup plugins
 require('lazy').setup('user.plugins')

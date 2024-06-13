@@ -44,33 +44,27 @@ return {
     {
         'neovim/nvim-lspconfig',
         dependencies = { 'williamboman/mason-lspconfig.nvim' },
-        init = function()
+        config = function()
             -- <F3> to toggle inlay hints
             if vim.version().minor >= 10 then
-                vim.api.nvim_set_keymap( 'n', '<F3>', '', {
-                    callback = function()
+                vim.keymap.set('n', '<F3>', function()
                         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-                    end,
-                    noremap = true,
-                })
+                end)
             end
 
             -- <F4> to toggle diagnostic virtual text
-            vim.api.nvim_set_keymap( 'n', '<F4>', '', {
-                callback = function()
+            vim.keymap.set('n', '<F4>', function()
                     local current = vim.diagnostic.config().virtual_text
                     vim.diagnostic.config({ virtual_text = not current })
-                end,
-                noremap = true,
-            })
+            end)
+
+            vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename)
 
             -- diagnostic icons
-            vim.cmd [[
-                sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
-                sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
-                sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
-                sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
-            ]]
+            vim.fn.sign_define('DiagnosticSignError', { text='', texthl = 'DiagnosticSignError' })
+            vim.fn.sign_define('DiagnosticSignWarn', { text='', texthl = 'DiagnosticSignWarn' })
+            vim.fn.sign_define('DiagnosticSignInfo', { text='', texthl = 'DiagnosticSignInfo' })
+            vim.fn.sign_define('DiagnosticSignHint', { text='', texthl = 'DiagnosticSignHint' })
         end,
     },
 
@@ -87,12 +81,15 @@ return {
             },
             lightbulb = { enable = false },
         },
-        init = function()
+        config = function(_, opts)
+            local lspsaga = require('lspsaga')
             vim.cmd [[
                 nnoremap <Leader>O   <Cmd>Lspsaga outline<CR>
                 nnoremap gk          <Cmd>Lspsaga goto_definition<CR>
                 nnoremap <Leader>fi  <Cmd>Lspsaga code_action<CR>
             ]]
+
+            lspsaga.setup(opts)
         end,
     },
 
@@ -132,6 +129,7 @@ return {
             local cmp = require('cmp')
             local lspkind = require('lspkind')
             return {
+                preselect = cmp.PreselectMode.None,
                 snippet = {
                     expand = function(args)
                         vim.fn['vsnip#anonymous'](args.body)

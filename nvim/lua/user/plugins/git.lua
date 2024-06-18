@@ -34,9 +34,24 @@ return {
         'kdheepak/lazygit.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
         cmd = 'LazyGit',
-        keys = {
-            { '<Leader>gg', '<Cmd>LazyGit<CR>' }
-        },
+        -- keys = {
+        --     { '<Leader>gg', '<Cmd>LazyGit<CR>' }
+        -- },
     },
 
+    {
+        'NeogitOrg/neogit',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim',
+            'nvim-telescope/telescope.nvim',
+        },
+        cmd = 'Neogit',
+        keys = {
+            {'<Leader>gg', '<Cmd>Neogit<CR>' }
+        },
+        opts = {
+            graph_style = 'unicode',
+        },
+    },
 }

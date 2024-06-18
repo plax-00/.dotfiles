@@ -1,27 +1,40 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
-    main = 'nvim-treesitter.configs',
-    build = ':TSUpdate',
-    opts = {
-        ensure_installed = {
-            'bash',
-            'c',
-            'css',
-            'html',
-            'javascript',
-            'json',
-            'lua',
-            'markdown',
-            'markdown_inline',
-            'python',
-            'regex',
-            'rust',
-            'typescript',
-            'vim',
-            'vimdoc',
-            'vue'
+    {
+        'nvim-treesitter/nvim-treesitter',
+        main = 'nvim-treesitter.configs',
+        build = ':TSUpdate',
+        opts = {
+            ensure_installed = {
+                'bash',
+                'c',
+                'css',
+                'html',
+                'javascript',
+                'json',
+                'lua',
+                'markdown',
+                'markdown_inline',
+                'python',
+                'regex',
+                'rust',
+                'typescript',
+                'vim',
+                'vimdoc',
+                'vue'
+            },
+            highlight = { enable = true },
+            incremental_selection = { enable = true },
         },
-        highlight = { enable = true },
-        incremental_selection = { enable = true },
     },
+
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        config = function()
+            local context = require('treesitter-context')
+
+            vim.keymap.set('n', '[c', function()
+                context.go_to_context(vim.v.count1)
+            end)
+        end
+    }
 }

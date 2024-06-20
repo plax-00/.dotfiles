@@ -55,17 +55,11 @@ return {
     },
 
     {
-        'kevinhwang91/nvim-ufo',
-        main = 'ufo',
-        dependencies = {
-            'kevinhwang91/promise-async'
-        },
+        'kawre/neotab.nvim',
         opts = {
-            open_fold_hl_timeout = 0,
-            provider_selector = function()
-                return { 'treesitter', 'indent' }
-            end,
-        },
+            tabkey = '<C-l>',
+            act_as_tab = false,
+        }
     },
 
     {
@@ -78,6 +72,20 @@ return {
                 'RainbowDelimiterBlue',
                 'RainbowDelimiterRed',
             },
+        },
+    },
+
+    {
+        'kevinhwang91/nvim-ufo',
+        main = 'ufo',
+        dependencies = {
+            'kevinhwang91/promise-async'
+        },
+        opts = {
+            open_fold_hl_timeout = 0,
+            provider_selector = function()
+                return { 'treesitter', 'indent' }
+            end,
         },
     },
 }

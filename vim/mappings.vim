@@ -11,7 +11,7 @@ nmap                <Leader>\tabpageT    <Leader>T
 nnoremap            <Leader><BS>         g<Tab>
 
 nnoremap            <Leader>h            <Cmd>noh<CR>
-nnoremap            <Leader>q            <Cmd>call LeaderQ()<CR>
+nnoremap            <Leader>q            <Cmd>call <SID>LeaderQ()<CR>
 nnoremap            <Leader>ww           <Cmd>update<CR>
 nnoremap            <Leader>ws           <Cmd>update<CR><Cmd>source %<CR>
 nnoremap            <Leader>x            <Cmd>update<CR><Cmd>qall<CR>
@@ -35,12 +35,13 @@ nnoremap            <Leader>:            q:
 
 nnoremap            Y                    y$
 nnoremap            G                    Gzz
-nnoremap            p                    ]p
-nnoremap            P                    ]P
+nnoremap            p                    <Cmd>call <SID>SmartPut('p')<CR>
+nnoremap            P                    <Cmd>call <SID>SmartPut('P')<CR>
 nnoremap <expr>     i                    trim(getline('.')) == '' ? 'cc' : 'i'
 nnoremap            <C-h>                <C-w>h
 nnoremap            <C-l>                <C-w>l
 inoremap            <C-l>                <Esc>A
+onoremap <expr>     <Leader>             '<Esc>' .. '"' .. nr2char(getchar()) .. v:operator
 
 nmap                <C-j>                3j
 nmap                <C-k>                3k
@@ -50,8 +51,7 @@ imap                jj                   <Esc>
 
 iunmap              <C-w>
 
-
-function! LeaderQ() abort
+function! s:LeaderQ() abort
     let l:filetypes = ['dashboard', 'lazy', 'oil']  " filetypes to quit out for
 
     let l:quitOut = v:false
@@ -90,5 +90,15 @@ function! LeaderQ() abort
         quit
     else
         bdelete
+    endif
+endfunction
+
+function! s:SmartPut(p_or_P) abort
+    let l:regtype = getregtype()
+    execute 'normal!' a:p_or_P
+    if l:regtype ==# 'V'
+        normal! '[mx
+        '[,']normal! ==
+        normal! 'x
     endif
 endfunction

@@ -10,27 +10,29 @@ augroup END
 let g:sessions_directory = stdpath('data') . '/sessions/'
 call mkdir(g:sessions_directory, 'p')
 
-function! GetGitBranch() abort
-    return system("git branch --show-current 2> /dev/null | tr -d '\n'")
+function! s:GetSessionFile() abort
+    let l:branch = system("git branch --show-current 2> /dev/null | tr -d '\n'")
+    let l:session_subdir = g:sessions_directory .. substitute(getcwd(), '/', '__', 'g')
+    call mkdir(l:session_subdir, 'p')
+    if l:branch == ''
+        let l:session_file = l:session_subdir .. '/__norepo__'
+    else
+        let l:session_file = l:session_subdir .. '/' .. l:branch
+    endif
+
+    return l:session_file
 endfunction
 
 " Called by keymap
 function! CreateSessionCWD() abort
-    let l:session_file = g:sessions_directory .. substitute(getcwd(), '/', '__', 'g')
-    if GetGitBranch() != ''
-        let l:session_file = l:session_file .. '&branch=' .. GetGitBranch()
-    endif
-
+    let l:session_file = s:GetSessionFile()
     silent! execute 'mksession!' .. l:session_file
     echo 'Session created'
 endfunction
 
 " Called by keymap
 function! DeleteSessionCWD() abort
-    let l:session_file = expand(g:sessions_directory .. substitute(getcwd(), '/', '__', 'g'))
-    if GetGitBranch() != ''
-        let l:session_file = l:session_file .. '&branch=' .. GetGitBranch()
-    endif
+    let l:session_file = s:GetSessionFile()
 
     if filereadable(l:session_file)
         call delete(l:session_file)
@@ -44,10 +46,7 @@ function! LoadSessionCWD() abort
         return
     endif
 
-    let l:session_file = expand(g:sessions_directory .. substitute(getcwd(), '/', '__', 'g'))
-    if GetGitBranch() != ''
-        let l:session_file = l:session_file .. '&branch=' .. GetGitBranch()
-    endif
+    let l:session_file = s:GetSessionFile()
 
     if filereadable(l:session_file)
         silent! execute 'source' l:session_file
@@ -64,10 +63,7 @@ function! SaveSessionCWD() abort
 		return
 	endif
 
-    let l:session_file = expand(g:sessions_directory .. substitute(getcwd(), '/', '__', 'g'))
-    if GetGitBranch() != ''
-        let l:session_file = l:session_file .. '&branch=' .. GetGitBranch()
-    endif
+    let l:session_file = s:GetSessionFile()
 
     if filereadable(l:session_file)
         call CreateSessionCWD()

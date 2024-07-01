@@ -76,11 +76,7 @@ function! s:LeaderQ() abort
         let l:quitOut = v:true
     endif
 
-    if &filetype == 'dashboard' || &filetype == 'lazy'  " check for filetypes
-        let l:quitOut = v:true
-    endif
-
-    for f in l:filetypes
+    for f in l:filetypes  " check for filetypes
         if &filetype == f
             let l:quitOut = v:true
         endif

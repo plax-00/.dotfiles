@@ -19,9 +19,10 @@ return {
     cmd = 'Telescope',
     keys = function()
         return vim.tbl_map(function(val)
-            return '<Leader>' .. val
-        end,
-        { 'ff', 'fj', 'fo', 'fg', 'fk', 'fh' })
+                return '<Leader>' .. val
+            end,
+            { 'f<Leader>', 'ff', 'fj', 'fo', 'fg', 'fk', 'fh' }
+        )
     end,
     opts = {
         defaults = {
@@ -41,12 +42,13 @@ return {
 
         -- keymaps
         vim.cmd[[
-            nnoremap    <Leader>ff     <Cmd>Telescope find_files hidden=true theme=dropdown prompt_title=Search\ Directory<CR>
-            nnoremap    <Leader>fj     <Cmd>Telescope buffers theme=dropdown<CR>
-            nnoremap    <Leader>fo     <Cmd>Telescope oldfiles hidden=true theme=dropdown prompt_title=Recent\ Files<CR>
-            nnoremap    <Leader>fg     <Cmd>Telescope live_grep hidden=true theme=dropdown prompt_title=Grep\ Files<CR>
-            nnoremap    <Leader>fk     <Cmd>Telescope keymaps hidden=true theme=dropdown<CR>
-            nnoremap    <Leader>fh     <Cmd>Telescope help_tags hidden=true theme=dropdown<CR>
+            nnoremap    <Leader>f<Leader>     <Cmd>Telescope resume<CR>
+            nnoremap    <Leader>ff            <Cmd>Telescope find_files hidden=true theme=dropdown prompt_title=Search\ Directory<CR>
+            nnoremap    <Leader>fj            <Cmd>Telescope buffers theme=dropdown<CR>
+            nnoremap    <Leader>fo            <Cmd>Telescope oldfiles hidden=true theme=dropdown prompt_title=Recent\ Files<CR>
+            nnoremap    <Leader>fg            <Cmd>Telescope live_grep hidden=true theme=dropdown prompt_title=Grep\ Files<CR>
+            nnoremap    <Leader>fk            <Cmd>Telescope keymaps hidden=true theme=dropdown<CR>
+            nnoremap    <Leader>fh            <Cmd>Telescope help_tags hidden=true theme=dropdown<CR>
         ]]
 
         telescope.setup(opts)

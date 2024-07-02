@@ -10,6 +10,11 @@ augroup END
 let g:sessions_directory = stdpath('data') . '/sessions/'
 call mkdir(g:sessions_directory, 'p')
 
+function! GetSessionList() abort
+    call system('rmdir --ignore-fail-on-non-empty ' .. g:sessions_directory .. '/*')
+    return map(readdir(g:sessions_directory), 'substitute(v:val, "__", "/", "g")')
+endfunction
+
 function! s:GetSessionFile() abort
     let l:branch = system("git branch --show-current 2> /dev/null | tr -d '\n'")
     let l:session_subdir = g:sessions_directory .. substitute(getcwd(), '/', '__', 'g')

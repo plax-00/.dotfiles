@@ -13,6 +13,9 @@ end
 return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
+        {
+            dir = vim.fn.stdpath('config') .. '/lua/user/telescope_pickers',
+        },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         { 'nvim-lua/plenary.nvim' },
     },
@@ -21,7 +24,7 @@ return {
         return vim.tbl_map(function(val)
                 return '<Leader>' .. val
             end,
-            { 'f<Leader>', 'ff', 'fj', 'fo', 'fg', 'fk', 'fh' }
+            { 'f<Leader>', 'ff', 'fj', 'fo', 'fg', 'fk', 'fh', 'fs' }
         )
     end,
     opts = {
@@ -49,9 +52,12 @@ return {
             nnoremap    <Leader>fg            <Cmd>Telescope live_grep hidden=true theme=dropdown prompt_title=Grep\ Files<CR>
             nnoremap    <Leader>fk            <Cmd>Telescope keymaps hidden=true theme=dropdown<CR>
             nnoremap    <Leader>fh            <Cmd>Telescope help_tags hidden=true theme=dropdown<CR>
+            nnoremap    <Leader>fs            <Cmd>Telescope sessions<CR>
         ]]
 
         telescope.setup(opts)
+
+        telescope.load_extension('sessions')
         telescope.load_extension('fzf')
     end,
 }

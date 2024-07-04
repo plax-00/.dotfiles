@@ -1,6 +1,6 @@
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
 local feedkey = function(key, mode)
@@ -35,10 +35,10 @@ return {
                     local server_config = require('user.lsp.server_config')[server_name]
                     server_config = server_config ~= nil and server_config or {}
                     server_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
-                    require("lspconfig")[server_name].setup(server_config)
+                    require('lspconfig')[server_name].setup(server_config)
                 end,
             },
-        }
+        },
     },
 
     {
@@ -48,14 +48,14 @@ return {
             -- <F3> to toggle inlay hints
             if vim.version().minor >= 10 then
                 vim.keymap.set('n', '<F3>', function()
-                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
                 end)
             end
 
             -- <F4> to toggle diagnostic virtual text
             vim.keymap.set('n', '<F4>', function()
-                    local current = vim.diagnostic.config().virtual_text
-                    vim.diagnostic.config({ virtual_text = not current })
+                local current = vim.diagnostic.config().virtual_text
+                vim.diagnostic.config({ virtual_text = not current })
             end)
 
             vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename)
@@ -119,7 +119,7 @@ return {
             'hrsh7th/cmp-nvim-lsp-signature-help',
             {
                 'hrsh7th/cmp-vsnip',
-                dependencies = { 'hrsh7th/vim-vsnip' }
+                dependencies = { 'hrsh7th/vim-vsnip' },
             },
             'hrsh7th/cmp-path',
             'onsails/lspkind.nvim',
@@ -153,29 +153,29 @@ return {
                     ['<C-k>'] = cmp.mapping.select_prev_item(),
 
                     -- Super tab
-                    ["<Tab>"] = cmp.mapping(function(fallback)
+                    ['<Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             if #cmp.get_entries() == 1 then
                                 cmp.confirm({ select = true })
                             else
                                 cmp.select_next_item()
                             end
-                        elseif vim.fn["vsnip#available"](1) == 1 then
-                            feedkey("<Plug>(vsnip-expand-or-jump)", "")
+                        elseif vim.fn['vsnip#available'](1) == 1 then
+                            feedkey('<Plug>(vsnip-expand-or-jump)', '')
                         elseif has_words_before() then
                             cmp.complete()
                         else
                             fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
                         end
-                    end, { "i", "s" }),
+                    end, { 'i', 's' }),
 
-                    ["<S-Tab>"] = cmp.mapping(function()
+                    ['<S-Tab>'] = cmp.mapping(function()
                         if cmp.visible() then
                             cmp.select_prev_item()
-                        elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-                            feedkey("<Plug>(vsnip-jump-prev)", "")
+                        elseif vim.fn['vsnip#jumpable'](-1) == 1 then
+                            feedkey('<Plug>(vsnip-jump-prev)', '')
                         end
-                    end, { "i", "s" }),
+                    end, { 'i', 's' }),
                 },
                 sources = {
                     { name = 'nvim_lsp' },
@@ -185,7 +185,7 @@ return {
                     { name = 'path' },
                 },
                 formatting = {
-                    fields = { "abbr", "kind", "menu" },
+                    fields = { 'abbr', 'kind', 'menu' },
                     format = lspkind.cmp_format({
                         before = function(entry, vim_item)
                             vim_item.menu = ({
@@ -200,7 +200,7 @@ return {
                 },
                 window = {
                     documentation = {
-                        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+                        border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
                     },
                 },
             }

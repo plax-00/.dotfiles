@@ -6,7 +6,7 @@ return {
     'jeetsukumaran/vim-indentwise',
     {
         'junegunn/vim-easy-align',
-        init = function()
+        config = function()
             vim.cmd[[
                 " Start interactive EasyAlign in visual mode (e.g. vipga)
                 xmap ga <Plug>(EasyAlign)

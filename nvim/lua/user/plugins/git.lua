@@ -7,7 +7,7 @@ return {
         'lewis6991/gitsigns.nvim',
         opts = {
             signs = {
-                changedelete = { hl = 'GitSignsChange', text = '┃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
+                changedelete = { text = '┃' },
             },
         },
         config = function(_, opts)

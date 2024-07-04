@@ -33,9 +33,6 @@ return {
 
     {
         'nvim-lualine/lualine.nvim',
-        init = function()
-            vim.o.showcmdloc = 'statusline'
-        end,
         opts = {
             options = {
                 icons_enabled = false,
@@ -45,11 +42,15 @@ return {
             },
             extensions = { 'nvim-tree' },
         },
+        config = function(_, opts)
+            vim.o.showcmdloc = 'statusline'
+            require('lualine').setup(opts)
+        end,
     },
 
     {
         'ggandor/leap.nvim',
-        init = function()
+        config = function()
             require('leap').add_default_mappings()
         end,
     },

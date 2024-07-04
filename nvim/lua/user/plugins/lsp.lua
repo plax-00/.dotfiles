@@ -7,6 +7,12 @@ local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+local diag_icons = {
+    error = '',
+    warn = '',
+    info = '',
+    hint = '',
+}
 
 return {
     {
@@ -55,16 +61,16 @@ return {
             -- <F4> to toggle diagnostic virtual text
             vim.keymap.set('n', '<F4>', function()
                 local current = vim.diagnostic.config().virtual_text
-                vim.diagnostic.config({ virtual_text = not current })
+                vim.diagnostic.config { virtual_text = not current }
             end)
 
             vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename)
 
             -- diagnostic icons
-            vim.fn.sign_define('DiagnosticSignError', { text='', texthl = 'DiagnosticSignError' })
-            vim.fn.sign_define('DiagnosticSignWarn', { text='', texthl = 'DiagnosticSignWarn' })
-            vim.fn.sign_define('DiagnosticSignInfo', { text='', texthl = 'DiagnosticSignInfo' })
-            vim.fn.sign_define('DiagnosticSignHint', { text='', texthl = 'DiagnosticSignHint' })
+            vim.fn.sign_define('DiagnosticSignError', { text = diag_icons.error, texthl = 'DiagnosticSignError' })
+            vim.fn.sign_define('DiagnosticSignWarn',  { text = diag_icons.warn,  texthl = 'DiagnosticSignWarn'  })
+            vim.fn.sign_define('DiagnosticSignInfo',  { text = diag_icons.info,  texthl = 'DiagnosticSignInfo'  })
+            vim.fn.sign_define('DiagnosticSignHint',  { text = diag_icons.hint,  texthl = 'DiagnosticSignHint'  })
         end,
     },
 
@@ -94,22 +100,28 @@ return {
     },
 
     {
-        'dgagn/diagflow.nvim',
+        'plax-00/corn.nvim',
         event = 'LspAttach',
         opts = {
-            enable = function()
-                local disabled = {
-                    'NvimTree',
-                    'lazy',
-                    'cmdpalette',
-                }
-                return not vim.tbl_contains(disabled, vim.bo.filetype)
+            border_style = 'rounded',
+            item_preprocess_func = function(item)
+                item.source = nil
+                item.code = nil
+                item.lnum = nil
+                item.col = nil
+                return item
             end,
-            show_sign = true,
-            toggle_event = { 'InsertEnter', 'InsertLeave' },
-            scope = 'line',
-            text_align = 'left',
+            icons = {
+                error = diag_icons.error,
+                warn = diag_icons.warn,
+                info = diag_icons.info,
+                hint = diag_icons.hint,
+            },
         },
+        config = function(_, opts)
+            vim.diagnostic.config { virtual_text = false }
+            require('corn').setup(opts)
+        end
     },
 
     {

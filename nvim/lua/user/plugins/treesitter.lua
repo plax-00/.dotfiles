@@ -29,12 +29,17 @@ return {
 
     {
         'nvim-treesitter/nvim-treesitter-context',
-        config = function()
+        opts = {
+            max_lines = 1,
+        },
+        config = function(_, opts)
             local context = require('treesitter-context')
 
             vim.keymap.set('n', '[c', function()
                 context.go_to_context(vim.v.count1)
             end)
+
+            context.setup(opts)
         end
     }
 }

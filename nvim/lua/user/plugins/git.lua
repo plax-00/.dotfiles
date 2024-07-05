@@ -15,6 +15,7 @@ return {
             local gitsigns = require('gitsigns')
             vim.keymap.set('n', '<Leader>gl', gitsigns.toggle_linehl)
             vim.keymap.set('n', '<Leader>gt', gitsigns.toggle_deleted)
+            vim.keymap.set('n', '<Leader>gb', gitsigns.blame)
             vim.keymap.set('n', '<Leader>gd', gitsigns.reset_hunk)
             vim.keymap.set('v', '<Leader>gd', function()
                 local range_start = vim.fn.line('v')

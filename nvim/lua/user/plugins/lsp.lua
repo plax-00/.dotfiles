@@ -16,14 +16,25 @@ local diag_icons = {
 
 return {
     {
-        'mhartington/formatter.nvim',
+        'stevearc/conform.nvim',
+        event = 'LspAttach',
+        opts = {
+            formatters = {
+                rustfmt = {
+                    inherit = false,
+                    command = 'cargo format',
+                },
+            },
+            formatters_by_ft = {
+                lua = { 'stylua' },
+                rust = { 'rustfmt' },
+            },
+        },
         config = function(_, opts)
-            local formatter = require('formatter')
-            opts.filetype = {
-                lua = { require('formatter.filetypes.lua').stylua },
-            }
-            formatter.setup(opts)
-        end,
+            local conform = require('conform')
+            vim.keymap.set('n', '<Leader>lf', conform.format)
+            conform.setup(opts)
+        end
     },
 
     {
@@ -90,9 +101,9 @@ return {
         config = function(_, opts)
             local lspsaga = require('lspsaga')
             vim.cmd [[
-                nnoremap <Leader>O   <Cmd>Lspsaga outline<CR>
+                nnoremap <Leader>lo  <Cmd>Lspsaga outline<CR>
                 nnoremap gk          <Cmd>Lspsaga goto_definition<CR>
-                nnoremap <Leader>fi  <Cmd>Lspsaga code_action<CR>
+                nnoremap <Leader>la  <Cmd>Lspsaga code_action<CR>
             ]]
 
             lspsaga.setup(opts)

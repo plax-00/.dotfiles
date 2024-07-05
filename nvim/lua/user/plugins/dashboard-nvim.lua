@@ -4,59 +4,53 @@ local center = {
         desc = 'Search Directory         ',
         key = 'f',
         action = 'Telescope find_files hidden=true theme=dropdown prompt_title=Search\\ Directory',
+        icon_hl = '@keyword', desc_hl = '@function', key_hl = '@string',
     },
     {
         icon = '󰈢 ',
         desc = 'Recent Files             ',
         key = 'o',
         action = 'Telescope oldfiles hidden=true theme=dropdown prompt_title=Recent\\ Files',
+        icon_hl = '@keyword', desc_hl = '@function', key_hl = '@string',
     },
     {
         icon = '󰈞 ',
         desc = 'Grep Files               ',
         key = 'g',
         action = 'Telescope live_grep hidden=true theme=dropdown prompt_title=Grep\\ Files',
+        icon_hl = '@keyword', desc_hl = '@function', key_hl = '@string',
     },
     {
         icon = ' ',
         desc = 'File Explorer            ',
         key = 'e',
         action = 'NvimTreeOpen',
+        icon_hl = '@keyword', desc_hl = '@function', key_hl = '@string',
     },
     {
         icon = ' ',
         desc = 'Quit                     ',
         key = 'q',
         action = 'q',
+        icon_hl = '@keyword', desc_hl = '@function', key_hl = '@string',
     },
 }
 
-for _, v in pairs(center) do
-    v.icon_hl = '@keyword'
-    v.desc_hl = '@function'
-    v.key_hl = '@string'
-end
-
 local function pad_header(header, top, bottom)
-    local top_pad = {}
-    local bottom_pad = {}
+    local result = {}
 
-    for _ = 1,top do
-        table.insert(top_pad, '')
-    end
-    for _ = 1,bottom do
-        table.insert(bottom_pad, '')
-    end
+    vim.list_extend(result, vim.fn['repeat']({ '' }, top))
+    vim.list_extend(result, header)
+    vim.list_extend(result, vim.fn['repeat']({ '' }, bottom))
 
-    vim.list_extend(top_pad, header)
-    vim.list_extend(top_pad, bottom_pad)
-
-    return top_pad
+    return result
 end
-
 
 return {
     'nvimdev/dashboard-nvim',
+    cond = function()
+        return not vim.list_contains(vim.fn.GetSessionList(), vim.fn.getcwd())
+    end,
     dependencies = {
         'nvim-tree/nvim-web-devicons',
         'MaximilianLloyd/ascii.nvim',

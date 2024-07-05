@@ -17,7 +17,6 @@ return {
             dir = vim.fn.stdpath('config') .. '/lua/user/telescope_pickers',
         },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-        { 'nvim-lua/plenary.nvim' },
     },
     cmd = 'Telescope',
     keys = function()

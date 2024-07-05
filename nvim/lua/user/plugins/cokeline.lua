@@ -1,9 +1,6 @@
 return {
     'willothy/nvim-cokeline',
-    dependencies = {
-        'nvim-lua/plenary.nvim',
-        'nvim-tree/nvim-web-devicons',
-    },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
         buffers = {
             new_buffers_position = 'next',

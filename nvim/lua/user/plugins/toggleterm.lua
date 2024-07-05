@@ -1,6 +1,7 @@
 return {
     'akinsho/toggleterm.nvim',
     version = '*',
+    keys = [[<C-\>]],
     opts = {
         shade_terminals = true,
         open_mapping = [[<C-\>]],

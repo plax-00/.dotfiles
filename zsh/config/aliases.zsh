@@ -56,7 +56,7 @@ function gr() {
 
 # nvim
 alias nv="nvim"
-alias oil="VIM_NO_SESSION_LOAD=1 nvim ."
+alias oil="VIM_NO_SESSION_LOAD=1 NVIM_OIL=1 nvim ."
 
 # Other
 alias c="clear"

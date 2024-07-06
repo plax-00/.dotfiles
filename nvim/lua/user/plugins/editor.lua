@@ -106,6 +106,15 @@ return {
                 'RainbowDelimiterRed',
             },
         },
+        config = function(_, opts)
+            local rainbow_delimiters = require('rainbow-delimiters')
+            vim.api.nvim_create_augroup('RainbowDelimitersReload', { clear = true })
+            vim.api.nvim_create_autocmd('BufWritePost', { callback = function()
+                rainbow_delimiters.disable()
+                rainbow_delimiters.enable()
+            end })
+            require('rainbow-delimiters.setup').setup(opts)
+        end
     },
 
     {

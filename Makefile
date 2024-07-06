@@ -5,18 +5,20 @@ NVIM := ~/.config/nvim
 TMUX := ~/.config/tmux
 VIM := ~/.config/vim
 VIMFILES := mappings sessions settings
+ZELLIJ := ~/.config/zellij
 ZSH := ~/.config/zsh
 
 GIT_CLEAN = ${GIT}
 NVIM_CLEAN = ${NVIM}/*.link.vim ${NVIM} ~/.local/share/nvim
 TMUX_CLEAN = ${TMUX}/tmux.conf ${TMUX}/themes
 VIM_CLEAN = ${VIM}/autoload/plug.vim ${VIM}/plugged ${VIM}
+ZELLIJ_CLEAN = ${ZELLIJ}
 ZSH_CLEAN = ${ZSH}/.zshrc ${ZSH}/.zprofile ${ZSH}/aliases.zsh ${ZSH}/plugins ${ZSH}/themes ~/.zshenv
 
 symlink = ln -invs $(1) $(2) || true
 clean = echo "Cleaning... " ; rm -rf $(1) && echo "Done"
 
-.PHONY: help git nvim tmux vim zsh clean-nvim clean-tmux clean-vim clean-zsh
+.PHONY: help git nvim tmux vim zellij zsh clean-nvim clean-tmux clean-vim clean-zsh
 
 help: ## Print this message
 	@# https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
@@ -48,6 +50,9 @@ vim: ## Setup vim configuration
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
 		echo "Installed"
 
+zellij: ## Setup zellij configuration
+	@$(call symlink, ${DOTFILES}/zellij, ${ZELLIJ})
+
 zsh: ## Setup zsh configuration
 	@echo 'export ZDOTDIR=$$HOME/.config/zsh' > ~/.zshenv
 	@$(call symlink, ${DOTFILES}/zsh/zshrc, ${ZSH}/.zshrc)
@@ -71,6 +76,9 @@ clean-tmux: ## Remove tmux symlinks and plugins
 
 clean-vim: ## Remove vim symlinks and plugins
 	@$(call clean, ${VIM_CLEAN})
+
+clean-zellij: ## Remove zellij symlinks
+	@$(call clean, ${ZELLIJ_CLEAN})
 
 clean-zsh: ## Remove zsh symlinks and plugins
 	@$(call clean, ${ZSH_CLEAN})

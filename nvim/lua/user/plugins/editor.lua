@@ -56,6 +56,38 @@ return {
     },
 
     {
+        'echasnovski/mini.ai',
+        dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+        opts = function()
+            local gen_spec = require('mini.ai').gen_spec
+            return {
+                custom_textobjects = {
+                    F = gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },
+                    o = gen_spec.treesitter {
+                        a = { '@conditional.outer', '@loop.outer' },
+                        i = { '@conditional.inner', '@loop.inner' },
+                    },
+                },
+            }
+        end,
+    },
+
+    {
+        'echasnovski/mini.splitjoin',
+        opts = function()
+            local gen_hook = require('mini.splitjoin').gen_hook
+            return {
+                split = {
+                    hooks_post = { gen_hook.add_trailing_separator() },
+                },
+                join = {
+                    hooks_post = { gen_hook.del_trailing_separator(), gen_hook.pad_brackets() },
+                },
+            }
+        end,
+    },
+
+    {
         'kawre/neotab.nvim',
         opts = {
             tabkey = '<C-l>',

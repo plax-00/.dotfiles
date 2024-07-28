@@ -98,3 +98,6 @@ source $ZDOTDIR/extended.zshrc
 # Aliases
 source $ZDOTDIR/config/aliases.zsh
 source $ZDOTDIR/extended_aliases.zsh
+
+# zoxide
+zoxide --version &> /dev/null && eval "$(zoxide init --cmd cd zsh)"

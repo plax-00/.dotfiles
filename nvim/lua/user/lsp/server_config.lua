@@ -1,4 +1,4 @@
-local lua_ls = { settings = { Lua = {} } }
+local lua_ls = { settings = {} }
 lua_ls.settings.Lua = {
     runtime = { version = 'LuaJIT' },
     diagnostics = {
@@ -7,7 +7,15 @@ lua_ls.settings.Lua = {
     telemetry = { enable = false },
 }
 
-local tsserver = { settings = { typescript = {} } }
+local rust_analyzer = { settings = {} }
+rust_analyzer.settings['rust-analyzer'] = {
+    diagnostics = {
+        disabled = { 'unlinked-file' }
+    }
+}
+
+local tsserver = { settings = {} }
+tsserver.settings.typescript = {}
 tsserver.settings.typescript.inlayHints = {
     includeInlayEnumMemberValueHints = true,
     includeInlayFunctionLikeReturnTypeHints = true,
@@ -20,5 +28,6 @@ tsserver.settings.typescript.inlayHints = {
 
 return {
     lua_ls = lua_ls,
+    rust_analyzer = rust_analyzer,
     tsserver = tsserver,
 }

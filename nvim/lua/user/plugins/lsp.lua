@@ -28,11 +28,16 @@ return {
             formatters_by_ft = {
                 lua = { 'stylua' },
                 rust = { 'rustfmt' },
+                html = { 'prettier' },
+                javascript = { 'prettier' },
+                typescript = { 'prettier' },
             },
         },
         config = function(_, opts)
             local conform = require('conform')
-            vim.keymap.set('n', '<Leader>lf', conform.format)
+            vim.keymap.set('n', '<Leader>lf', function()
+                conform.format { timeout_ms = 5000 }
+            end)
             conform.setup(opts)
         end
     },
@@ -104,6 +109,7 @@ return {
                 nnoremap <Leader>lo  <Cmd>Lspsaga outline<CR>
                 nnoremap gk          <Cmd>Lspsaga goto_definition<CR>
                 nnoremap <Leader>la  <Cmd>Lspsaga code_action<CR>
+                nnoremap <Leader>r   <Cmd>Lspsaga rename<CR>
             ]]
 
             lspsaga.setup(opts)

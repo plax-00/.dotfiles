@@ -41,10 +41,10 @@ else
 fi
 
 # zsh
-HISTFILE=$XDG_STATE_HOME/zsh/history
-HISTSIZE=5000
-SAVEHIST=5000
-KEYTIMEOUT=1
+export HISTFILE=$XDG_STATE_HOME/zsh/history
+export HISTSIZE=5000
+export SAVEHIST=5000
+export KEYTIMEOUT=1
 
 # PATH
 path+=($HOME/.local/bin $CARGO_HOME/bin $XDG_DATA_HOME/npm/bin)

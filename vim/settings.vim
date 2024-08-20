@@ -19,6 +19,7 @@ set foldlevelstart=99
 set encoding=utf-8
 set autoread
 set path+=**
+set jumpoptions=view
 
 
 augroup MiscAutocmds

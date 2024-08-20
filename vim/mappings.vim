@@ -57,7 +57,7 @@ function! s:LeaderQ() abort
     let l:quitOut = v:false
     let l:bufCount = len(getbufinfo({ 'buflisted': 1 }))
 
-    if (winnr('$') > 1)  " if there are multiple windows just close
+    if (winlayout()[0] != 'leaf')  " if there are multiple windows just close
         close
         return
     endif

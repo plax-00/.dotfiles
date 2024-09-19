@@ -1,5 +1,6 @@
 return {
     'willothy/nvim-cokeline',
+    event = 'VeryLazy',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
         buffers = {

@@ -91,7 +91,7 @@ endfunction
 
 function! s:SmartPut(p_or_P) abort
     let l:regtype = getregtype()
-    execute 'normal!' a:p_or_P
+    execute 'normal!' '"' .. v:register .. a:p_or_P
     if l:regtype ==# 'V'
         normal! '[mx
         '[,']normal! ==

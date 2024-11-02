@@ -14,9 +14,9 @@ rust_analyzer.settings['rust-analyzer'] = {
     }
 }
 
-local tsserver = { settings = {} }
-tsserver.settings.typescript = {}
-tsserver.settings.typescript.inlayHints = {
+local ts_ls = { settings = {} }
+ts_ls.settings.typescript = {}
+ts_ls.settings.typescript.inlayHints = {
     includeInlayEnumMemberValueHints = true,
     includeInlayFunctionLikeReturnTypeHints = true,
     includeInlayFunctionParameterTypeHints = true,
@@ -29,5 +29,5 @@ tsserver.settings.typescript.inlayHints = {
 return {
     lua_ls = lua_ls,
     rust_analyzer = rust_analyzer,
-    tsserver = tsserver,
+    ts_ls = ts_ls,
 }

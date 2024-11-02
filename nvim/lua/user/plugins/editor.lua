@@ -28,6 +28,7 @@ return {
                     'lazy',
                 },
             },
+            scope = { enabled = false },
         },
     },
 
@@ -115,6 +116,11 @@ return {
             end })
             require('rainbow-delimiters.setup').setup(opts)
         end
+    },
+
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        config = true,
     },
 
     {

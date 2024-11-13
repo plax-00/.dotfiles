@@ -4,12 +4,11 @@ GIT := ~/.config/git
 NVIM := ~/.config/nvim
 TMUX := ~/.config/tmux
 VIM := ~/.config/vim
-VIMFILES := mappings sessions settings
 ZELLIJ := ~/.config/zellij
 ZSH := ~/.config/zsh
 
 GIT_CLEAN = ${GIT}
-NVIM_CLEAN = ${NVIM}/*.link.vim ${NVIM} ~/.local/share/nvim
+NVIM_CLEAN = ${NVIM} ~/.local/share/nvim
 TMUX_CLEAN = ${TMUX}/tmux.conf ${TMUX}/themes
 VIM_CLEAN = ${VIM}/autoload/plug.vim ${VIM}/plugged ${VIM}
 ZELLIJ_CLEAN = ${ZELLIJ}
@@ -33,9 +32,6 @@ git: ## Setup git configuration
 
 nvim: ## Setup neovim configuration
 	@$(call symlink, ${DOTFILES}/nvim, ${NVIM})
-	@for file in ${VIMFILES}; do \
-		$(call symlink, ${DOTFILES}/vim/$$file.vim, ${NVIM}/$$file.link.vim); \
-	done
 
 tmux: ## Setup tmux configuration
 	@mkdir -p ${TMUX}

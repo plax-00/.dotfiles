@@ -20,6 +20,7 @@ set encoding=utf-8
 set autoread
 set path+=**
 set jumpoptions=view
+set termguicolors
 
 
 augroup MiscAutocmds

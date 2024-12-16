@@ -34,6 +34,7 @@ export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$X
 if command -v nvim &> /dev/null; then
     export EDITOR=nvim
     export VISUAL=nvim
+    export MANPAGER='nvim +Man!'
 else
     export EDITOR=vim
     export VISUAL=vim

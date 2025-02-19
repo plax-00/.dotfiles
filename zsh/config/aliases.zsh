@@ -66,3 +66,7 @@ alias sqlite3="sqlite3 -init $XDG_CONFIG_HOME/sqlite3/sqliterc"
 alias sqlite="sqlite3"
 alias tm="tmux -f ~/.config/tmux/tmux.conf new -A -s shell"
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
+
+function mkc() {
+    mkdir -p "$1" && cd "$1"
+}

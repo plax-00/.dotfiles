@@ -1,24 +1,4 @@
-[submodule "zsh/themes/pure"]
-	path = zsh/themes/pure
-	url = https://github.com/sindresorhus/pure
-	shallow = true
-[submodule "zsh/plugins/zsh-autosuggestions"]
-	path = zsh/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions
-	shallow = true
-[submodule "zsh/plugins/zsh-history-substring-search"]
-	path = zsh/plugins/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search
-	shallow = true
-[submodule "zsh/plugins/zsh-syntax-highlighting"]
-	path = zsh/plugins/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting
-	shallow = true
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
 	shallow = true
-[submodule "zsh/plugins/zsh-bd"]
-	path = zsh/plugins/zsh-bd
-	url = https://github.com/Tarrasch/zsh-bd
-    shallow = true

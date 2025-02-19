@@ -1,0 +1,9 @@
+zsh-users/zsh-autosuggestions
+zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-completions                  kind:fpath path:src
+Tarrasch/zsh-bd
+hlissner/zsh-autopair
+Aloxaf/fzf-tab
+
+sindresorhus/pure                          kind:fpath

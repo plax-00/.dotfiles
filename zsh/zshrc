@@ -33,18 +33,15 @@ setopt menu_complete          # automatically open completion menu on ambiguous 
 #           Plugins           #
 ###############################
 
+# source antidote and load plugins
+source $ZDOTDIR/.antidote/antidote.zsh
+antidote load
+
 # Pure theme
-fpath+=$ZDOTDIR/themes/pure
 autoload promptinit; promptinit
 prompt pure
 export PURE_PROMPT_SYMBOL=
 export PURE_PROMPT_VICMD_SYMBOL=
-
-# Load plugins
-source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZDOTDIR/plugins/zsh-bd/bd.zsh
-source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # Autosuggest settings
 bindkey '`' autosuggest-accept

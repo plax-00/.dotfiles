@@ -75,10 +75,11 @@ return {
         local normal_fg = get_hex('Normal', 'fg')
         local normal_bg = get_hex('Normal', 'bg')
         local comment_fg = get_hex('Comment', 'fg')
+        local statusline_bg = get_hex('StatusLine', 'bg')
 
         local function get_tab_color(buffer)
             return buffer.is_focused and normal_bg
-            or 'black'
+            or statusline_bg
         end
 
         opts.default_hl.fg = function(buffer)
@@ -133,7 +134,7 @@ return {
         vim.api.nvim_set_hl(0, 'TabLineFill', { fg = normal_bg })
         vim.cmd [[
             nnoremap    <Leader>v    <Plug>(cokeline-pick-focus)
-            nnoremap    <Leader>c    <Plug>(cokeline-pick-close)
+            nnoremap    <Leader>c    <Plug>(cokeline-pick-close-multiple)
             nmap        <Leader>n    <Plug>(cokeline-focus-next)<Leader>\buffer
             nmap        <Leader>N    <Plug>(cokeline-focus-prev)<Leader>\buffer
         ]]

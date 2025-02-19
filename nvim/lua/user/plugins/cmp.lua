@@ -1,5 +1,6 @@
 return {
     'saghen/blink.cmp',
+    enabled = true,
     -- optional: provides snippets for the snippet source
     dependencies = 'rafamadriz/friendly-snippets',
 
@@ -59,7 +60,10 @@ return {
         -- elsewhere in your config, without redefining it, via `opts_extend`
         sources = {
             default = { 'lsp', 'path', 'snippets', 'buffer' },
-            cmdline = {},
+        },
+
+        cmdline = {
+            enabled = false,
         },
 
         -- experimental signature help support

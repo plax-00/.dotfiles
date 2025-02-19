@@ -1,5 +1,10 @@
 return {
     {
+        'nvim-lua/plenary.nvim',
+        lazy = true,
+    },
+
+    {
         'stevearc/dressing.nvim',
         event = 'VeryLazy',
         opts = {},
@@ -111,8 +116,8 @@ return {
             local rainbow_delimiters = require('rainbow-delimiters')
             vim.api.nvim_create_augroup('RainbowDelimitersReload', { clear = true })
             vim.api.nvim_create_autocmd('BufWritePost', { callback = function()
-                rainbow_delimiters.disable()
-                rainbow_delimiters.enable()
+                rainbow_delimiters.disable(0)
+                rainbow_delimiters.enable(0)
             end })
             require('rainbow-delimiters.setup').setup(opts)
         end

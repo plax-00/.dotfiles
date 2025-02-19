@@ -2,7 +2,6 @@ return {
     'tpope/vim-surround',
     'tpope/vim-repeat',
     'jesseleite/vim-noh',
-    'jeetsukumaran/vim-indentwise',
     {
         'junegunn/vim-easy-align',
         config = function()

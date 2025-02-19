@@ -1,12 +1,3 @@
-local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
 local diag_icons = {
     error = '',
     warn = '',
@@ -50,14 +41,16 @@ return {
 
     {
         'williamboman/mason-lspconfig.nvim',
-        dependencies = { 'williamboman/mason.nvim' },
+        dependencies = {
+            'williamboman/mason.nvim',
+            'saghen/blink.cmp',
+        },
         opts = {
             handlers = {
                 function(server_name)
-                    local server_config = require('user.lsp.server_config')[server_name]
-                    server_config = server_config ~= nil and server_config or {}
-                    server_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
-                    require('lspconfig')[server_name].setup(server_config)
+                    local config = require('user.lsp.server_config')[server_name] or {}
+                    config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+                    require('lspconfig')[server_name].setup(config)
                 end,
             },
         },
@@ -139,104 +132,5 @@ return {
             vim.diagnostic.config { virtual_text = false }
             require('corn').setup(opts)
         end
-    },
-
-    {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
-            {
-                'hrsh7th/cmp-vsnip',
-                dependencies = { 'hrsh7th/vim-vsnip' },
-            },
-            'hrsh7th/cmp-path',
-            'onsails/lspkind.nvim',
-        },
-        event = 'InsertEnter',
-        opts = function()
-            local cmp = require('cmp')
-            local lspkind = require('lspkind')
-            return {
-                preselect = cmp.PreselectMode.None,
-                snippet = {
-                    expand = function(args)
-                        vim.fn['vsnip#anonymous'](args.body)
-                    end,
-                },
-                mapping = {
-                    -- If nothing is selected (including preselections) add a newline as usual.
-                    -- If something has explicitly been selected by the user, select it.
-                    ['<CR>'] = cmp.mapping({
-                        i = function(fallback)
-                            if cmp.visible() and cmp.get_active_entry() then
-                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-                            else
-                                fallback()
-                            end
-                        end,
-                        s = cmp.mapping.confirm({ select = true }),
-                        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
-                    }),
-                    ['<C-j>'] = cmp.mapping.select_next_item(),
-                    ['<C-k>'] = cmp.mapping.select_prev_item(),
-
-                    -- Super tab
-                    ['<Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            if #cmp.get_entries() == 1 then
-                                cmp.confirm({ select = true })
-                            else
-                                cmp.select_next_item()
-                            end
-                        elseif vim.fn['vsnip#available'](1) == 1 then
-                            feedkey('<Plug>(vsnip-expand-or-jump)', '')
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-                        end
-                    end, { 'i', 's' }),
-
-                    ['<S-Tab>'] = cmp.mapping(function()
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-                            feedkey('<Plug>(vsnip-jump-prev)', '')
-                        end
-                    end, { 'i', 's' }),
-                },
-                sources = {
-                    { name = 'nvim_lsp' },
-                    { name = 'nvim_lsp_signature_help' },
-                    { name = 'vsnip' },
-                    { name = 'buffer' },
-                    { name = 'path' },
-                },
-                formatting = {
-                    fields = { 'abbr', 'kind', 'menu' },
-                    format = lspkind.cmp_format({
-                        before = function(entry, vim_item)
-                            vim_item.menu = ({
-                                nvim_lsp = '[LSP]',
-                                vsnip = '[Snippet]',
-                                buffer = '[Buffer]',
-                                path = '[Path]',
-                            })[entry.source.name]
-                            return vim_item
-                        end,
-                    }),
-                },
-                window = {
-                    documentation = {
-                        border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-                    },
-                },
-            }
-        end,
-        config = function(_, opts)
-            vim.opt.completeopt = 'menu,menuone,noselect'
-            require('cmp').setup(opts)
-        end,
     },
 }

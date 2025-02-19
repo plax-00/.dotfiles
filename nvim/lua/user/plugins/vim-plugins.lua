@@ -1,7 +1,6 @@
 return {
     'tpope/vim-surround',
     'tpope/vim-repeat',
-    'jiangmiao/auto-pairs',
     'jesseleite/vim-noh',
     'jeetsukumaran/vim-indentwise',
     {

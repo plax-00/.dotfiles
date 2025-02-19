@@ -6,7 +6,7 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 
 zstyle ':completion:*' completer _complete _ignored
-zstyle ':completion:*' format '%F{yellow}%B%U%d:%u%f%b'
+zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-colors ${(s.:.)${LS_COLORS}}

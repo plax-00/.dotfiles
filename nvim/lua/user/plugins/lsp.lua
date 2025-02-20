@@ -58,7 +58,20 @@ return {
 
     {
         'neovim/nvim-lspconfig',
-        dependencies = { 'williamboman/mason-lspconfig.nvim' },
+        dependencies = {
+            'williamboman/mason-lspconfig.nvim',
+            {
+                "folke/lazydev.nvim",
+                ft = "lua", -- only load on lua files
+                opts = {
+                    library = {
+                        -- See the configuration section for more details
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "luvit-meta/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
+        },
         config = function()
             -- <F3> to toggle inlay hints
             if vim.version().minor >= 10 then
@@ -76,10 +89,23 @@ return {
             vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename)
 
             -- diagnostic icons
-            vim.fn.sign_define('DiagnosticSignError', { text = diag_icons.error, texthl = 'DiagnosticSignError' })
-            vim.fn.sign_define('DiagnosticSignWarn',  { text = diag_icons.warn,  texthl = 'DiagnosticSignWarn'  })
-            vim.fn.sign_define('DiagnosticSignInfo',  { text = diag_icons.info,  texthl = 'DiagnosticSignInfo'  })
-            vim.fn.sign_define('DiagnosticSignHint',  { text = diag_icons.hint,  texthl = 'DiagnosticSignHint'  })
+            if vim.version().minor >= 11 then
+                vim.diagnostic.config {
+                    signs = {
+                        text = {
+                            [vim.diagnostic.severity.ERROR] = diag_icons.error,
+                            [vim.diagnostic.severity.WARN] = diag_icons.warn,
+                            [vim.diagnostic.severity.INFO] = diag_icons.info,
+                            [vim.diagnostic.severity.HINT] = diag_icons.hint,
+                        }
+                    }
+                }
+            else
+                vim.fn.sign_define('DiagnosticSignError', { text = diag_icons.error, texthl = 'DiagnosticSignError' })
+                vim.fn.sign_define('DiagnosticSignWarn',  { text = diag_icons.warn,  texthl = 'DiagnosticSignWarn'  })
+                vim.fn.sign_define('DiagnosticSignInfo',  { text = diag_icons.info,  texthl = 'DiagnosticSignInfo'  })
+                vim.fn.sign_define('DiagnosticSignHint',  { text = diag_icons.hint,  texthl = 'DiagnosticSignHint'  })
+            end
         end,
     },
 
@@ -92,7 +118,7 @@ return {
         event = 'LspAttach',
         opts = {
             symbol_in_winbar = {
-                enable = true,
+                enable = false,
             },
             lightbulb = { enable = false },
         },
@@ -129,7 +155,7 @@ return {
             },
         },
         config = function(_, opts)
-            vim.diagnostic.config { virtual_text = false }
+            vim.diagnostic.config { virtual_text = true }
             require('corn').setup(opts)
         end
     },

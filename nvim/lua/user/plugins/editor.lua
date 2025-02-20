@@ -1,3 +1,6 @@
+---@module 'lazy'
+
+---@type LazySpec
 return {
     {
         'nvim-lua/plenary.nvim',
@@ -12,6 +15,8 @@ return {
 
     {
         'plax-00/endscroll.nvim',
+        enabled = true,
+        dev = true,
         opts = {
             disabled_filetypes = {
                 'dashboard',
@@ -99,6 +104,30 @@ return {
             tabkey = '<C-l>',
             act_as_tab = false,
         }
+    },
+
+    {
+        'stevearc/quicker.nvim',
+        event = "FileType qf",
+        ---@module "quicker"
+        ---@type quicker.SetupOptions
+        opts = {
+            -- Maximum width of the filename column
+            max_filename_width = function()
+                return math.floor(math.min(95, vim.o.columns / 3))
+            end,
+            keys = {
+                { ">", "<cmd>lua require('quicker').toggle_expand()<CR>", desc = "Toggle expanded quickfix content" },
+            },
+        },
+        config = function(_, opts)
+            local quicker = require('quicker')
+            quicker.setup(opts)
+
+            vim.keymap.set('n', '<Leader>Q', function()
+                quicker.toggle({ focus = true })
+            end)
+        end,
     },
 
     {

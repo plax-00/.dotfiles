@@ -14,9 +14,6 @@ setopt correct                # spellcheck commands
 setopt correct_all            # spellcheck arguments too
 setopt menu_complete          # automatically open completion menu on ambiguous completions
 
-# zle settings
-source $ZDOTDIR/config/zle.zsh
-
 # completion settings
 source $ZDOTDIR/config/completion.zsh
 

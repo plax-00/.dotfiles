@@ -33,7 +33,7 @@ fi
 # load plugins
 zstyle ':antidote:bundle' use-friendly-names on
 source $ANTIDIR/antidote.zsh
-antidote load
+antidote load $ZDOTDIR/config/plugins.txt $ANTIDIR/plugins.zsh
 
 # Pure theme
 autoload promptinit; promptinit
@@ -78,12 +78,13 @@ fi
 #        Miscellaneous        #
 ###############################
 
-# Extended zshrc
-source $ZDOTDIR/extended.zshrc
-
 # Aliases
 source $ZDOTDIR/config/aliases.zsh
-source $ZDOTDIR/extended_aliases.zsh
+
+# Extended config
+for ext in $ZDOTDIR/extended/*(N) ; do
+    source $ext
+done
 
 # zoxide
 zoxide --version &> /dev/null && eval "$(zoxide init --cmd cd zsh)"

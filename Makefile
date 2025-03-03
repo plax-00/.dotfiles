@@ -35,8 +35,18 @@ nvim: ## Setup neovim configuration
 	@$(call symlink,${DOTFILES}/nvim,${NVIM})
 
 .PHONY: packages
-packages: ## Install pacman packages
-@sudo pacman -S --needed - < ${DOTFILES}/pkglist.txt
+packages: paru ## Install pacman packages
+	@sudo pacman -S --needed - < ${DOTFILES}/pkglist.txt
+
+.PHONY: paru
+paru:
+	@sudo pacman -S --needed base-devel
+	@tmp_dir="$$(mktemp -d)"
+	@git clone https://aur.archlinux.org/paru-bin.git "$$tmp_dir"
+	@cd $$tmp_dir
+	@makepkg --clean --install --syncdeps --rmdeps
+	@rm -rf "$$tmp_dir"
+
 
 .PHONY: tmux
 tmux: ## Setup tmux configuration

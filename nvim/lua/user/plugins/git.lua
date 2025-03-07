@@ -14,7 +14,7 @@ return {
         config = function(_, opts)
             local gitsigns = require('gitsigns')
             vim.keymap.set('n', '<Leader>gl', gitsigns.toggle_linehl)
-            vim.keymap.set('n', '<Leader>gt', gitsigns.toggle_deleted)
+            vim.keymap.set('n', '<Leader>gt', gitsigns.preview_hunk_inline)
             vim.keymap.set('n', '<Leader>gb', gitsigns.blame)
             vim.keymap.set('n', '<Leader>gd', gitsigns.reset_hunk)
             vim.keymap.set('v', '<Leader>gd', function()

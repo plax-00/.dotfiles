@@ -17,7 +17,9 @@ setopt menu_complete          # automatically open completion menu on ambiguous 
 # completion settings
 source $ZDOTDIR/config/completion.zsh
 
-autoload -Uz mkconf
+# autoload functions
+fpath+=$ZDOTDIR/functions
+autoload -Uz $ZDOTDIR/functions/*(N) &> /dev/null
 
 
 ###############################

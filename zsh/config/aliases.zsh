@@ -1,13 +1,10 @@
 # make aliases work with sudo
 alias sudo='sudo '
 
-# zsh stuff
-alias zshrc="cd $ZDOTDIR && $EDITOR $ZDOTDIR/.zshrc ; cd - &> /dev/null"
-alias rezsh="source $ZDOTDIR/.zshrc"
-alias aliases="cd $ZDOTDIR && $EDITOR config/aliases.zsh ; cd - &> /dev/null"
-alias extal="cd $ZDOTDIR && $EDITOR extended_aliases.zsh ; cd - &> /dev/null"
-
-function makedots() { cd ~/.dotfiles && make $1 ; cd - &> /dev/null }
+alias dots="cd ~/.dotfiles && $EDITOR ; cd - &> /dev/null"
+function makedots() {
+    make -sC $HOME/.dotfiles $1
+}
 
 # ls
 alias ls="ls --color=auto"

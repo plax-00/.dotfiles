@@ -13,7 +13,8 @@ return {
             formatters = {
                 rustfmt = {
                     inherit = false,
-                    command = 'cargo format',
+                    command = 'cargo',
+                    args = { 'fmt' }
                 },
             },
             formatters_by_ft = {

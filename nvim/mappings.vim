@@ -8,7 +8,7 @@ nmap                <Leader>t            <Cmd>tabn<CR><Leader>\tabpage
 nmap                <Leader>T            <Cmd>tabp<CR><Leader>\tabpage
 nmap                <Leader>\tabpaget    <Leader>t
 nmap                <Leader>\tabpageT    <Leader>T
-nnoremap            <Leader><BS>         g<Tab>
+nnoremap            <Leader><BS>         <Cmd>call <SID>PrevTab()<CR>
 
 nnoremap            <Leader>h            <Cmd>noh<CR>
 nnoremap            <Leader>q            <Cmd>call <SID>LeaderQ()<CR>
@@ -103,4 +103,13 @@ function! s:SmartPut(p_or_P) abort
         '[,']normal! ==
         normal! 'x
     endif
+endfunction
+
+function! s:PrevTab() abort
+    let l:tab = tabpagenr('#')
+    if l:tab == 0
+        let l:tab = 1
+    endif
+
+    execute 'normal!' l:tab .. 'gt'
 endfunction

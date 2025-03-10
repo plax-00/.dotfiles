@@ -10,10 +10,10 @@ GIT_CLEAN = ${GIT}
 NVIM_CLEAN = ${NVIM} $$HOME/.local/share/nvim
 TMUX_CLEAN = ${TMUX}/tmux.conf
 ZELLIJ_CLEAN = ${ZELLIJ}
-ZSH_CLEAN = $(shell ( GLOBIGNORE="${ZSH}/extended*"; echo ${ZSH}/* )) $$HOME/.cache/antidote
+ZSH_CLEAN = ${ZSH} $$HOME/.cache/antidote
 
 symlink = ln -invs $(1) $(2) || true
-clean = echo "Cleaning... " ; rm -rf $(1) && echo "Done"
+clean = echo "Cleaning $(1)... " ; rm -rf $(2) && echo "Done"
 
 .PHONY: help all git nvim tmux zellij zsh clean clean-all clean-git clean-nvim clean-tmux clean-zellij clean-zsh
 
@@ -27,22 +27,22 @@ help: ## Print this message
 all: git nvim tmux zellij zsh ## Install and setup everything
 
 git: ## Setup git configuration
-	@$(call symlink, ${DOTFILES}/git, ${GIT})
+	@$(call symlink,${DOTFILES}/git,${GIT})
 
 nvim: ## Setup neovim configuration
-	@$(call symlink, ${DOTFILES}/nvim, ${NVIM})
+	@$(call symlink,${DOTFILES}/nvim,${NVIM})
 
 tmux: ## Setup tmux configuration
 	@mkdir -p ${TMUX}
-	@$(call symlink, ${DOTFILES}/tmux/tmux.conf, ${TMUX}/tmux.conf)
+	@$(call symlink,${DOTFILES}/tmux/tmux.conf,${TMUX}/tmux.conf)
 	@if ! [ -f ${TMUX}/extended.tmux.conf ]; then touch ${TMUX}/extended.tmux.conf; fi
 
 zellij: ## Setup zellij configuration
-	@$(call symlink, ${DOTFILES}/zellij, ${ZELLIJ})
+	@$(call symlink,${DOTFILES}/zellij,${ZELLIJ})
 
 zsh: ## Setup zsh configuration
-	@echo 'export ZDOTDIR=${ZSH}' > $$HOME/.zshenv
-	@$(call symlink, ${DOTFILES}/zsh, ${ZSH})
+	@$(call symlink,${DOTFILES}/zsh,${ZSH})
+	@$(SHELL) ${DOTFILES}/scripts/zsh/zshenv.sh
 	@mkdir -p $$HOME/.local/state/zsh
 
 clean: ## Clean symlinks and other files
@@ -55,16 +55,16 @@ clean: ## Clean symlinks and other files
 clean-all: clean-git clean-nvim clean-tmux clean-zellij clean-zsh
 
 clean-git:
-	@$(call clean, ${GIT_CLEAN})
+	@$(call clean,git,${GIT_CLEAN})
 
 clean-nvim:
-	@$(call clean, ${NVIM_CLEAN})
+	@$(call clean,nvim,${NVIM_CLEAN})
 
 clean-tmux:
-	@$(call clean, ${TMUX_CLEAN})
+	@$(call clean,tmux,${TMUX_CLEAN})
 
 clean-zellij:
-	@$(call clean, ${ZELLIJ_CLEAN})
+	@$(call clean,zellij,${ZELLIJ_CLEAN})
 
 clean-zsh:
-	@$(call clean, ${ZSH_CLEAN})
+	@$(call clean,zsh,${ZSH_CLEAN})

@@ -25,7 +25,7 @@ nnoremap            <Leader>i            ^
 vnoremap            <Leader>i            ^
 nnoremap            <Leader>a            $
 vnoremap            <Leader>a            $
-nnoremap            <Leader>P            "_dd]P
+nnoremap            <Leader>P            "_dd<Cmd>call <SID>SmartPut('P')<CR>
 nnoremap            <Leader>y            yyp<Cmd>call repeat#set("\<Leader>y")<CR>
 nnoremap            <Leader>o            o<Esc>k<Cmd>call repeat#set("\<Leader>o",-1)<CR>
 nnoremap            <Leader>;            mxA;<Esc>`x<Cmd>call repeat#set("\<Leader>;",-1)<CR>
@@ -58,7 +58,7 @@ function! s:LeaderQ() abort
     let l:quitOut = v:false
     let l:bufCount = len(getbufinfo({ 'buflisted': 1 }))
 
-    if (winlayout()[0] != 'leaf')  " if there are multiple windows just close
+    if (winlayout()[0] != 'leaf' || tabpagenr() > 1)  " if there are multiple windows or tabs just close
         close
         return
     endif

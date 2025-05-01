@@ -5,7 +5,7 @@ return {
     dependencies = 'rafamadriz/friendly-snippets',
 
     -- use a release tag to download pre-built binaries
-    version = 'v0.*',
+    version = 'v1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -39,7 +39,7 @@ return {
 
         completion = {
             list = {
-                selection = { preselect = false, auto_insert = false },
+                selection = { preselect = true, auto_insert = false },
             },
             ghost_text = {
                 enabled = true

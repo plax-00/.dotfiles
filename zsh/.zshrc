@@ -84,7 +84,7 @@ fi
 source $ZDOTDIR/config/aliases.zsh
 
 # Extended config
-for ext in $ZDOTDIR/extended/*(N) ; do
+for ext in $XDG_CONFIG_HOME/extended/zsh/*(N) ; do
     source $ext
 done
 

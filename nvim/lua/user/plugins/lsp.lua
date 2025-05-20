@@ -5,6 +5,20 @@ local diag_icons = {
     hint = '',
 }
 
+vim.diagnostic.config {
+    virtual_lines = false,
+    virtual_text = true,
+}
+
+local function toggle_virtual_lines()
+    local text = vim.diagnostic.config().virtual_text
+    local lines = vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config {
+        virtual_lines = not lines,
+        virtual_text = not text,
+    }
+end
+
 return {
     {
         'stevearc/conform.nvim',
@@ -81,6 +95,27 @@ return {
                 end)
             end
 
+
+            vim.keymap.set('n', '<Leader>k', function()
+                local line = vim.fn.line('.')
+                local vtext = vim.diagnostic.config().virtual_text
+                vim.diagnostic.config {
+                    virtual_lines = { current_line = true },
+                    virtual_text = false,
+                }
+                vim.api.nvim_create_autocmd('CursorMoved', {
+                    callback = function()
+                        if vim.fn.line('.') ~= line then
+                            vim.diagnostic.config {
+                                virtual_lines = false,
+                                virtual_text = vtext,
+                            }
+                            return true
+                        end
+                    end
+                })
+            end)
+
             -- <F4> to toggle diagnostic virtual text
             vim.keymap.set('n', '<F4>', function()
                 local current = vim.diagnostic.config().virtual_text
@@ -138,6 +173,7 @@ return {
 
     {
         'plax-00/corn.nvim',
+        cond = false,
         event = 'LspAttach',
         opts = {
             border_style = 'rounded',
@@ -156,8 +192,13 @@ return {
             },
         },
         config = function(_, opts)
-            vim.diagnostic.config { virtual_text = true }
-            require('corn').setup(opts)
+            local corn = require('corn')
+            vim.keymap.set('n', '<F4>', function()
+                toggle_virtual_lines()
+                corn.toggle(not vim.diagnostic.config().virtual_lines and 'on')
+            end)
+            corn.setup(opts)
+            corn.toggle()
         end
     },
 }

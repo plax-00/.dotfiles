@@ -36,7 +36,7 @@ nvim: ## Setup neovim configuration
 
 .PHONY: packages
 packages: paru ## Install pacman packages
-	@sudo pacman -S --needed - < ${DOTFILES}/pkglist.txt
+	@sudo paru -S --needed - < ${DOTFILES}/pkglist.txt
 
 .PHONY: paru
 paru:

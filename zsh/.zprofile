@@ -15,6 +15,7 @@ export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 # less
 export LESSHISTFILE=$XDG_CACHE_HOME/less/history
 export LESSUTFCHARDEF=E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p
+export LESS="-Ri"
 
 # ls (disable ugly folder highlighting)
 eval ${(S)$(dircolors)/:ow=*:/:ow=01;34:}
@@ -46,7 +47,12 @@ export HISTFILE=$XDG_STATE_HOME/zsh/history
 export HISTSIZE=5000
 export SAVEHIST=5000
 export KEYTIMEOUT=1
+export WORDCHARS="${WORDCHARS//\/}"
 
 # PATH
 path+=($HOME/.local/bin $CARGO_HOME/bin $XDG_DATA_HOME/npm/bin)
 export PATH
+
+if uwsm check may-start; then
+    exec uwsm start -- hyprland.desktop
+fi

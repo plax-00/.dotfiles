@@ -1,0 +1,88 @@
+/* https://github.com/Egosummiki/dotfiles */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Ubuntu Nerd Font";
+    font-size: 12px;
+    min-height: 0;
+}
+
+#custom-logo {
+    font-size: 16px;
+    padding: 0 2px;
+    color: #1793d1;
+}
+
+window#waybar {
+    background: rgba(0,0,0,0.15);
+    color: white;
+}
+
+#window {
+    font-weight: bold;
+}
+
+#workspaces {
+    padding: 0 5px;
+}
+
+#workspaces button {
+    padding: 1px 3px;
+    background: transparent;
+    color: #555555;
+    box-shadow: none;
+}
+
+#workspaces button:hover {
+    color: #aaaaaa;
+}
+
+#workspaces button.active {
+    color: inherit;
+    text-shadow: 0 0 1em rgba(255,255,255,0.8);
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
+    padding: 0 5px;
+    margin: 0 2px;
+}
+
+#clock {
+    font-weight: bold;
+}
+
+#battery icon {
+    color: red;
+}
+
+#battery.charging {
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#network.disconnected {
+    background: #f53c3c;
+}
+
+#custom-spotify {
+    color: rgb(102, 220, 105);
+}

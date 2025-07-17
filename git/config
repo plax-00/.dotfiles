@@ -22,3 +22,5 @@
     ra = rebase --abort
     mc = merge --continue
     ma = merge --abort
+[advice]
+	mergeConflict = false

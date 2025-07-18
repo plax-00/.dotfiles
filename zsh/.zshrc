@@ -40,8 +40,6 @@ antidote load $ZDOTDIR/config/plugins.txt $ANTIDIR/plugins.zsh
 # Pure theme
 autoload promptinit; promptinit
 prompt pure
-export PURE_PROMPT_SYMBOL=
-export PURE_PROMPT_VICMD_SYMBOL=
 
 # Autosuggest settings
 bindkey '`' autosuggest-accept

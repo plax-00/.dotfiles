@@ -49,15 +49,14 @@ return {
     },
 
     {
-        'williamboman/mason.nvim',
-        build = ':MasonUpdate',
+        'mason-org/mason.nvim',
         opts = {},
     },
 
     {
-        'williamboman/mason-lspconfig.nvim',
+        'mason-org/mason-lspconfig.nvim',
         dependencies = {
-            'williamboman/mason.nvim',
+            'mason-org/mason.nvim',
             'saghen/blink.cmp',
         },
         opts = {

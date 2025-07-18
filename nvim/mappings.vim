@@ -48,7 +48,6 @@ nmap                <C-j>                3j
 nmap                <C-k>                3k
 vmap                <C-j>                3j
 vmap                <C-k>                3k
-imap                jj                   <Esc>
 
 silent! iunmap      <C-w>
 

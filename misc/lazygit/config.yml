@@ -1,0 +1,6 @@
+notARepository: 'quit'
+
+gui:
+  nerdFontsVersion: '3'
+  expandFocusedSidePanel: true
+  showCommandLog: false

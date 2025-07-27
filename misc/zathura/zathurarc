@@ -1,0 +1,5 @@
+set selection-notification false
+set window-title-home-tilde true
+set window-title-page true
+set selection-clipboard "clipboard"
+set guioptions ""

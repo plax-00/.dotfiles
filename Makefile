@@ -1,6 +1,8 @@
 SHELL := bash
 DOTFILES := $$HOME/.dotfiles
 GIT := $$HOME/.config/git
+HYPR := $$HOME/.config/hypr
+KITTY := $$HOME/.config/kitty
 NVIM := $$HOME/.config/nvim
 ZSH := $$HOME/.config/zsh
 
@@ -25,6 +27,14 @@ all: git nvim tmux zellij zsh ## Install and setup everything
 .PHONY: git
 git: ## Setup git configuration
 	@$(call symlink,${DOTFILES}/git,${GIT})
+
+.PHONY: hypr
+hypr:
+	@$(call symlink,${DOTFILES}/hypr,${HYPR})
+
+.PHONY: kitty
+kitty:
+	@$(call symlink,${DOTFILES}/kitty,${KITTY})
 
 .PHONY: nvim
 nvim: ## Setup neovim configuration

@@ -46,6 +46,7 @@ packages: paru ## Install pacman packages
 
 .PHONY: paru
 paru:
+	@command -v paru &> /dev/null && exit 0
 	@sudo pacman -S --needed base-devel
 	@tmp_dir="$$(mktemp -d)"
 	@git clone https://aur.archlinux.org/paru-bin.git "$$tmp_dir"

@@ -53,6 +53,6 @@ export WORDCHARS="${WORDCHARS//\/}"
 path+=($HOME/.local/bin $CARGO_HOME/bin $XDG_DATA_HOME/npm/bin)
 export PATH
 
-if uwsm check may-start; then
+if uwsm check may-start && [[ -z "$SSH_TTY" ]]; then
     exec uwsm start -- hyprland.desktop
 fi

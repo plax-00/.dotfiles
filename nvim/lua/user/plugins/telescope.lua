@@ -51,6 +51,7 @@ return {
             nnoremap    <Leader>fg            <Cmd>Telescope live_grep hidden=true theme=dropdown prompt_title=Grep\ Files<CR>
             nnoremap    <Leader>fk            <Cmd>Telescope keymaps hidden=true theme=dropdown<CR>
             nnoremap    <Leader>fh            <Cmd>Telescope help_tags hidden=true theme=dropdown<CR>
+            nnoremap    <Leader>fm            <Cmd>Telescope man_pages theme=dropdown<CR>
             nnoremap    <Leader>fs            <Cmd>Telescope sessions<CR>
         ]]
 

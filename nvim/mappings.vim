@@ -52,7 +52,7 @@ vmap                <C-k>                3k
 silent! iunmap      <C-w>
 
 function! s:LeaderQ() abort
-    let l:filetypes = ['dashboard', 'lazy', 'oil']  " filetypes to quit out for
+    let l:filetypes = ['dashboard', 'lazy', 'oil', 'help']  " filetypes to quit out for
 
     let l:quitOut = v:false
     let l:bufCount = len(getbufinfo({ 'buflisted': 1 }))

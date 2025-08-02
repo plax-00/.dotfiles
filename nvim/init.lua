@@ -13,10 +13,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 
+-- Sessions
+require('user.sessions')
+
 -- Load settings and mappings
 local config_dir = vim.fn.stdpath('config')
 vim.cmd.source(config_dir .. '/settings.vim')
-vim.cmd.source(config_dir .. '/sessions.vim')
 vim.cmd.source(config_dir .. '/mappings.vim')
 
 -- Setup plugins

@@ -49,7 +49,8 @@ end
 return {
     'nvimdev/dashboard-nvim',
     cond = function()
-        return not vim.list_contains(vim.fn.GetSessionList(), vim.fn.getcwd())
+        local sessions = require('user.sessions')
+        return not vim.list_contains(sessions.get_session_list(), vim.fn.getcwd())
     end,
     dependencies = {
         'nvim-tree/nvim-web-devicons',

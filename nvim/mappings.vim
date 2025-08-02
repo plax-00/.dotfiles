@@ -15,8 +15,6 @@ nnoremap            <Leader>q            <Cmd>call <SID>LeaderQ()<CR>
 nnoremap            <Leader>ww           <Cmd>update<CR>
 nnoremap            <Leader>ws           <Cmd>update<CR><Cmd>source %<CR>
 nnoremap            <Leader>x            <Cmd>update<CR><Cmd>qall<CR>
-nnoremap            <Leader>sm           <Cmd>call CreateSessionCWD()<CR>
-nnoremap            <Leader>sd           <Cmd>call DeleteSessionCWD()<CR>
 nnoremap            <Leader>b            <C-^>
 nnoremap            <Leader>d            "_d
 vnoremap            <Leader>d            "_d

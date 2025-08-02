@@ -15,8 +15,6 @@ nnoremap            <Leader>q            <Cmd>call <SID>LeaderQ()<CR>
 nnoremap            <Leader>ww           <Cmd>update<CR>
 nnoremap            <Leader>ws           <Cmd>update<CR><Cmd>source %<CR>
 nnoremap            <Leader>x            <Cmd>update<CR><Cmd>qall<CR>
-nnoremap            <Leader>sm           <Cmd>call CreateSessionCWD()<CR>
-nnoremap            <Leader>sd           <Cmd>call DeleteSessionCWD()<CR>
 nnoremap            <Leader>b            <C-^>
 nnoremap            <Leader>d            "_d
 vnoremap            <Leader>d            "_d
@@ -52,7 +50,7 @@ vmap                <C-k>                3k
 silent! iunmap      <C-w>
 
 function! s:LeaderQ() abort
-    let l:filetypes = ['dashboard', 'lazy', 'oil']  " filetypes to quit out for
+    let l:filetypes = ['dashboard', 'lazy', 'oil', 'help']  " filetypes to quit out for
 
     let l:quitOut = v:false
     let l:bufCount = len(getbufinfo({ 'buflisted': 1 }))

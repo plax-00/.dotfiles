@@ -10,7 +10,7 @@ local function pick_session()
     pickers.new(opts, {
         prompt_title = 'Sessions',
         finder = finders.new_table {
-            results = vim.fn.GetSessionList()
+            results = require('user.sessions').get_session_list()
         },
         sorter = conf.generic_sorter(opts),
         attach_mappings = function(prompt_bufnr, _)

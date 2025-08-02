@@ -21,7 +21,7 @@ return {
         },
         cmdline = {
             format = {
-                help = { pattern = { "^:%s*he?l?p?%s+", ":%s*tab%s*he?l?p?%s+" }, icon = "" },
+                man = { pattern = "^:%s*Man%s+", icon = "" },
             }
         },
         commands = {
@@ -47,7 +47,6 @@ return {
 
         vim.keymap.set('n', '<Leader>m', function() noice.cmd('history') end)
         vim.cmd.cabbrev('n', 'Noice')
-        vim.cmd.cabbrev('h', 'tab help')
 
         noice.setup(opts)
     end,

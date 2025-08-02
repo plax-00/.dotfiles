@@ -1,9 +1,3 @@
 vim.treesitter.start()
-vim.cmd([[
-    silent! wincmd L
-    vertical resize 100
-    nnoremap <buffer> o <Cmd>only<CR>
-    nnoremap <buffer> t <Cmd>wincmd T<CR>
-    nnoremap <buffer> > <Cmd>vertical resize -2<CR>
-    nnoremap <buffer> < <Cmd>vertical resize +2<CR>
-]])
+vim.cmd.wincmd("T")
+vim.keymap.set("n", "q", vim.cmd.bdelete, { buffer = true })

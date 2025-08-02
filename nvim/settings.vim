@@ -30,4 +30,3 @@ augroup MiscAutocmds
     " Remove trailing whitespace on write
     autocmd BufWritePre * %s/\s\+$//e
 augroup END
-

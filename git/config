@@ -24,5 +24,7 @@
     ra = rebase --abort
     mc = merge --continue
     ma = merge --abort
+    mt = mergetool
 [advice]
-	mergeConflict = false
+    mergeConflict = false
+    skippedCherryPicks = false

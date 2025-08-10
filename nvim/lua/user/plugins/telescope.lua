@@ -23,7 +23,18 @@ return {
         return vim.tbl_map(function(val)
                 return '<Leader>' .. val
             end,
-            { 'f<Leader>', 'ff', 'fj', 'fo', 'fg', 'fk', 'fh', 'fs' }
+            {
+                'f<Leader>',
+                'ff',
+                'fj',
+                'fo',
+                'fg',
+                'fk',
+                'fh',
+                'fm',
+                'fs',
+                'fr',
+            }
         )
     end,
     opts = {
@@ -53,8 +64,8 @@ return {
             nnoremap    <Leader>fh            <Cmd>Telescope help_tags hidden=true theme=dropdown<CR>
             nnoremap    <Leader>fm            <Cmd>Telescope man_pages theme=dropdown<CR>
             nnoremap    <Leader>fs            <Cmd>Telescope sessions<CR>
+            nnoremap    <Leader>fr            <Cmd>Telescope registers<CR>
         ]]
-
         telescope.setup(opts)
 
         telescope.load_extension('sessions')

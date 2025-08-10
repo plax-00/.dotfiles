@@ -25,6 +25,10 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/config
 export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
 export NPM_CONFIG_PREFIX=$XDG_DATA_HOME/npm
 
+# python
+export PYTHON_COLORS=1
+export PYTHON_HISTORY=$XDG_STATE_HOME/python_history
+
 # rust
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup

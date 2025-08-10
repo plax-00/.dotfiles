@@ -23,7 +23,7 @@ nnoremap            <Leader>i            ^
 vnoremap            <Leader>i            ^
 nnoremap            <Leader>a            $
 vnoremap            <Leader>a            $
-nnoremap            <Leader>P            "_dd<Cmd>call <SID>SmartPut('P')<CR>
+nnoremap            <Leader>p            "_dd<Cmd>call <SID>SmartPut('P')<CR>
 nnoremap            <Leader>y            yyp<Cmd>call repeat#set("\<Leader>y")<CR>
 nnoremap            <Leader>o            o<Esc>k<Cmd>call repeat#set("\<Leader>o",-1)<CR>
 nnoremap            <Leader>;            mxA;<Esc>`x<Cmd>call repeat#set("\<Leader>;",-1)<CR>
@@ -66,7 +66,7 @@ function! s:LeaderQ() abort
     endif
 
     if (l:bufCount > 1 && tabpagenr() == 1)  " avoid closing tabpage in tab 1
-        bnext
+        buffer #
         bdelete #
         return
     endif

@@ -1,7 +1,7 @@
 base
 base-devel
-bottom
 bat
+bottom
 downgrade
 eza
 fastfetch
@@ -22,6 +22,7 @@ lazygit
 man-db
 mpv
 neovim
+noto-fonts
 oculante
 openssh
 pacman-contrib
@@ -38,9 +39,8 @@ swayosd
 tealdeer
 thunar
 tree
-noto-fonts
-ttf-fira-sans
 ttf-firacode-nerd
+ttf-fira-sans
 tumbler
 unzip
 uwsm

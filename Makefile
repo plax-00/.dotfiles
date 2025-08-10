@@ -40,9 +40,9 @@ kitty:
 nvim: ## Setup neovim configuration
 	@$(call symlink,${DOTFILES}/nvim,${NVIM})
 
-.PHONY: packages
-packages: paru ## Install pacman packages
-	@paru -S --needed $$(sed '/#.*/d' ${DOTFILES}/pkglist.txt)
+.PHONY: pkgs
+pkgs: paru ## Install pacman packages
+	@$(SHELL) ${DOTFILES}/scripts/install_pkgs.sh
 
 .PHONY: paru
 paru:

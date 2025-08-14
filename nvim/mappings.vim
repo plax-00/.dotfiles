@@ -42,10 +42,10 @@ inoremap            <C-l>                <Esc>A
 onoremap <expr>     <Leader>             '<Esc>' .. '"' .. nr2char(getchar()) .. v:operator
 tnoremap            <C-\>                <C-\><C-n>
 
-nmap                <C-j>                3j
-nmap                <C-k>                3k
-vmap                <C-j>                3j
-vmap                <C-k>                3k
+nmap                <C-j>                <C-d>
+nmap                <C-k>                <C-u>
+vnoremap            <C-j>                3j
+vnoremap            <C-k>                3k
 
 silent! iunmap      <C-w>
 

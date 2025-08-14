@@ -2,6 +2,10 @@
 
 ---@type LazySpec
 return {
+    {
+        'm4xshen/hardtime.nvim',
+        opts = {},
+    },
 
     {
         'stevearc/dressing.nvim',
@@ -21,6 +25,16 @@ return {
                 'noice',
                 'NvimTree',
             },
+        },
+    },
+
+    {
+        "karb94/neoscroll.nvim",
+        opts = {
+            stop_eof = false,
+            respect_scrolloff = true,
+            easing = 'cubic',
+            duration_multiplier = 0.3,
         },
     },
 

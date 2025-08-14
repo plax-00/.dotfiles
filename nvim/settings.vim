@@ -10,6 +10,7 @@ set ignorecase
 set smartcase
 set notimeout
 set scrolloff=12 sidescrolloff=10
+execute 'set scroll=' .. &scrolloff
 set laststatus=2
 set noshowmode
 set updatetime=1000

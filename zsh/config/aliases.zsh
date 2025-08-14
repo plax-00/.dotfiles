@@ -55,6 +55,13 @@ function gr() {
 alias nv="nvim"
 alias oil="NVIM_OIL=1 nvim ."
 
+function clean-sessions () {
+    for session in $XDG_DATA_HOME/nvim/sessions/*; do
+        local bname=$(basename $session)
+        [[ -d $(echo $bname | sed 's/__/\//g') ]] || (rm -rf "$session" && echo "removed $bname")
+    done
+}
+
 # Other
 alias c="clear"
 alias x="exit 0"

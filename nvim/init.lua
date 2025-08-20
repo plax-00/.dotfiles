@@ -31,3 +31,5 @@ require('lazy').setup('user.plugins')
 if vim.g.neovide then
     require('user.neovide')
 end
+
+require('user.regedit')

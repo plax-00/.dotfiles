@@ -52,10 +52,6 @@ return {
         local sessions = require('user.sessions')
         return not vim.list_contains(sessions.get_session_list(), vim.fn.getcwd())
     end,
-    dependencies = {
-        'nvim-tree/nvim-web-devicons',
-        'MaximilianLloyd/ascii.nvim',
-    },
     opts = function()
         local header = pad_header(require('ascii').art.text.neovim.sharp, 4, 8)
         return {

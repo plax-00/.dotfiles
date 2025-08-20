@@ -23,7 +23,7 @@ function M.get_session_list()
         :totable()
 end
 
-local function get_session_file()
+function M.get_session_file()
     local branch = vim.trim(
         vim.fn.system('git branch --show-current 2> /dev/null')
     )
@@ -36,20 +36,20 @@ end
 
 local function create_session()
     vim.fn.mkdir(session_subdir(), 'p')
-    vim.cmd.mksession { get_session_file(), bang = true }
+    vim.cmd.mksession { M.get_session_file(), bang = true }
     vim.notify('Session created')
 end
 
 local function delete_session()
-    vim.fs.rm(get_session_file(), { force = true })
+    vim.fs.rm(M.get_session_file(), { force = true })
     vim.notify('Session deleted')
 end
 
 function M.save_session()
     if not vim.g.sessions_enabled then return end
 
-    if vim.uv.fs_stat(get_session_file()) then
-        vim.cmd.mksession { get_session_file(), bang = true }
+    if vim.uv.fs_stat(M.get_session_file()) then
+        vim.cmd.mksession { M.get_session_file(), bang = true }
         vim.notify('Session saved')
     end
 end
@@ -57,7 +57,7 @@ end
 function M.load_session()
     if not vim.g.sessions_enabled then return end
 
-    local session_file = get_session_file()
+    local session_file = M.get_session_file()
     if vim.uv.fs_stat(session_file) then
         vim.cmd.source { session_file }
         vim.notify('Session loaded')
@@ -67,7 +67,7 @@ function M.load_session()
     local timer = vim.uv.new_timer()
     local timeout = 1800000   -- 30 mins
     if timer then
-        timer:start(timeout, timeout, M.save_session)
+        timer:start(timeout, timeout, vim.schedule_wrap(M.save_session))
     end
 end
 

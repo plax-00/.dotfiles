@@ -50,7 +50,7 @@ return {
     'nvimdev/dashboard-nvim',
     cond = function()
         local sessions = require('user.sessions')
-        return not vim.list_contains(sessions.get_session_list(), vim.fn.getcwd())
+        return not vim.uv.fs_stat(sessions.get_session_file())
     end,
     opts = function()
         local header = pad_header(require('ascii').art.text.neovim.sharp, 4, 8)

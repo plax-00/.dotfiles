@@ -53,7 +53,7 @@ function gr() {
 
 # nvim
 alias nv="nvim"
-alias oil="NVIM_OIL=1 nvim ."
+alias oil="nvim ."
 
 function clean-sessions () {
     for session in $XDG_DATA_HOME/nvim/sessions/*; do

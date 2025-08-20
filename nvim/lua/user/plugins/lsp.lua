@@ -37,6 +37,7 @@ return {
                 html = { 'prettier' },
                 javascript = { 'prettier' },
                 typescript = { 'prettier' },
+                go = { 'gofmt' }
             },
         },
         config = function(_, opts)

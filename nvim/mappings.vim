@@ -26,15 +26,18 @@ vnoremap            <Leader>a            $
 nnoremap            <Leader>p            "_dd<Cmd>call <SID>SmartPut('P')<CR>
 nnoremap            <Leader>y            yyp<Cmd>call repeat#set("\<Leader>y")<CR>
 nnoremap            <Leader>o            o<Esc>k<Cmd>call repeat#set("\<Leader>o",-1)<CR>
-nnoremap            <Leader>;            mxA;<Esc>`x<Cmd>call repeat#set("\<Leader>;",-1)<CR>
-nnoremap            <Leader>,            mxA,<Esc>`x<Cmd>call repeat#set("\<Leader>,",-1)<CR>
+nnoremap            <Leader>;            m'A;<Esc>``<Cmd>call repeat#set("\<Leader>;",-1)<CR>
+nnoremap            <Leader>,            m'A,<Esc>``<Cmd>call repeat#set("\<Leader>,",-1)<CR>
 nnoremap            <Leader>z            za
 nnoremap            <Leader>:            q:
 
 nnoremap            Y                    y$
+nnoremap            &                    <Cmd>&&<CR>
 nnoremap            G                    Gzz
 nnoremap            p                    <Cmd>call <SID>SmartPut('p')<CR>
 nnoremap            P                    <Cmd>call <SID>SmartPut('P')<CR>
+nnoremap            gp                   <Cmd>call <SID>SmartPut('gp')<CR>
+nnoremap            gP                   <Cmd>call <SID>SmartPut('gP')<CR>
 nnoremap <expr>     i                    trim(getline('.')) == '' ? 'cc' : 'i'
 nnoremap            <C-h>                <C-w>h
 nnoremap            <C-l>                <C-w>l
@@ -42,15 +45,15 @@ inoremap            <C-l>                <Esc>A
 onoremap <expr>     <Leader>             '<Esc>' .. '"' .. nr2char(getchar()) .. v:operator
 tnoremap            <C-\>                <C-\><C-n>
 
-nmap                <C-j>                <C-d>
-nmap                <C-k>                <C-u>
+nmap <expr>         <C-j>                &scrolloff .. '<C-d>'
+nmap <expr>         <C-k>                &scrolloff .. '<C-u>'
 vnoremap            <C-j>                3j
 vnoremap            <C-k>                3k
 
 silent! iunmap      <C-w>
 
 function! s:LeaderQ() abort
-    let l:filetypes = ['dashboard', 'lazy', 'oil', 'help']  " filetypes to quit out for
+    let l:filetypes = ['dashboard', 'lazy', 'help']  " filetypes to quit out for
 
     let l:quitOut = v:false
     let l:bufCount = len(getbufinfo({ 'buflisted': 1 }))
@@ -67,11 +70,11 @@ function! s:LeaderQ() abort
 
     if (l:bufCount > 1 && tabpagenr() == 1)  " avoid closing tabpage in tab 1
         buffer #
-        bdelete #
+        silent! bdelete #
         return
     endif
 
-    if (l:bufCount == 1 && &filetype != 'help')  " check if there is only 1 buffer
+    if (l:bufCount == 1 && &buflisted == 1 )  " check if there is only 1 buffer
         let l:quitOut = v:true
     endif
 
@@ -92,13 +95,13 @@ function! s:LeaderQ() abort
     endif
 endfunction
 
-function! s:SmartPut(p_or_P) abort
+function! s:SmartPut(keys) abort
     let l:regtype = getregtype()
-    execute 'normal!' '"' .. v:register .. a:p_or_P
+    execute 'normal!' '"' .. v:register .. a:keys
     if l:regtype ==# 'V'
-        normal! '[mx
+        normal! m'
         '[,']normal! ==
-        normal! 'x
+        normal! ''
     endif
 endfunction
 

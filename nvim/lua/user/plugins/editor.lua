@@ -32,7 +32,6 @@ return {
         "karb94/neoscroll.nvim",
         opts = {
             stop_eof = false,
-            respect_scrolloff = true,
             easing = 'cubic',
             duration_multiplier = 0.3,
         },
@@ -61,7 +60,7 @@ return {
             sections = {
                 lualine_x = { '%8.10S', 'encoding', 'filetype' },
             },
-            extensions = { 'nvim-tree' },
+            extensions = { 'nvim-tree', 'oil', 'quickfix', 'toggleterm' },
         },
         config = function(_, opts)
             vim.o.showcmdloc = 'statusline'

@@ -6,6 +6,10 @@ function makedots() {
     make -sC $HOME/.dotfiles $1
 }
 
+# globals
+alias -g L="| less"
+alias -g G="| grep"
+
 # ls
 alias ls="ls --color=auto"
 alias l="ls -lAh"
@@ -71,5 +75,6 @@ alias sqlite="sqlite3"
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
 
 function mkc() {
+    if [ $# -eq 0 ]; then return 1; fi
     mkdir -p "$1" && cd "$1"
 }

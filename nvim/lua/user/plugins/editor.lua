@@ -3,8 +3,8 @@
 ---@type LazySpec
 return {
     {
-        'nvim-lua/plenary.nvim',
-        lazy = true,
+        'm4xshen/hardtime.nvim',
+        opts = {},
     },
 
     {
@@ -25,6 +25,15 @@ return {
                 'noice',
                 'NvimTree',
             },
+        },
+    },
+
+    {
+        "karb94/neoscroll.nvim",
+        opts = {
+            stop_eof = false,
+            easing = 'cubic',
+            duration_multiplier = 0.3,
         },
     },
 
@@ -51,7 +60,7 @@ return {
             sections = {
                 lualine_x = { '%8.10S', 'encoding', 'filetype' },
             },
-            extensions = { 'nvim-tree' },
+            extensions = { 'nvim-tree', 'oil', 'quickfix', 'toggleterm' },
         },
         config = function(_, opts)
             vim.o.showcmdloc = 'statusline'

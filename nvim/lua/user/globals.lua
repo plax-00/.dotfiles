@@ -1,5 +1,5 @@
 function P(arg)
-    print(vim.inspect(arg))
+    vim.notify(vim.inspect(arg))
 end
 
 function Dict_len(dict)

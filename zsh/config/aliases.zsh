@@ -6,6 +6,10 @@ function makedots() {
     make -sC $HOME/.dotfiles $1
 }
 
+# globals
+alias -g L="| less"
+alias -g G="| grep"
+
 # ls
 alias ls="eza"
 alias l="ls -lA"
@@ -53,7 +57,14 @@ function gr() {
 
 # nvim
 alias nv="nvim"
-alias oil="NVIM_OIL=1 nvim ."
+alias oil="nvim ."
+
+function clean-sessions () {
+    for session in $XDG_DATA_HOME/nvim/sessions/*; do
+        local bname=$(basename $session)
+        [[ -d $(echo $bname | sed 's/__/\//g') ]] || (rm -rf "$session" && echo "removed $bname")
+    done
+}
 
 # typst
 function typ () {
@@ -82,5 +93,6 @@ alias sqlite="sqlite3"
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
 
 function mkc() {
+    if [ $# -eq 0 ]; then return 1; fi
     mkdir -p "$1" && cd "$1"
 }

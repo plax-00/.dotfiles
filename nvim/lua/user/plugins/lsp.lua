@@ -37,6 +37,7 @@ return {
                 html = { 'prettier' },
                 javascript = { 'prettier' },
                 typescript = { 'prettier' },
+                go = { 'gofmt' }
             },
         },
         config = function(_, opts)
@@ -148,7 +149,6 @@ return {
         'nvimdev/lspsaga.nvim',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
-            'nvim-tree/nvim-web-devicons',
         },
         event = 'LspAttach',
         opts = {

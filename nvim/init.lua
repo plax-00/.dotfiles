@@ -14,6 +14,9 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 
 -- Sessions
+vim.g.sessions_enabled = #vim.fn.argv() == 0  -- no file args
+    and vim.env.VIM_NO_SESSION_LOAD ~= '1'    -- no env variable
+    and vim.v.argv[3] ~= '+Man!'              -- no manpage
 require('user.sessions')
 
 -- Load settings and mappings
@@ -28,3 +31,5 @@ require('lazy').setup('user.plugins')
 if vim.g.neovide then
     require('user.neovide')
 end
+
+require('user.regedit')

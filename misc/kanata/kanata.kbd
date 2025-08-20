@@ -1,0 +1,148 @@
+(defsrc)
+(defcfg
+    process-unmapped-keys yes
+    log-layer-changes no
+    sequence-timeout 5000
+)
+(defvar
+    tap-timeout 100
+    hold-timeout 150
+    tt $tap-timeout
+    ht $hold-timeout
+)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; base
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defoverrides
+    (caps) (bspc)
+    (f24) (caps)
+    (rsft caps) (lctl bspc)
+    (lsft spc) (esc)
+    (lctl lsft spc) (lctl lsft spc)
+)
+
+(deflayermap (base)
+    bspc (fork f23 lrld (lctl))
+    m    (t! hold-action (layer-while-held num-left))
+    ,    (t! hold-action (multi rsft (layer-while-held num-left)))
+    v    (t! hold-action (layer-while-held num-right))
+    c    (t! hold-action (multi rsft (layer-while-held num-right)))
+    lmet (t! hold-action (layer-while-held lmet))
+    ralt sldr
+    rsft (fork
+             _
+             (multi XX (tap-hold $tt $ht @cwc @caps))
+             (lsft)
+         )
+    1 (fork XX _ (lalt))
+    2 (fork XX _ (lalt))
+    3 (fork XX _ (lalt))
+    4 (fork XX _ (lalt))
+    5 (fork XX _ (lalt))
+    6 (fork XX _ (lalt))
+    7 (fork XX _ (lalt))
+    8 (fork XX _ (lalt))
+    9 (fork XX _ (lalt))
+    0 (fork XX _ (lalt lctl))
+    - (fork XX _ (lctl))
+    = (fork XX _ (lctl))
+)
+
+(defalias
+    cwc (caps-word-custom
+        3000
+        (a b c d e f g h i j k l m n o p q r s t u v w x y z -)
+        (lsft rsft lctl rctl bspc del 0 1 2 3 4 5 6 7 8 9)
+    )
+    caps f24
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; layers
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deflayermap (lmet)
+    h left
+    j down
+    k up
+    l right
+    n (layer-switch num-row)
+    ___ (multi lmet _)
+)
+
+(deflayermap (num-left)
+    a 1
+    s 2
+    d 3
+    f 4
+    g 5
+)
+
+(deflayermap (num-right)
+    h 6
+    j 7
+    k 8
+    l 9
+    ; 0
+    m -
+    , =
+
+)
+
+(deflayermap (num-row)
+    a   1
+    s   2
+    d   3
+    f   4
+    g   5
+    h   6
+    j   7
+    k   8
+    l   9
+    ;   0
+    esc @base
+    x   @base
+    spc (multi _ @base)
+    ret (multi _ @base)
+    tab (multi _ @base)
+)
+
+(defalias base (layer-switch base))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; templates
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deftemplate tap-action (action)
+    (multi XX (tap-hold $tt $ht $action _))
+)
+(deftemplate hold-action (action)
+    (fork
+        (multi XX (tap-hold-release $tt $ht _ $action))
+        _
+        (lsft rsft lctl rctl lmet)
+    )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sequences
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defseq email (e))
+(defvirtualkeys email (macro p l a x m a n Digit8 Digit1 5 S-2 5 g m a i l . c o m))
+
+(defseq name (n))
+(defvirtualkeys name (macro S-(p) r a n a v spc S-(l) a x m a n))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; vim:ft=lisp

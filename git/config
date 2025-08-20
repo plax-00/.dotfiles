@@ -25,6 +25,7 @@
     mc = merge --continue
     ma = merge --abort
     mt = mergetool
+    difft = -c diff.external=difft diff
 [advice]
     mergeConflict = false
     skippedCherryPicks = false

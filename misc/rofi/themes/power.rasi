@@ -1,0 +1,24 @@
+@import "base"
+
+configuration {
+    show-icons: false;
+}
+
+inputbar {
+    enabled: false;
+}
+
+window {
+    width: 300px;
+    location: north;
+    anchor: north;
+    y-offset: 250px;
+}
+
+listview {
+    fixed-height: false;
+}
+
+element-text {
+    font: "Mono 18";
+}

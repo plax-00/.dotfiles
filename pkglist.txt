@@ -7,7 +7,6 @@ downgrade
 eza
 fastfetch
 fd
-fuzzel
 fzf
 git
 gsimplecal
@@ -29,6 +28,7 @@ openssh
 pacman-contrib
 pipewire-pulse
 ripgrep
+rofi
 rsync
 rustup
 solanum

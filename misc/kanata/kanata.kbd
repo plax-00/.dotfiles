@@ -9,6 +9,11 @@
     hold-timeout 150
     tt $tap-timeout
     ht $hold-timeout
+
+    mwheel-distance 120
+    mwheel-int 50
+    mwheel-int-half 100
+    mwheel-int-double 25
 )
 
 
@@ -67,11 +72,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (deflayermap (lmet)
-    h left
-    j down
-    k up
-    l right
-    n (layer-switch num-row)
+    h   left
+    j   down
+    k   up
+    l   right
+    m   (layer-switch mouse-btns)
+    n   (layer-switch num-row)
     spc (multi lmet (macro 5 spc))
 )
 
@@ -91,7 +97,6 @@
     ; 0
     m -
     , =
-
 )
 
 (deflayermap (num-row)
@@ -112,6 +117,20 @@
     tab (multi _ @base)
 )
 
+(deflayermap (mouse-btns)
+    d    mlft
+    f    mrgt
+    j    (t! scroll mwheel-down)
+    k    (t! scroll mwheel-up)
+    lsft (layer-while-held mwheel-half)
+    lctl (layer-while-held mwheel-double)
+    esc  @base
+    x    @base
+    spc  @base
+)
+(deflayermap (mwheel-half))
+(deflayermap (mwheel-double))
+
 (defalias base (layer-switch base))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -128,6 +147,13 @@
         (multi XX (tap-hold-release $tt $ht _ $action))
         _
         (lsft rsft lctl rctl lmet)
+    )
+)
+(deftemplate scroll (action)
+    (switch
+        ((layer mwheel-half)) ($action $mwheel-int-half $mwheel-distance) break
+        ((layer mwheel-double)) ($action $mwheel-int-double $mwheel-distance) break
+        () ($action $mwheel-int $mwheel-distance) break
     )
 )
 

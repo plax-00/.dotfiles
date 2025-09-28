@@ -22,18 +22,18 @@ help: ## Print this message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: all
-all: git nvim tmux zellij zsh ## Install and setup everything
+all: git hypr kitty nvim pkgs zsh misc ## Install and setup everything
 
 .PHONY: git
 git: ## Setup git configuration
 	@$(call symlink,${DOTFILES}/git,${GIT})
 
 .PHONY: hypr
-hypr:
+hypr: ## Setup hyprland configuration
 	@$(call symlink,${DOTFILES}/hypr,${HYPR})
 
 .PHONY: kitty
-kitty:
+kitty: ## Setup kitty configuration
 	@$(call symlink,${DOTFILES}/kitty,${KITTY})
 
 .PHONY: nvim

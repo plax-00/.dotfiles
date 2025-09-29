@@ -1,0 +1,9 @@
+@import "base"
+
+listview {
+    enabled: false;
+}
+
+window {
+    width: 10%;
+}

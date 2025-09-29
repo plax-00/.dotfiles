@@ -10,11 +10,11 @@
 #custom-logo {
     font-size: 1.3em;
     padding: 0 0.2em;
-    color: #1793d1;
+    text-shadow: 0 0 0.3em rgba(255,255,255,0.8);
 }
 
 window#waybar {
-    background: rgba(0,0,0,0.15);
+    background: rgba(0,0,0,0.35);
     color: white;
 }
 
@@ -23,7 +23,8 @@ window#waybar {
 }
 
 #workspaces {
-    padding: 0 0.2em;
+    /* extra padding on the right so the text shadow doesn't get cut off */
+    padding: 0 2em 0 0.2em;
 }
 
 #workspaces button {
@@ -39,7 +40,7 @@ window#waybar {
 
 #workspaces button.active {
     color: inherit;
-    text-shadow: 0 0 1em rgba(255,255,255,0.8);
+    text-shadow: 0 0 0.45em rgba(255,255,255,0.8);
 }
 
 #mode {

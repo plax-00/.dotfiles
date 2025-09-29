@@ -1,5 +1,10 @@
 return {
     {
+        'rafikdraoui/jj-diffconflicts',
+        cmd = 'JJDiffConflicts',
+    },
+
+    {
         'lewis6991/gitsigns.nvim',
         opts = {
             signs = {

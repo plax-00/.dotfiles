@@ -1,5 +1,6 @@
 # make aliases work with sudo
 alias sudo='sudo '
+alias S='sudo $(print ${history[@][1]})'
 
 alias dots="cd ~/.dotfiles && $EDITOR ; cd - &> /dev/null"
 function makedots() {
@@ -9,6 +10,8 @@ function makedots() {
 # globals
 alias -g L="| less"
 alias -g G="| grep"
+alias -g Gi="| grep -i"
+alias -g C="--color=always"
 
 # ls
 alias ls="eza"
@@ -88,7 +91,6 @@ function typ () {
 alias c="clear"
 alias x="exit 0"
 alias mv="mv -i"
-alias sqlite3="sqlite3 -init $XDG_CONFIG_HOME/sqlite3/sqliterc"
 alias sqlite="sqlite3"
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
 

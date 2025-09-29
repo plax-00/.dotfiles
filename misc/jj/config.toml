@@ -1,0 +1,17 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "Pranav Laxman"
+email = "plaxman81@gmail.com"
+
+[ui]
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
+merge-editor = "diffconflicts"
+
+[merge-tools.diffconflicts]
+program = "nvim"
+merge-args = [
+    "-c", "let g:jj_diffconflicts_marker_length=$marker_length",
+    "-c", "JJDiffConflicts", "$output"
+]
+merge-tool-edits-conflict-markers = true

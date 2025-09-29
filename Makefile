@@ -1,8 +1,6 @@
 SHELL := bash
 DOTFILES := $$HOME/.dotfiles
-GIT := $$HOME/.config/git
-NVIM := $$HOME/.config/nvim
-ZSH := $$HOME/.config/zsh
+CONFIG := $$HOME/.config
 
 GIT_CLEAN = ${GIT}
 NVIM_CLEAN = ${NVIM} $$HOME/.local/share/nvim
@@ -23,22 +21,26 @@ help: ## Print this message
 all: git nvim tmux zellij zsh ## Install and setup everything
 
 .PHONY: git
-git: ## Setup git configuration
-	@$(call symlink,${DOTFILES}/git,${GIT})
+git: config  ## Setup git configuration
+	@$(call symlink,${DOTFILES}/${@},${CONFIG}/${@})
 
 .PHONY: nvim
-nvim: ## Setup neovim configuration
-	@$(call symlink,${DOTFILES}/nvim,${NVIM})
+nvim: config ## Setup neovim configuration
+	@$(call symlink,${DOTFILES}/${@},${CONFIG}/${@})
 
 .PHONY: zsh
-zsh: ## Setup zsh configuration
-	@$(call symlink,${DOTFILES}/zsh,${ZSH})
+zsh: config ## Setup zsh configuration
+	@$(call symlink,${DOTFILES}/${@},${CONFIG}/${@})
 	@$(SHELL) ${DOTFILES}/scripts/zsh/zshenv.sh
 	@mkdir -p $$HOME/.local/state/zsh
 
 .PHONY: misc
-misc: ## Various other configs
+misc: config ## Various other configs
 	@stow .
+
+.PHONY: config
+config:
+	@mkdir -p ${CONFIG}
 
 .PHONY: clean
 clean: ## Clean symlinks and other files

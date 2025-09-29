@@ -90,6 +90,9 @@ for ext in $XDG_CONFIG_HOME/extended/zsh/*(N) ; do
     source $ext
 done
 
+# atuin
+atuin --version &> /dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+
 # zoxide
 if zoxide --version &> /dev/null; then
     eval "$(zoxide init --cmd cd zsh)"

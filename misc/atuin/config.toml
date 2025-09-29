@@ -1,0 +1,116 @@
+## enable or disable automatic sync
+auto_sync = false
+
+## enable or disable automatic update checks
+update_check = false
+
+## which filter mode to use by default
+## possible values: "global", "host", "session", "directory", "workspace"
+## consider using search.filters to customize the enablement and order of filter modes
+# filter_mode = "global"
+
+## With workspace filtering enabled, Atuin will filter for commands executed
+## in any directory within a git repository tree (default: false).
+##
+## To use workspace mode by default when available, set this to true and
+## set filter_mode to "workspace" or leave it unspecified and
+## set search.filters to include "workspace" before other filter modes.
+workspaces = true
+
+## which style to use
+## possible values: auto, full, compact
+style = "compact"
+invert = true
+
+## Defaults to true. If enabled, upon hitting enter Atuin will immediately execute the command. Press tab to return to the shell and edit.
+# This applies for new installs. Old installs will keep the old behaviour unless configured otherwise.
+enter_accept = false
+
+## Defaults to false. If enabled, when triggered after && or ||, Atuin will complete commands to chain rather than replace the current line.
+command_chaining = true
+
+## Defaults to "emacs".  This specifies the keymap on the startup of `atuin
+## search`.  If this is set to "auto", the startup keymap mode in the Atuin
+## search is automatically selected based on the shell's keymap where the
+## keybinding is defined.  If this is set to "emacs", "vim-insert", or
+## "vim-normal", the startup keymap mode in the Atuin search is forced to be
+## the specified one.
+keymap_mode = "vim-insert"
+
+## Cursor style in each keymap mode.  If specified, the cursor style is changed
+## in entering the cursor shape.  Available values are "default" and
+## "{blink,steady}-{block,underline,bar}".
+# keymap_cursor = { emacs = "blink-block", vim_insert = "blink-block", vim_normal = "steady-block" }
+
+# network_connect_timeout = 5
+# network_timeout = 5
+
+## Timeout (in seconds) for acquiring a local database connection (sqlite)
+# local_timeout = 5
+
+## Set this to true and Atuin will minimize motion in the UI - timers will not update live, etc.
+## Alternatively, set env NO_MOTION=true
+# prefers_reduced_motion = false
+
+[stats]
+## Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
+common_subcommands = [
+  "cargo",
+  "docker",
+  "git",
+  "jj",
+  "systemctl",
+]
+
+## Set commands that should be totally stripped and ignored from stats
+common_prefix = ["sudo"]
+
+## Set commands that will be completely ignored from stats
+ignored_commands = [
+  "cd",
+  "ls",
+]
+
+[keys]
+# Defaults to true. If disabled, using the up/down key won't exit the TUI when scrolled past the first/last entry.
+# scroll_exits = true
+# Defaults to true. The left arrow key will exit the TUI when scrolling before the first character
+# exit_past_line_start = true
+# Defaults to true. The right arrow key performs the same functionality as Tab and copies the selected line to the command line to be modified.
+# accept_past_line_end = true
+
+[sync]
+# Enable sync v2 by default
+# This ensures that sync v2 is enabled for new installs only
+# In a later release it will become the default across the board
+records = true
+
+[preview]
+## which preview strategy to use to calculate the preview height (respects max_preview_height).
+## possible values: auto, static
+## auto: length of the selected command.
+## static: length of the longest command stored in the history.
+## fixed: use max_preview_height as fixed height.
+# strategy = "auto"
+
+# [theme]
+## Color theme to use for rendering in the terminal.
+## There are some built-in themes, including the base theme ("default"),
+## "autumn" and "marine". You can add your own themes to the "./themes" subdirectory of your
+## Atuin config (or ATUIN_THEME_DIR, if provided) as TOML files whose keys should be one or
+## more of AlertInfo, AlertWarn, AlertError, Annotation, Base, Guidance, Important, and
+## the string values as lowercase entries from this list:
+##    https://ogeon.github.io/docs/palette/master/palette/named/index.html
+## If you provide a custom theme file, it should be  called "NAME.toml" and the theme below
+## should be the stem, i.e. `theme = "NAME"` for your chosen NAME.
+# name = "autumn"
+
+## Whether the theme manager should output normal or extra information to help fix themes.
+## Boolean, true or false. If unset, left up to the theme manager.
+# debug = true
+
+[search]
+## The list of enabled filter modes, in order of priority.
+## The "workspace" mode is skipped when not in a workspace or workspaces = false.
+## Default filter mode can be overridden with the filter_mode setting.
+filters = [ "global", "host", "session", "workspace", "directory" ]

@@ -9,10 +9,7 @@ inputbar {
 }
 
 window {
-    width: 300px;
-    location: north;
-    anchor: north;
-    y-offset: 250px;
+    width: 15%;
 }
 
 listview {

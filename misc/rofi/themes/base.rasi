@@ -13,13 +13,14 @@
 
 /*****----- Main Window -----*****/
 window {
+    font:                        "Mono 12";
     transparency:                "real";
     fullscreen:                  false;
-    width:                       750px;
+    width:                       40%;
     location:                    north;
     anchor:                      north;
     x-offset:                    0px;
-    y-offset:                    250px;
+    y-offset:                    22%;
 
     enabled:                     true;
     margin:                      0px;

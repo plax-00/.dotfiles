@@ -89,12 +89,9 @@ return {
         },
         config = function()
             -- <F3> to toggle inlay hints
-            if vim.version().minor >= 10 then
-                vim.keymap.set('n', '<F3>', function()
-                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-                end)
-            end
-
+            vim.keymap.set('n', '<F3>', function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            end)
 
             vim.keymap.set('n', '<Leader>k', function()
                 local line = vim.fn.line('.')
@@ -125,23 +122,16 @@ return {
             vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename)
 
             -- diagnostic icons
-            if vim.version().minor >= 11 then
-                vim.diagnostic.config {
-                    signs = {
-                        text = {
-                            [vim.diagnostic.severity.ERROR] = diag_icons.error,
-                            [vim.diagnostic.severity.WARN] = diag_icons.warn,
-                            [vim.diagnostic.severity.INFO] = diag_icons.info,
-                            [vim.diagnostic.severity.HINT] = diag_icons.hint,
-                        }
+            vim.diagnostic.config {
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = diag_icons.error,
+                        [vim.diagnostic.severity.WARN] = diag_icons.warn,
+                        [vim.diagnostic.severity.INFO] = diag_icons.info,
+                        [vim.diagnostic.severity.HINT] = diag_icons.hint,
                     }
                 }
-            else
-                vim.fn.sign_define('DiagnosticSignError', { text = diag_icons.error, texthl = 'DiagnosticSignError' })
-                vim.fn.sign_define('DiagnosticSignWarn',  { text = diag_icons.warn,  texthl = 'DiagnosticSignWarn'  })
-                vim.fn.sign_define('DiagnosticSignInfo',  { text = diag_icons.info,  texthl = 'DiagnosticSignInfo'  })
-                vim.fn.sign_define('DiagnosticSignHint',  { text = diag_icons.hint,  texthl = 'DiagnosticSignHint'  })
-            end
+            }
         end,
     },
 

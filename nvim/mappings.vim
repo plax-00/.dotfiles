@@ -39,6 +39,7 @@ nnoremap            P                    <Cmd>call <SID>SmartPut('P')<CR>
 nnoremap            gp                   <Cmd>call <SID>SmartPut('gp')<CR>
 nnoremap            gP                   <Cmd>call <SID>SmartPut('gP')<CR>
 nnoremap <expr>     i                    trim(getline('.')) == '' ? 'cc' : 'i'
+nmap                gC                   gcgc
 nnoremap            <C-h>                <C-w>h
 nnoremap            <C-l>                <C-w>l
 inoremap            <C-l>                <Esc>A

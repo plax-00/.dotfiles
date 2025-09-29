@@ -51,6 +51,10 @@ export HISTSIZE=5000
 export SAVEHIST=5000
 export KEYTIMEOUT=1
 
+# GUI
+export ELECTRON_OZONE_PLATFORM_HINT="wayland"
+export GTK_THEME="Adwaita:dark"
+
 # PATH
 path+=($HOME/.local/bin $CARGO_HOME/bin $XDG_DATA_HOME/npm/bin)
 export PATH

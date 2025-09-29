@@ -10,8 +10,8 @@
     autoSetupRemote = true
 [rerere]
     enabled = true
-[include]
-    path = diffconflicts.gitconfig
+[merge]
+    tool = nvimdiff1
 [status]
     submodulesummary = true
 [diff]
@@ -25,6 +25,7 @@
     mc = merge --continue
     ma = merge --abort
     mt = mergetool
+    difft = -c diff.external=difft diff
 [advice]
     mergeConflict = false
     skippedCherryPicks = false

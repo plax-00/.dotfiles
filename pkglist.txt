@@ -2,6 +2,7 @@ base
 base-devel
 bat
 bottom
+difftastic
 downgrade
 eza
 fastfetch

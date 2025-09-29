@@ -1,10 +1,5 @@
 return {
     {
-        'whiteinge/diffconflicts',
-        cmd = 'DiffConflicts',
-    },
-
-    {
         'lewis6991/gitsigns.nvim',
         opts = {
             signs = {

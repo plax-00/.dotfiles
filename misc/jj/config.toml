@@ -7,6 +7,7 @@ email = "plaxman81@gmail.com"
 [ui]
 diff-formatter = ["difft", "--color=always", "$left", "$right"]
 merge-editor = "diffconflicts"
+default-command = "log"
 
 [merge-tools.diffconflicts]
 program = "nvim"

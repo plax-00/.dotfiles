@@ -1,10 +1,6 @@
 SHELL := bash
 DOTFILES := $$HOME/.dotfiles
-GIT := $$HOME/.config/git
-HYPR := $$HOME/.config/hypr
-KITTY := $$HOME/.config/kitty
-NVIM := $$HOME/.config/nvim
-ZSH := $$HOME/.config/zsh
+CONFIG := $$HOME/.config
 
 GIT_CLEAN = ${GIT}
 NVIM_CLEAN = ${NVIM} $$HOME/.local/share/nvim
@@ -25,20 +21,20 @@ help: ## Print this message
 all: git hypr kitty nvim pkgs zsh misc ## Install and setup everything
 
 .PHONY: git
-git: ## Setup git configuration
-	@$(call symlink,${DOTFILES}/git,${GIT})
+git: config  ## Setup git configuration
+	@$(call symlink,${DOTFILES}/${@},${CONFIG}/${@})
 
 .PHONY: hypr
-hypr: ## Setup hyprland configuration
-	@$(call symlink,${DOTFILES}/hypr,${HYPR})
+hypr: config ## Setup hyprland configuration
+	@$(call symlink,${DOTFILES}/${@},${CONFIG}/${@})
 
 .PHONY: kitty
-kitty: ## Setup kitty configuration
-	@$(call symlink,${DOTFILES}/kitty,${KITTY})
+kitty: config ## Setup kitty configuration
+	@$(call symlink,${DOTFILES}/${@},${CONFIG}/${@})
 
 .PHONY: nvim
-nvim: ## Setup neovim configuration
-	@$(call symlink,${DOTFILES}/nvim,${NVIM})
+nvim: config ## Setup neovim configuration
+	@$(call symlink,${DOTFILES}/${@},${CONFIG}/${@})
 
 .PHONY: pkgs
 pkgs: paru ## Install pacman packages
@@ -56,14 +52,18 @@ paru:
 
 
 .PHONY: zsh
-zsh: ## Setup zsh configuration
-	@$(call symlink,${DOTFILES}/zsh,${ZSH})
+zsh: config ## Setup zsh configuration
+	@$(call symlink,${DOTFILES}/${@},${CONFIG}/${@})
 	@$(SHELL) ${DOTFILES}/scripts/zsh/zshenv.sh
 	@mkdir -p $$HOME/.local/state/zsh
 
 .PHONY: misc
-misc: ## Various other configs
+misc: config ## Various other configs
 	@stow .
+
+.PHONY: config
+config:
+	@mkdir -p ${CONFIG}
 
 .PHONY: clean
 clean: ## Clean symlinks and other files

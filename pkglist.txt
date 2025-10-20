@@ -38,6 +38,7 @@ sunsetr-bin
 swappy
 swaync
 swayosd
+swww
 tealdeer
 thunar
 tree

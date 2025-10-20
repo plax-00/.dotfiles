@@ -1,6 +1,6 @@
 # make aliases work with sudo
 alias sudo='sudo '
-alias S='sudo $(print ${history[@][1]})'
+alias s='pushln "sudo $(print ${history[@][1]})"'
 
 alias dots="cd ~/.dotfiles && $EDITOR ; cd - &> /dev/null"
 function makedots() {
@@ -9,9 +9,12 @@ function makedots() {
 
 # globals
 alias -g L="| less"
+alias -g Lc="--color=always | less"
 alias -g G="| grep"
 alias -g Gi="| grep -i"
 alias -g C="--color=always"
+alias -g O="2>&1"
+alias -g sot="stdoutisatty"
 
 # ls
 alias ls="ls --color=auto"

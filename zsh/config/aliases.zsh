@@ -52,24 +52,6 @@ function clean-sessions () {
     done
 }
 
-# typst
-function typ () {
-    if [ $# -eq 0 ]; then return 1; fi
-
-    local pdf="$1.pdf"
-    local typ="$1.typ"
-
-    if [ ! -f $typ ]; then return 1; fi
-
-    if [ ! -f $pdf ]; then
-        typst compile $typ
-    fi
-
-    local pid=$(&> /dev/null zathura $pdf & echo "$!")
-    trap "kill $pid" EXIT
-    nvim $typ
-}
-
 # Other
 alias c="clear"
 alias x="exit 0"
@@ -77,4 +59,7 @@ alias mv="mv -i"
 alias sqlite="sqlite3"
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
 
-}
+
+# needs this line in sudoers to work:
+# Defaults env_keep += "SNAP_PAC_SKIP"
+alias sps="SNAP_PAC_SKIP=y"

@@ -1,0 +1,11 @@
+case "$1" in
+    -i)
+        cat <(checkupdates --nocolor | cut -d ' ' -f 1) <(paru -Qqua --color never) | paru -Qi --color always -
+    ;;
+    -q)
+        cat <(checkupdates --nocolor | cut -d ' ' -f 1) <(paru -Qqua --color never)
+    ;;
+    *)
+        cat <(checkupdates) <(paru -Qua --color always)
+    ;;
+esac

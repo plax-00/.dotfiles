@@ -1,0 +1,11 @@
+[[ $# -eq 0 ]] && return 1
+
+local pdf="$1.pdf"
+local typ="$1.typ"
+
+[[ ! -f "$typ" ]] && return 1
+[[ ! -f "$pdf" ]] && typst compile "$typ"
+
+local pid=$(&> /dev/null zathura $pdf & echo "$!")
+trap "kill $pid" EXIT
+nvim $typ

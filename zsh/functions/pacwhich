@@ -1,0 +1,3 @@
+[[ $# -eq 0 ]] && return 1
+
+paru -Qqo "$(which $1)" | paru -Qi -

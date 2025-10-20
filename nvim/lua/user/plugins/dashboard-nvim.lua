@@ -24,7 +24,7 @@ local center = {
         icon = ' ',
         desc = 'File Explorer            ',
         key = 'e',
-        action = 'NvimTreeOpen',
+        action = 'Oil .',
         icon_hl = '@keyword', desc_hl = '@function', key_hl = '@string',
     },
     {

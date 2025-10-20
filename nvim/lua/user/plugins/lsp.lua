@@ -50,31 +50,18 @@ return {
     },
 
     {
-        'mason-org/mason.nvim',
-        opts = {},
-    },
-
-    {
         'mason-org/mason-lspconfig.nvim',
         dependencies = {
-            'mason-org/mason.nvim',
+            { 'mason-org/mason.nvim', opts = {} },
+            'neovim/nvim-lspconfig',
             'saghen/blink.cmp',
         },
-        opts = {
-            handlers = {
-                function(server_name)
-                    local config = require('user.lsp.server_config')[server_name] or {}
-                    config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-                    require('lspconfig')[server_name].setup(config)
-                end,
-            },
-        },
+        opts = {},
     },
 
     {
         'neovim/nvim-lspconfig',
         dependencies = {
-            'williamboman/mason-lspconfig.nvim',
             {
                 "folke/lazydev.nvim",
                 ft = "lua", -- only load on lua files
@@ -125,23 +112,17 @@ return {
             vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename)
 
             -- diagnostic icons
-            if vim.version().minor >= 11 then
-                vim.diagnostic.config {
-                    signs = {
-                        text = {
-                            [vim.diagnostic.severity.ERROR] = diag_icons.error,
-                            [vim.diagnostic.severity.WARN] = diag_icons.warn,
-                            [vim.diagnostic.severity.INFO] = diag_icons.info,
-                            [vim.diagnostic.severity.HINT] = diag_icons.hint,
-                        }
+            vim.diagnostic.config {
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = diag_icons.error,
+                        [vim.diagnostic.severity.WARN] = diag_icons.warn,
+                        [vim.diagnostic.severity.INFO] = diag_icons.info,
+                        [vim.diagnostic.severity.HINT] = diag_icons.hint,
                     }
                 }
-            else
-                vim.fn.sign_define('DiagnosticSignError', { text = diag_icons.error, texthl = 'DiagnosticSignError' })
-                vim.fn.sign_define('DiagnosticSignWarn',  { text = diag_icons.warn,  texthl = 'DiagnosticSignWarn'  })
-                vim.fn.sign_define('DiagnosticSignInfo',  { text = diag_icons.info,  texthl = 'DiagnosticSignInfo'  })
-                vim.fn.sign_define('DiagnosticSignHint',  { text = diag_icons.hint,  texthl = 'DiagnosticSignHint'  })
-            end
+            }
+            vim.lsp.enable('rust_analyzer')
         end,
     },
 
@@ -172,7 +153,6 @@ return {
 
     {
         'plax-00/corn.nvim',
-        cond = false,
         event = 'LspAttach',
         opts = {
             border_style = 'rounded',

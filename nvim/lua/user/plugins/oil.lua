@@ -3,7 +3,7 @@ return {
     event = 'VeryLazy',
     cmd = { 'Oil' },
     keys = {
-        { '<Leader>e', '<Cmd>Oil .<CR>' },
+        { '<Leader>e', '<Cmd>Oil<CR>' },
     },
     opts = {
         default_file_explorer = true,

@@ -1,3 +1,3 @@
 vim.treesitter.start()
-vim.cmd.wincmd("T")
+vim.cmd [[ silent wincmd T ]]
 vim.keymap.set("n", "q", vim.cmd.bdelete, { buffer = true })

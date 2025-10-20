@@ -1,0 +1,7 @@
+if [[ $# -eq 0 ]] && command -v fzf &> /dev/null; then
+    local selected="$(git log --oneline --decorate --color | fzf --height=~30% --reverse --ansi | sed -E 's/\s.*//')"
+    [[ -z $selected ]] && return 1
+    git rebase --interactive $selected
+else
+    git rebase --interactive "$@"
+fi

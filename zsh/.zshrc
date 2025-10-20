@@ -19,7 +19,7 @@ source $ZDOTDIR/config/completion.zsh
 
 # autoload functions
 fpath+=$ZDOTDIR/functions
-autoload -Uz $ZDOTDIR/functions/*(N) &> /dev/null
+autoload -Uz $ZDOTDIR/functions/**/*(.N) &> /dev/null
 
 
 ###############################
@@ -51,6 +51,12 @@ bindkey '^[[B' history-substring-search-down
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+# edit commands in vim with history
+function zvm_after_lazy_keybindings() {
+    zvm_define_widget edit-command-line-history
+    zvm_bindkey vicmd 'V' edit-command-line-history
+}
 
 # fzf
 if command -v fzf &> /dev/null; then

@@ -1,16 +1,11 @@
 #!/usr/bin/env bash
 
-if [ -n "$(env -i zsh -c 'echo $ZDOTDIR')" ]; then
-    exit 0
-fi
+[[ -n "$(env -i zsh -c 'echo $ZDOTDIR')" ]] && exit 0
 
-zshenv='if [[ -z "$XDG_CONFIG_HOME" ]] then;
-    export XDG_CONFIG_HOME="$HOME/.config"
-fi
-
-if [[ -d "$XDG_CONFIG_HOME/zsh" ]] then;
-    export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-fi'
+read -d '' zshenv << 'EOF'
+[[ -z "$XDG_CONFIG_HOME" ]] && export XDG_CONFIG_HOME="$HOME/.config"
+[[ -d "$XDG_CONFIG_HOME/zsh" ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+EOF
 
 sudo_prompt() {
     local reply
@@ -19,15 +14,15 @@ sudo_prompt() {
         [Yy])
             sudo -k
             sudo -v
-            ;;
+        ;;
         *)
             false
-            ;;
+        ;;
     esac
 }
 
 if sudo_prompt; then
     echo "$zshenv" | sudo tee -a /etc/zsh/zshenv &> /dev/null
 else
-    echo "$zshenv" >> "$HOME/.zshenv"
+    echo "$zshenv" > "$HOME/.zshenv"
 fi

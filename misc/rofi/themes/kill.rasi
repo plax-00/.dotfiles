@@ -2,4 +2,7 @@
 
 configuration {
     show-icons: false;
+    no-sort: true;
+    kb-mode-complete: "";
+    kb-custom-1: "Control+l";
 }

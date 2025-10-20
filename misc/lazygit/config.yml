@@ -1,9 +1,7 @@
 notARepository: 'quit'
-
 git:
-  paging:
-    externalDiffCommand: 'difft --color=always'
-
+  pagers:
+    - externalDiffCommand: 'difft --color=always'
 gui:
   nerdFontsVersion: '3'
   expandFocusedSidePanel: true

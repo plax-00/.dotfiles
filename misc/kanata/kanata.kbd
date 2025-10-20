@@ -120,6 +120,7 @@
 (deflayermap (mouse-btns)
     d    mlft
     f    mrgt
+    s    mmid
     j    (t! scroll mwheel-down)
     k    (t! scroll mwheel-up)
     lsft (layer-while-held mwheel-half)

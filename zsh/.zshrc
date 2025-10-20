@@ -20,6 +20,9 @@ source $ZDOTDIR/config/completion.zsh
 # autoload functions
 fpath+=$ZDOTDIR/functions
 autoload -Uz $ZDOTDIR/functions/**/*(.N) &> /dev/null
+for widget in $ZDOTDIR/functions/zle/*(.N); do
+    zle -N $(basename $widget)
+done
 
 
 ###############################
@@ -93,4 +96,7 @@ for ext in $XDG_CONFIG_HOME/extended/zsh/*(N) ; do
 done
 
 # zoxide
-zoxide --version &> /dev/null && eval "$(zoxide init --cmd cd zsh)"
+if zoxide --version &> /dev/null; then
+    eval "$(zoxide init --cmd cd zsh)"
+    bindkey '^O' zoxide-query
+fi

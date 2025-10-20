@@ -1,0 +1,5 @@
+local selection="$(zoxide query -i)"
+
+BUFFER="${BUFFER}${selection}"
+CURSOR+="${#selection}"
+zle redisplay

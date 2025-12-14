@@ -19,7 +19,10 @@ source $ZDOTDIR/config/completion.zsh
 
 # autoload functions
 fpath+=$ZDOTDIR/functions
-autoload -Uz $ZDOTDIR/functions/*(N) &> /dev/null
+autoload -Uz $ZDOTDIR/functions/**/*(.N) &> /dev/null
+for widget in $ZDOTDIR/functions/zle/*(.N); do
+    zle -N $(basename $widget)
+done
 
 
 ###############################
@@ -52,6 +55,12 @@ bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+# edit commands in vim with history
+function zvm_after_lazy_keybindings() {
+    zvm_define_widget edit-command-line-history
+    zvm_bindkey vicmd 'V' edit-command-line-history
+}
+
 # fzf
 if command -v fzf &> /dev/null; then
     fzf --zsh &> /dev/null && source <(fzf --zsh)
@@ -82,4 +91,7 @@ for ext in $XDG_CONFIG_HOME/extended/zsh/*(N) ; do
 done
 
 # zoxide
-zoxide --version &> /dev/null && eval "$(zoxide init --cmd cd zsh)"
+if zoxide --version &> /dev/null; then
+    eval "$(zoxide init --cmd cd zsh)"
+    bindkey '^O' zoxide-query
+fi

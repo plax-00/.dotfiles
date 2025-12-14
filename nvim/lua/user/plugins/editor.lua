@@ -1,13 +1,6 @@
 ---@module 'lazy'
-
 ---@type LazySpec
 return {
-    {
-        'm4xshen/hardtime.nvim',
-        enabled = false,
-        opts = {},
-    },
-
     {
         'stevearc/dressing.nvim',
         event = 'VeryLazy',
@@ -71,13 +64,15 @@ return {
 
     {
         'ggandor/leap.nvim',
-        config = function()
-            require('leap').add_default_mappings()
-        end,
+        keys = {
+            { 's', '<Plug>(leap)', mode = { 'n', 'x', 'o' } },
+            { 'S', '<Plug>(leap-from-window)', mode = { 'n' } },
+        },
+        opts = {},
     },
 
     {
-        'echasnovski/mini.ai',
+        'nvim-mini/mini.ai',
         dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
         opts = function()
             local gen_spec = require('mini.ai').gen_spec
@@ -94,7 +89,7 @@ return {
     },
 
     {
-        'echasnovski/mini.splitjoin',
+        'nvim-mini/mini.splitjoin',
         opts = function()
             local gen_hook = require('mini.splitjoin').gen_hook
             return {

@@ -50,31 +50,18 @@ return {
     },
 
     {
-        'mason-org/mason.nvim',
-        opts = {},
-    },
-
-    {
         'mason-org/mason-lspconfig.nvim',
         dependencies = {
-            'mason-org/mason.nvim',
+            { 'mason-org/mason.nvim', opts = {} },
+            'neovim/nvim-lspconfig',
             'saghen/blink.cmp',
         },
-        opts = {
-            handlers = {
-                function(server_name)
-                    local config = require('user.lsp.server_config')[server_name] or {}
-                    config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-                    require('lspconfig')[server_name].setup(config)
-                end,
-            },
-        },
+        opts = {},
     },
 
     {
         'neovim/nvim-lspconfig',
         dependencies = {
-            'williamboman/mason-lspconfig.nvim',
             {
                 "folke/lazydev.nvim",
                 ft = "lua", -- only load on lua files
@@ -132,6 +119,7 @@ return {
                     }
                 }
             }
+            vim.lsp.enable('rust_analyzer')
         end,
     },
 
@@ -162,7 +150,6 @@ return {
 
     {
         'plax-00/corn.nvim',
-        cond = false,
         event = 'LspAttach',
         opts = {
             border_style = 'rounded',

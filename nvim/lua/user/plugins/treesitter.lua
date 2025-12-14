@@ -17,10 +17,10 @@ return {
                 'python',
                 'regex',
                 'rust',
+                'toml',
                 'typescript',
                 'vim',
                 'vimdoc',
-                'vue'
             },
             highlight = { enable = true },
             incremental_selection = { enable = true },

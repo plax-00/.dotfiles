@@ -1,0 +1,7 @@
+if [[ $# -eq 0 ]] && command -v fzf &> /dev/null; then
+    local selected="$(git branch --color | fzf --height=~30% --ansi | sed -E 's/^\*?\s*//' | sed -E 's/\s*$//')"
+    [[ -z $selected ]] && return 1
+    git checkout $selected
+else
+    git checkout "$@"
+fi
